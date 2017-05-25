@@ -1,0 +1,12 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
+  <div class="card ui-g-12 ui-md-6 ui-lg-4"><h1>Genes</h1></div>
+  <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
+</div>
+
+
+
+<p-dataTable [value]="genes">
+  <p-column field="symbol" header="Symbol" [sortable]="true"></p-column>
+  <p-column field="geneNameExpansion" header="Gene Name Expansion" [sortable]="true"></p-column>
+</p-dataTable>
