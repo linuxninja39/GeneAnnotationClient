@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
 import {Error404Component} from "./components/error-404/error-404.component";
 import {GenesComponent} from "./components/genes/genes.component";
+import {GeneComponent} from "./gene/gene.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'genes',
     component: GenesComponent
+  },
+  {
+    path: 'gene/:id',
+    component: GeneComponent
   },
   {
     path: '**',

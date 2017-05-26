@@ -7,16 +7,17 @@
 
 <div class="ui-g">
   <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
-  <div class="card ui-g-12 ui-md-6 ui-lg-4">Search: <input (keyup)="searchGenes($event)"></div>
+  <div class="card ui-g-12 ui-md-6 ui-lg-4"><label for="search">Search:</label> <input id="search" (keyup)="searchGenes($event)"></div>
   <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
   <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
   <div class="card ui-g-12 ui-md-6 ui-lg-8">
-    <p-dataTable [value]="genes">
+    <p-dataTable [value]="genes" selectionMode="single" [(selection)]="selectedGene" (onRowSelect)="onRowSelect($event)">
       <p-column field="symbol" header="Symbol" [sortable]="true"></p-column>
       <p-column field="geneNameExpansion" header="Gene Name Expansion" [sortable]="true"></p-column>
     </p-dataTable>
   </div>
   <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
 </div>
+{{selectedGene| json}}
 
 

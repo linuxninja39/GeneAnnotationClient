@@ -2,8 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GenesComponent } from './genes.component';
 import {DataTableModule, SharedModule} from "primeng/primeng";
-import {GeneService} from "./services/gene.service";
-import {Http} from "@angular/http";
 
 describe('GenesComponent', () => {
   let component: GenesComponent;
@@ -30,5 +28,9 @@ describe('GenesComponent', () => {
 
   it('should be created', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Should have an id', () => {
+    expect(1).toEqual(1);
   });
 });

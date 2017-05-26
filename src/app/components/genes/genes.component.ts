@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GeneModel} from "../../models/api/gene.model";
 import {GeneService} from "./services/gene.service";
 import { Log } from 'ng2-logger';
+import {Router} from "@angular/router";
 
 const log = Log.create('GeneService');
 
@@ -15,8 +16,9 @@ declare const jlinq: any;
 export class GenesComponent implements OnInit {
   genesOrig: GeneModel[];
   genes: GeneModel[];
+  selectedGene: GeneModel;
 
-  constructor(private geneService: GeneService) { }
+  constructor(private geneService: GeneService, private router: Router) { }
 
   ngOnInit() {
     this.geneService
@@ -39,5 +41,10 @@ export class GenesComponent implements OnInit {
       .orMatch('hgncId', searchTerm)
       .orMatch('geneNameExpansion', searchTerm)
       .select();
+  }
+
+  onRowSelect(event) {
+    log.error('row selected', event);
+    this.router.navigate(['/gene', this.selectedGene.id]);
   }
 }

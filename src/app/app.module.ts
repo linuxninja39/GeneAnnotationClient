@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GenesComponent } from './components/genes/genes.component';
 import {GeneService} from "./components/genes/services/gene.service";
+import { GeneComponent } from './gene/gene.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {GeneService} from "./components/genes/services/gene.service";
     Error404Component,
     NavbarComponent,
     FooterComponent,
-    GenesComponent
+    GenesComponent,
+    GeneComponent
   ],
   imports: [
     AppRoutingModule,
