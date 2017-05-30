@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "symbol": "A1BG",
+    "geneNameExpansion": "alpha-1-B glycoprotein",
+    "start": 44502597,
+    "end": 44547962,
+    "hgncId": "hg19",
+    "hg": {},
+    "chromosome": {
+      "name": "1"
+    }
+  },
+  {
+    "id": "2",
+    "symbol": "A1BG-AS1",
+    "geneNameExpansion": "A1BG antisense RNA 1",
+    "start": 44502597,
+    "end": 44547962,
+    "hgncId": "hg19",
+    "hg": {},
+    "chromosome": {
+      "name": "1"
+    }
+  }
+]

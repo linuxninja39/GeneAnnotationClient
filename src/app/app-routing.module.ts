@@ -7,7 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
 import {Error404Component} from "./components/error-404/error-404.component";
 import {GenesComponent} from "./components/genes/genes.component";
-import {GeneComponent} from "./gene/gene.component";
+import {GeneComponent} from "./components/gene/gene.component";
 
 const routes: Routes = [
   {

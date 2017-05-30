@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GeneModel} from "../../models/api/gene.model";
-import {GeneService} from "./services/gene.service";
+import {GeneService} from "../../services/gene.service";
 import { Log } from 'ng2-logger';
 import {Router} from "@angular/router";
 

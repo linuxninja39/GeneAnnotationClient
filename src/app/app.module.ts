@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {DataTableModule, InputTextModule, SharedModule} from 'primeng/primeng';
+import {AccordionModule, DataTableModule, InputTextModule, SharedModule} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -11,8 +11,11 @@ import { Error404Component } from './components/error-404/error-404.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GenesComponent } from './components/genes/genes.component';
-import {GeneService} from "./components/genes/services/gene.service";
-import { GeneComponent } from './gene/gene.component';
+import {GeneService} from "./services/gene.service";
+import { GeneComponent } from './components/gene/gene.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MdCardModule} from "@angular/material";
+import { LiteratureComponent } from './components/literature/literature.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { GeneComponent } from './gene/gene.component';
     NavbarComponent,
     FooterComponent,
     GenesComponent,
-    GeneComponent
+    GeneComponent,
+    LiteratureComponent
   ],
   imports: [
     AppRoutingModule,
@@ -31,7 +35,10 @@ import { GeneComponent } from './gene/gene.component';
     HttpModule,
     DataTableModule,
     SharedModule,
-    InputTextModule
+    InputTextModule,
+    AccordionModule,
+    BrowserAnimationsModule,
+    MdCardModule
   ],
   providers: [
     GeneService

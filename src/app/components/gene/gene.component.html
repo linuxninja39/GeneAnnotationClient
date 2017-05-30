@@ -1,0 +1,33 @@
+
+<p-accordion>
+  <p-accordionTab header="{{gene.symbol}}" [selected]="true">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <md-card>
+          <div class="center-block">Symbol: {{gene.symbol}}</div>
+        </md-card>
+      </div>
+      <div class="ui-g-4">
+        <md-card>
+          Chromosome: {{gene.chromosome?.name}}
+        </md-card>
+      </div>
+      <div class="ui-g-4">
+        <md-card>
+          Start: {{gene.start}}
+        </md-card>
+      </div>
+      <div class="ui-g-4">
+        <md-card>
+          End: {{gene.end}}
+        </md-card>
+      </div>
+    </div>
+  </p-accordionTab>
+  <p-accordionTab header="Header 2">
+    Content 2
+  </p-accordionTab>
+  <p-accordionTab header="Header 3">
+    Content 3
+  </p-accordionTab>
+</p-accordion>

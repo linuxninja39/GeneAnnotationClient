@@ -6,5 +6,4 @@ import {HumanGenomeModel} from "./human-genome.model";
 
 export interface ChromosomeModel extends BaseModel {
   name: string;
-  hg: HumanGenomeModel;
 }
