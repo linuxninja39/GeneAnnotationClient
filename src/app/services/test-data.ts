@@ -30,7 +30,9 @@ export class TestData {
       "hg": this.hg,
       "chromosome": this.chromosomes[0],
       knownGeneFunction: 'This gene encodes a thioredoxin-binding protein that is a member of the alpha arrestin protein family. Thioredoxin is a thiol-oxidoreductase that is a major regulator of cellular redox signaling which protects cells from oxidative stress. This protein inhibits the antioxidative function of thioredoxin resulting in the accumulation of reactive oxygen species and cellular stress. This protein also functions as a regulator of cellular metabolism and of endoplasmic reticulum (ER) stress. This protein may also function as a tumor suppressor. Alternate splicing results in multiple transcript variants. [provided by RefSeq, Sep 2015].',
-      origin: 'Index gene'
+      origin: 'Index gene',
+      previousSymobls: ['1001001001', '2112'],
+      previousNames: ['Cygnus', 'working man']
     },
     {
       "id": "2",
@@ -43,7 +45,9 @@ export class TestData {
       "hg": this.hg,
       "chromosome": this.chromosomes[0],
       knownGeneFunction: 'This gene encodes a thioredoxin-binding protein that is a member of the alpha arrestin protein family. Thioredoxin is a thiol-oxidoreductase that is a major regulator of cellular redox signaling which protects cells from oxidative stress. This protein inhibits the antioxidative function of thioredoxin resulting in the accumulation of reactive oxygen species and cellular stress. This protein also functions as a regulator of cellular metabolism and of endoplasmic reticulum (ER) stress. This protein may also function as a tumor suppressor. Alternate splicing results in multiple transcript variants. [provided by RefSeq, Sep 2015].',
-      origin: 'Index gene'
+      origin: 'Index gene',
+      previousSymobls: ['1001001001', '2112'],
+      previousNames: ['Cygnus', 'working man']
     },
     {
       "id": "3",
@@ -56,7 +60,9 @@ export class TestData {
       "hg": this.hg,
       "chromosome": this.chromosomes[0],
       knownGeneFunction: 'This gene encodes a thioredoxin-binding protein that is a member of the alpha arrestin protein family. Thioredoxin is a thiol-oxidoreductase that is a major regulator of cellular redox signaling which protects cells from oxidative stress. This protein inhibits the antioxidative function of thioredoxin resulting in the accumulation of reactive oxygen species and cellular stress. This protein also functions as a regulator of cellular metabolism and of endoplasmic reticulum (ER) stress. This protein may also function as a tumor suppressor. Alternate splicing results in multiple transcript variants. [provided by RefSeq, Sep 2015].',
-      origin: 'Index gene'
+      origin: 'Index gene',
+      previousSymobls: ['1001001001', '2112'],
+      previousNames: ['Cygnus', 'working man']
     },
   ];
 

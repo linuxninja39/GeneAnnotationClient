@@ -1,0 +1,67 @@
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <md-card>
+          <div class="center-block">Symbol: {{gene.symbol}}</div>
+        </md-card>
+      </div>
+      <div class="ui-g-3">
+        <md-card>
+          Chromosome: {{gene.chromosome?.name}}
+        </md-card>
+      </div>
+      <div class="ui-g-3">
+        <md-card>
+          Start: {{gene.start}}
+        </md-card>
+      </div>
+      <div class="ui-g-3">
+        <md-card>
+          End: {{gene.end}}
+        </md-card>
+      </div>
+      <div class="ui-g-3">
+        <md-card>
+          Locus: {{gene.locus}}
+        </md-card>
+      </div>
+      <div class="ui-g-6">
+        <md-card>
+            <div>
+              Expantion of gene name:
+            </div>
+            <div>
+              {{gene.geneNameExpansion}}
+            </div>
+        </md-card>
+      </div>
+      <div class="ui-g-6">
+        <md-card>
+          <div>
+            Known Function
+          </div>
+          <div>
+            {{gene.knownGeneFunction}}
+          </div>
+        </md-card>
+      </div>
+      <div class="ui-g-6">
+        <md-card>
+          <div>Previous Symbols: </div>
+          <div>
+            <div *ngFor="let symbol of gene.previousSymobls">
+              {{symbol}}
+            </div>
+          </div>
+        </md-card>
+      </div>
+      <div class="ui-g-6">
+        <md-card>
+          <div>Previous Names: </div>
+          <div>
+            <div *ngFor="let n of gene.previousNames">
+              {{n}}
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>

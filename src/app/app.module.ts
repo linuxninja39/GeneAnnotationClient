@@ -18,6 +18,9 @@ import {MdCardModule} from "@angular/material";
 import { LiteratureComponent } from './components/literature/literature.component';
 import {LiteratureService} from "./services/literature.service";
 import { TruncateModule } from 'ng2-truncate';
+import { GeneDetailsComponent } from './components/gene/components/gene/gene-details/gene-details.component';
+import { GeneVariantsComponent } from './components/gene/components/gene/gene-variants/gene-variants.component';
+import { GeneNotesComponent } from './components/gene/components/gene/gene-notes/gene-notes.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { TruncateModule } from 'ng2-truncate';
     FooterComponent,
     GenesComponent,
     GeneComponent,
-    LiteratureComponent
+    LiteratureComponent,
+    GeneDetailsComponent,
+    GeneVariantsComponent,
+    GeneNotesComponent
   ],
   imports: [
     AppRoutingModule,
