@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {AccordionModule, DataTableModule, InputTextModule, SharedModule} from 'primeng/primeng';
+import {AccordionModule, DataTableModule, InputTextModule, OverlayPanelModule, SharedModule} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -16,6 +16,8 @@ import { GeneComponent } from './components/gene/gene.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MdCardModule} from "@angular/material";
 import { LiteratureComponent } from './components/literature/literature.component';
+import {LiteratureService} from "./services/literature.service";
+import { TruncateModule } from 'ng2-truncate';
 
 @NgModule({
   declarations: [
@@ -38,10 +40,13 @@ import { LiteratureComponent } from './components/literature/literature.componen
     InputTextModule,
     AccordionModule,
     BrowserAnimationsModule,
-    MdCardModule
+    MdCardModule,
+    TruncateModule,
+    OverlayPanelModule
   ],
   providers: [
-    GeneService
+    GeneService,
+    LiteratureService
   ],
   bootstrap: [AppComponent]
 })

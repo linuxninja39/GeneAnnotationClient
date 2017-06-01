@@ -13,11 +13,20 @@
   <div class="card ui-g-12 ui-md-6 ui-lg-8">
     <p-dataTable [value]="genes" selectionMode="single" [(selection)]="selectedGene" (onRowSelect)="onRowSelect($event)">
       <p-column field="symbol" header="Symbol" [sortable]="true"></p-column>
-      <p-column field="geneNameExpansion" header="Gene Name Expansion" [sortable]="true"></p-column>
+      <p-column field="chromosome.name" header="Chromosome" [sortable]="true"></p-column>
+      <p-column field="start" header="Start" [sortable]="true"></p-column>
+      <p-column field="end" header="End" [sortable]="true"></p-column>
+      <p-column field="locus" header="Locus" [sortable]="true"></p-column>
+      <p-column field="origin" header="Origin" [sortable]="true"></p-column>
+      <p-column field="geneNameExpansion" header="Expansion of gene name" [sortable]="true"></p-column>
+      <p-column field="knownGeneFunction" header="Known Function" [sortable]="true">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          <div (click)="handleKnowFunctionClick($event, row, knownFunctionPanel)">{{row.knownGeneFunction | words : 10 : "..."}}</div>
+        </ng-template>
+      </p-column>
     </p-dataTable>
   </div>
   <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
 </div>
-{{selectedGene| json}}
 
-
+<p-overlayPanel #knownFunctionPanel>{{selectedGene?.knownGeneFunction}}</p-overlayPanel>

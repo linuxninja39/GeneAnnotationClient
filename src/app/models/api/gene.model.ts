@@ -7,12 +7,17 @@ import {HumanGenomeModel} from "./human-genome.model";
 
 export interface GeneModel extends BaseModel{
   symbol: string;
-  hgncId: string;
+  previousSymobls?: string[];
   hg: HumanGenomeModel;
+  chromosome: ChromosomeModel;
+  name: string;
+  previousNames?: string[];
+  synonyms?: string[];
+  lastModifiedDate?: Date;
   geneNameExpansion?: string;
   knownGeneFunction?: string;
-  lastModifiedDate?: Date;
-  chromosome: ChromosomeModel;
+  locus: string;
   start: number;
   end: number;
+  origin?: string;
 }

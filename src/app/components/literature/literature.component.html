@@ -1,3 +1,21 @@
-<p>
-  literature works!
-</p>
+<div class="ui-g">
+  <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
+  <div class="card ui-g-12 ui-md-6 ui-lg-4"><h1>Genes</h1></div>
+  <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
+</div>
+
+
+<div class="ui-g">
+  <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
+  <div class="card ui-g-12 ui-md-6 ui-lg-4"><label for="search">Search:</label> <input id="search" (keyup)="searchGenes($event)"></div>
+  <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
+  <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
+  <div class="card ui-g-12 ui-md-6 ui-lg-8">
+    <p-dataTable [value]="literatures" selectionMode="single" [(selection)]="selectedLiterature" (onRowSelect)="onRowSelect($event)">
+      <p-column field="title" header="Title" [sortable]="true"></p-column>
+      <p-column field="url" header="Url" [sortable]="false"></p-column>
+      <p-column field="details" header="Details" [sortable]="false"></p-column>
+    </p-dataTable>
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
+</div>

@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GeneModel} from "../../models/api/gene.model";
 import {GeneService} from "../../services/gene.service";
 import { Log } from 'ng2-logger';
 import {Router} from "@angular/router";
+import {OverlayPanel} from "primeng/primeng";
 
-const log = Log.create('GeneService');
+const log = Log.create('GenesComponent');
 
 declare const jlinq: any;
 
@@ -17,6 +18,8 @@ export class GenesComponent implements OnInit {
   genesOrig: GeneModel[];
   genes: GeneModel[];
   selectedGene: GeneModel;
+  @ViewChild('knownFunctionPanel')
+  knownFunctionPanel: ElementRef;
 
   constructor(private geneService: GeneService, private router: Router) { }
 
@@ -46,5 +49,10 @@ export class GenesComponent implements OnInit {
   onRowSelect(event) {
     log.error('row selected', event);
     this.router.navigate(['/gene', this.selectedGene.id]);
+  }
+
+  handleKnowFunctionClick(e, gene: GeneModel, overlayPanel: OverlayPanel) {
+    this.selectedGene = gene;
+    overlayPanel.toggle(e);
   }
 }
