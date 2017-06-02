@@ -3,6 +3,10 @@ import {ChromosomeModel} from "../models/api/chromosome.model";
 import {HumanGenomeModel} from "../models/api/human-genome.model";
 import {LiteratureModel} from "../models/api/literature.model";
 import {AuthorModel} from "../models/api/author.model";
+import {
+  GeneVariantCallType, GeneVariantModel, GeneVariantType,
+  GeneVariantZygosityType
+} from "../models/api/gene-variant.model";
 /**
  * Created by jboswell on 5/30/2017.
  */
@@ -18,6 +22,45 @@ export class TestData {
       name: "1"
     }
   ];
+
+  geneVariants: GeneVariantModel[] = [
+    {
+      id: "1",
+      zygosity: GeneVariantZygosityType.COMPOUND,
+      type: GeneVariantType.DELETION_WHOLE_GENE,
+      call: GeneVariantCallType.AUTOSOMAL,
+      annotations: [
+        {
+          id: "1",
+          annotation: "cool stuff man"
+        }
+      ]
+    },
+    {
+      id: "2",
+      zygosity: GeneVariantZygosityType.HETORZYGOUS,
+      type: GeneVariantType.DELETION_WHOLE_GENE,
+      call: GeneVariantCallType.AUTOSOMAL,
+      annotations: [
+        {
+          id: "1",
+          annotation: "cool stuff man"
+        }
+      ]
+    },
+    {
+      id: "3",
+      zygosity: GeneVariantZygosityType.HETORZYGOUS,
+      type: GeneVariantType.GWAS,
+      annotations: [
+        {
+          id: "2",
+          annotation: "entre nous"
+        }
+      ]
+    }
+  ];
+
   genes: GeneModel[] = [
     {
       "id": "1",
@@ -32,7 +75,10 @@ export class TestData {
       knownGeneFunction: 'This gene encodes a thioredoxin-binding protein that is a member of the alpha arrestin protein family. Thioredoxin is a thiol-oxidoreductase that is a major regulator of cellular redox signaling which protects cells from oxidative stress. This protein inhibits the antioxidative function of thioredoxin resulting in the accumulation of reactive oxygen species and cellular stress. This protein also functions as a regulator of cellular metabolism and of endoplasmic reticulum (ER) stress. This protein may also function as a tumor suppressor. Alternate splicing results in multiple transcript variants. [provided by RefSeq, Sep 2015].',
       origin: 'Index gene',
       previousSymobls: ['1001001001', '2112'],
-      previousNames: ['Cygnus', 'working man']
+      previousNames: ['Cygnus', 'working man'],
+      variants: [
+        this.geneVariants[0]
+      ]
     },
     {
       "id": "2",
@@ -96,4 +142,6 @@ export class TestData {
       author: this.authors[0]
     }
   ];
+
+
 }

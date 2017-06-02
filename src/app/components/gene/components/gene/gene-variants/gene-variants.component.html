@@ -1,3 +1,24 @@
 <div>
-  Gene: {{gene | json}}
+  <p-dataTable [value]="gene.variants">
+    <p-column header="Gene Symbol">
+      <ng-template pTemplate="body" let-row="rowData">
+        {{gene.symbol}}
+      </ng-template>
+    </p-column>
+    <p-column field="zygosity" header="Zygosity"></p-column>
+    <p-column field="type" header="Type"></p-column>
+    <p-column field="call" header="Call"></p-column>
+    <p-footer>
+      <div class="ui-helper-clearfix" style="width:100%">
+        <button type="button" pButton icon="fa-plus" style="float:left" (click)="showNewVariantDialog()" label="Add"></button>
+      </div>
+    </p-footer>
+  </p-dataTable>
 </div>
+
+<p-dialog header="New Variant" [(visible)]="displayNewVariantDialog" [responsive]="true" showEffect="fade" [modal]="true">
+  <label>Zygosity</label>
+  <div *ngIf="newVariant">
+    <p-dropdown [options]="zygosities" [(ngModel)]="newVariant.zygosity"></p-dropdown>
+  </div>
+</p-dialog>

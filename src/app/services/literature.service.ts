@@ -7,6 +7,7 @@ import {observable} from "rxjs/symbol/observable";
 @Injectable()
 export class LiteratureService {
   private testData = new TestData();
+  static readonly YO: string = "yo";
 
   constructor() { }
 

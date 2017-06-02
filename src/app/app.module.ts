@@ -2,7 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {AccordionModule, DataTableModule, InputTextModule, OverlayPanelModule, SharedModule} from 'primeng/primeng';
+import {
+  AccordionModule, ButtonModule, DataTableModule, DialogModule, DropdownModule, InputTextModule, OverlayPanelModule,
+  PanelModule,
+  SharedModule
+} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -35,6 +39,7 @@ import { GeneNotesComponent } from './components/gene/components/gene/gene-notes
     GeneDetailsComponent,
     GeneVariantsComponent,
     GeneNotesComponent
+
   ],
   imports: [
     AppRoutingModule,
@@ -48,7 +53,11 @@ import { GeneNotesComponent } from './components/gene/components/gene/gene-notes
     BrowserAnimationsModule,
     MdCardModule,
     TruncateModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    PanelModule,
+    DialogModule,
+    ButtonModule,
+    DropdownModule
   ],
   providers: [
     GeneService,
