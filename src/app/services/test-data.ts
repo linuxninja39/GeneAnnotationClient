@@ -33,6 +33,10 @@ export class TestData {
         {
           id: "1",
           annotation: "cool stuff man"
+        },
+        {
+          id: "2",
+          annotation: "another interesting thing"
         }
       ]
     },
@@ -45,6 +49,10 @@ export class TestData {
         {
           id: "1",
           annotation: "cool stuff man"
+        },
+        {
+          id: "2",
+          annotation: "another interesting thing"
         }
       ]
     },
@@ -56,6 +64,10 @@ export class TestData {
         {
           id: "2",
           annotation: "entre nous"
+        },
+        {
+          id: "2",
+          annotation: "another interesting thing"
         }
       ]
     }

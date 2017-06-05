@@ -25,6 +25,7 @@ import { TruncateModule } from 'ng2-truncate';
 import { GeneDetailsComponent } from './components/gene/components/gene/gene-details/gene-details.component';
 import { GeneVariantsComponent } from './components/gene/components/gene/gene-variants/gene-variants.component';
 import { GeneNotesComponent } from './components/gene/components/gene/gene-notes/gene-notes.component';
+import { GeneVariantComponent } from './components/gene-variant/gene-variant.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GeneNotesComponent } from './components/gene/components/gene/gene-notes
     LiteratureComponent,
     GeneDetailsComponent,
     GeneVariantsComponent,
-    GeneNotesComponent
+    GeneNotesComponent,
+    GeneVariantComponent
 
   ],
   imports: [

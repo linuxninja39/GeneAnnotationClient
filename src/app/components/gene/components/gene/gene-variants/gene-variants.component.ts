@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GeneModel} from "../../../../../models/api/gene.model";
 import {GeneVariantModel, GeneVariantZygosityType} from "../../../../../models/api/gene-variant.model";
 import { Log } from 'ng2-logger';
+import {Router} from "@angular/router";
 
 const log = Log.create('GeneVariantsComponent');
 
@@ -16,8 +17,9 @@ export class GeneVariantsComponent implements OnInit {
   displayNewVariantDialog: boolean = false;
   newVariant: GeneVariantModel;
   zygosities: string[] = [];
+  selectedVariant: GeneVariantModel;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     let count = 0;
@@ -33,5 +35,9 @@ export class GeneVariantsComponent implements OnInit {
   showNewVariantDialog() {
     this.newVariant = <GeneVariantModel>{};
     this.displayNewVariantDialog = true;
+  }
+
+  onRowSelect(event) {
+    this.router.navigate(['/gene-variant', this.selectedVariant.id]);
   }
 }

@@ -9,6 +9,7 @@ import {Error404Component} from "./components/error-404/error-404.component";
 import {GenesComponent} from "./components/genes/genes.component";
 import {GeneComponent} from "./components/gene/gene.component";
 import {LiteratureComponent} from "./components/literature/literature.component";
+import {GeneVariantComponent} from "./components/gene-variant/gene-variant.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'gene/:id',
     component: GeneComponent
+  },
+  {
+    path: 'gene-variant/:id',
+    component: GeneVariantComponent
   },
   {
     path: '**',
