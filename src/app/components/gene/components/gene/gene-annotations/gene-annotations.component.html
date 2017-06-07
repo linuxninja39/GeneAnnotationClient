@@ -3,7 +3,11 @@
     <p-column field="author.name" header="Author"></p-column>
     <p-column field="createdAt" header="Created"></p-column>
     <p-column field="modifiedAt" header="Modified"></p-column>
-    <p-column field="annotation" header="Annotation"></p-column>
+    <p-column field="annotation" header="Annotation">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        <div [innerHTML]="row.annotation"></div>
+      </ng-template>
+    </p-column>
     <p-footer>
       <div class="ui-helper-clearfix" style="width:100%">
         <button type="button" pButton icon="fa-plus" style="float:left" (click)="showNewAnnotationDialog()" label="Add"></button>
