@@ -7,6 +7,7 @@ import {
   GeneVariantCallType, GeneVariantModel, GeneVariantType,
   GeneVariantZygosityType
 } from "../models/api/gene-variant.model";
+import {UserModel} from "../models/api/user.model";
 /**
  * Created by jboswell on 5/30/2017.
  */
@@ -23,20 +24,33 @@ export class TestData {
     }
   ];
 
+  users: UserModel[] = [
+    {
+      id: '1',
+      name: 'bob'
+    }
+  ];
+
   geneVariants: GeneVariantModel[] = [
     {
       id: "1",
       zygosity: GeneVariantZygosityType.COMPOUND,
-      type: GeneVariantType.DELETION_WHOLE_GENE,
+      type: GeneVariantType.GWAS,
       call: GeneVariantCallType.AUTOSOMAL,
       annotations: [
         {
           id: "1",
-          annotation: "cool stuff man"
+          annotation: "cool stuff man",
+          user: this.users[0],
+          createdAt: new Date(),
+          modifiedAt: new Date()
         },
         {
           id: "2",
-          annotation: "another interesting thing"
+          annotation: "another interesting thing",
+          user: this.users[0],
+          createdAt: new Date(),
+          modifiedAt: new Date()
         }
       ]
     },
@@ -48,11 +62,17 @@ export class TestData {
       annotations: [
         {
           id: "1",
-          annotation: "cool stuff man"
+          annotation: "cool stuff man",
+          user: this.users[0],
+          createdAt: new Date(),
+          modifiedAt: new Date()
         },
         {
           id: "2",
-          annotation: "another interesting thing"
+          annotation: "another interesting thing",
+          user: this.users[0],
+          createdAt: new Date(),
+          modifiedAt: new Date()
         }
       ]
     },
@@ -63,11 +83,17 @@ export class TestData {
       annotations: [
         {
           id: "2",
-          annotation: "entre nous"
+          annotation: "entre nous",
+          user: this.users[0],
+          createdAt: new Date(),
+          modifiedAt: new Date()
         },
         {
           id: "2",
-          annotation: "another interesting thing"
+          annotation: "another interesting thing",
+          user: this.users[0],
+          createdAt: new Date(),
+          modifiedAt: new Date()
         }
       ]
     }

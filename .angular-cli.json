@@ -24,7 +24,8 @@
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "../node_modules/npm-jlinq/jlinq.js"
+        "../node_modules/npm-jlinq/jlinq.js",
+        "../node_modules/quill/dist/quill.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

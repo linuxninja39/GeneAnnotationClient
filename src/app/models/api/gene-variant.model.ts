@@ -29,7 +29,7 @@ export enum GeneVariantZygosityType {
 }
 
 export enum GeneVariantCallType {
-  VOUS = <any>'VOUS',
+  VOUS_ = <any>'VOUS',
   LIKELY_PATHOGENIC = <any>'Likely pathogenic',
   PATHOGNEIC = <any>'Pathogenic',
   BENIGN = <any>'Benign',

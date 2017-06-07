@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import {
   AccordionModule, ButtonModule, DataTableModule, DialogModule, DropdownModule, InputTextModule, OverlayPanelModule,
   PanelModule,
+  EditorModule,
   SharedModule
 } from 'primeng/primeng';
 
@@ -24,7 +25,7 @@ import {LiteratureService} from "./services/literature.service";
 import { TruncateModule } from 'ng2-truncate';
 import { GeneDetailsComponent } from './components/gene/components/gene/gene-details/gene-details.component';
 import { GeneVariantsComponent } from './components/gene/components/gene/gene-variants/gene-variants.component';
-import { GeneNotesComponent } from './components/gene/components/gene/gene-notes/gene-notes.component';
+import { GeneAnnotationsComponent } from './components/gene/components/gene/gene-annotations/gene-annotations.component';
 import { GeneVariantComponent } from './components/gene-variant/gene-variant.component';
 
 @NgModule({
@@ -39,7 +40,7 @@ import { GeneVariantComponent } from './components/gene-variant/gene-variant.com
     LiteratureComponent,
     GeneDetailsComponent,
     GeneVariantsComponent,
-    GeneNotesComponent,
+    GeneAnnotationsComponent,
     GeneVariantComponent
 
   ],
@@ -59,7 +60,8 @@ import { GeneVariantComponent } from './components/gene-variant/gene-variant.com
     PanelModule,
     DialogModule,
     ButtonModule,
-    DropdownModule
+    DropdownModule,
+    EditorModule
   ],
   providers: [
     GeneService,

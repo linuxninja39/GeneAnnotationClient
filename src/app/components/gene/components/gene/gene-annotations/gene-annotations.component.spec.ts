@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneNotesComponent } from './gene-notes.component';
+import { GeneAnnotationsComponent } from './gene-annotations.component';
 
 describe('GeneNotesComponent', () => {
-  let component: GeneNotesComponent;
-  let fixture: ComponentFixture<GeneNotesComponent>;
+  let component: GeneAnnotationsComponent;
+  let fixture: ComponentFixture<GeneAnnotationsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneNotesComponent ]
+      declarations: [ GeneAnnotationsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GeneNotesComponent);
+    fixture = TestBed.createComponent(GeneAnnotationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

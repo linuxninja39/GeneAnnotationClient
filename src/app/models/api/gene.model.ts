@@ -2,6 +2,7 @@ import {BaseModel} from "./base.model";
 import {ChromosomeModel} from "./chromosome.model";
 import {HumanGenomeModel} from "./human-genome.model";
 import {GeneVariantModel} from "./gene-variant.model";
+import {AnnotationModel} from "./annotation.model";
 /**
  * Created by jboswell on 5/24/2017.
  */
@@ -22,4 +23,5 @@ export interface GeneModel extends BaseModel{
   end: number;
   origin?: string;
   variants?: GeneVariantModel[];
+  annotations?: AnnotationModel[];
 }

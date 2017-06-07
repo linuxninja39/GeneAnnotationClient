@@ -16,9 +16,41 @@
   </p-dataTable>
 </div>
 
-<p-dialog header="New Variant" [(visible)]="displayNewVariantDialog" [responsive]="true" showEffect="fade" [modal]="true">
-  <label>Zygosity</label>
+<p-dialog
+  header="New Variant"
+  [(visible)]="displayNewVariantDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [width]="500"
+  [height]="300"
+>
   <div *ngIf="newVariant">
-    <p-dropdown [options]="zygosities" [(ngModel)]="newVariant.zygosity"></p-dropdown>
+
+    <div class="ui-g">
+      <div class="ui-g-6">
+        <label>Zygosity</label>
+      </div>
+      <div class="ui-g-6">
+        <p-dropdown [(ngModel)]="newVariant.zygosity" [options]="zygosities" [autoWidth]="false" width="200" placeholder="Select Zygosity"></p-dropdown>
+      </div>
+      <div class="ui-g-6">
+        <label>Type</label>
+      </div>
+      <div class="ui-g-6">
+        <p-dropdown [(ngModel)]="newVariant.type" [options]="types" [autoWidth]="false" width="200" placeholder="Select Type"></p-dropdown>
+      </div>
+      <div class="ui-g-6">
+        <label>Call</label>
+      </div>
+      <div class="ui-g-6">
+        <p-dropdown [(ngModel)]="newVariant.call" [options]="calls" [autoWidth]="false" width="200" placeholder="Select call"></p-dropdown>
+      </div>
+      <div class="ui-g-6">
+      </div>
+      <div class="ui-g-6">
+        <button pButton label="Save" (click)="saveVariant()"></button>
+      </div>
+    </div>
   </div>
 </p-dialog>

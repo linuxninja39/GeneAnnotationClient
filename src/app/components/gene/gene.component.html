@@ -3,10 +3,10 @@
   <p-accordionTab header="{{gene.symbol}}">
 <app-gene-details [(gene)]="gene"></app-gene-details>
   </p-accordionTab>
-  <p-accordionTab header="Variants" [selected]="true">
+  <p-accordionTab header="Variants">
     <app-gene-variants [(gene)]="gene"></app-gene-variants>
   </p-accordionTab>
-  <p-accordionTab header="Gene Notes">
+  <p-accordionTab header="Gene Notes" [selected]="true">
     <app-gene-notes [(gene)]="gene"></app-gene-notes>
   </p-accordionTab>
 </p-accordion>

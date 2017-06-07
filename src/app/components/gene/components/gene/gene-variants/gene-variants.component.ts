@@ -1,8 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {GeneModel} from "../../../../../models/api/gene.model";
-import {GeneVariantModel, GeneVariantZygosityType} from "../../../../../models/api/gene-variant.model";
+import {
+  GeneVariantCallType, GeneVariantModel, GeneVariantType,
+  GeneVariantZygosityType
+} from "../../../../../models/api/gene-variant.model";
 import { Log } from 'ng2-logger';
 import {Router} from "@angular/router";
+import {SelectItem} from "primeng/primeng";
 
 const log = Log.create('GeneVariantsComponent');
 
@@ -16,19 +20,32 @@ export class GeneVariantsComponent implements OnInit {
   gene: GeneModel;
   displayNewVariantDialog: boolean = false;
   newVariant: GeneVariantModel;
-  zygosities: string[] = [];
+  zygosities: SelectItem[] = [];
+  types: SelectItem[] = [];
+  calls: SelectItem[] = [];
   selectedVariant: GeneVariantModel;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private changeDetector: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
-    let count = 0;
-    for (let z in GeneVariantZygosityType) {
-      log.info('type: ', z);
-      if (count % 2 == 0) {
-        this.zygosities.push(z);
+    this.setupDropdownOptions();
+  }
+
+  private setupDropdownOptions() {
+    let types = {
+      zygosities: GeneVariantZygosityType,
+      types: GeneVariantType,
+      calls: GeneVariantCallType
+    };
+    for (let type in types) {
+      let count = 0;
+      for (let z in types[type]) {
+        if (count % 2 != 0) {
+          this[type].push({label: z, value: z});
+        }
+        count++;
       }
-      count++;
     }
   }
 
@@ -39,5 +56,11 @@ export class GeneVariantsComponent implements OnInit {
 
   onRowSelect(event) {
     this.router.navigate(['/gene-variant', this.selectedVariant.id]);
+  }
+
+  saveVariant() {
+    this.gene.variants = [...this.gene.variants, this.newVariant];
+    this.displayNewVariantDialog = false;
+    this.changeDetector.detectChanges();
   }
 }

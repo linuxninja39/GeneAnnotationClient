@@ -1,0 +1,39 @@
+<div>
+  <p-dataTable [value]="gene.annotations" selectionMode="single" [(selection)]="selectedAnnotation" (onRowSelect)="onRowSelect($event)">
+    <p-column field="author.name" header="Author"></p-column>
+    <p-column field="createdAt" header="Created"></p-column>
+    <p-column field="modifiedAt" header="Modified"></p-column>
+    <p-column field="annotation" header="Annotation"></p-column>
+    <p-footer>
+      <div class="ui-helper-clearfix" style="width:100%">
+        <button type="button" pButton icon="fa-plus" style="float:left" (click)="showNewAnnotationDialog()" label="Add"></button>
+      </div>
+    </p-footer>
+  </p-dataTable>
+</div>
+
+<p-dialog
+  header="New Variant"
+  [(visible)]="displayNewAnnotationDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [width]="600"
+  [height]="450"
+>
+  <div *ngIf="selectedAnnotation">
+    <div class="ui-g">
+      <div class="ui-g-6">User: </div>
+      <div class="ui-g-6">{{selectedAnnotation.user?.name}}</div>
+      <div class="ui-g-6">Created: </div>
+      <div class="ui-g-6">{{selectedAnnotation.createdAt | date:'medium'}}</div>
+      <div class="ui-g-12">
+        <p-editor [(ngModel)]="selectedAnnotation.annotation" [style]="{'height':'220px'}"></p-editor>
+      </div>
+      <div class="ui-g-6"></div>
+      <div class="ui-g-6">
+        <button pButton label="Save" (click)="saveAnnotation()"></button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
