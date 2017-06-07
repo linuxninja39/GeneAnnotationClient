@@ -1,3 +1,23 @@
-<p>
-  gene-variant works!
-</p>
+
+<p-accordion  [multiple]="true">
+  <p-accordionTab header="Variant" [selected]="true">
+    <div>
+      Gene: {{geneVariant.gene.name}}
+    </div>
+    <div>
+      Zygosity: {{geneVariant.zygosity}}
+    </div>
+    <div>
+      Type: {{geneVariant.type}}
+    </div>
+    <div>
+      Call: {{geneVariant.call}}
+    </div>
+  </p-accordionTab>
+  <p-accordionTab header="Variant Literature">
+    <app-gene-variant-literature-data-table [geneVariant]="geneVariant"></app-gene-variant-literature-data-table>
+  </p-accordionTab>
+  <p-accordionTab header="Variant Annotations">
+    <app-gene-variant-annotations [geneVariant]="geneVariant"></app-gene-variant-annotations>
+  </p-accordionTab>
+</p-accordion>

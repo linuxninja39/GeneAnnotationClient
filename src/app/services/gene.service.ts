@@ -7,22 +7,21 @@ import {ChromosomeModel} from "../models/api/chromosome.model";
 import {HumanGenomeModel} from "../models/api/human-genome.model";
 import {TestData} from "./test-data";
 import {observable} from "rxjs/symbol/observable";
+import {GeneVariantModel} from "../models/api/gene-variant.model";
 
 const log = Log.create('GeneService');
 
 @Injectable()
 export class GeneService {
   private testData: TestData = new TestData();
-  private genes: GeneModel[];
 
   constructor(private http: Http) {
-    this.genes = this.testData.genes;
   }
 
   getGene(id: string): Observable<GeneModel> {
       return Observable.create(
         (observer) => {
-          for (let gene of this.genes) {
+          for (let gene of this.testData.genes) {
             if (gene.id === id) {
               observer.next(gene);
             }
@@ -35,10 +34,22 @@ export class GeneService {
   getGenes(page?: number): Observable<GeneModel[]> {
     return Observable.create(
       (observable) => {
-        observable.next(this.genes);
+        observable.next(this.testData.genes);
         observable.complete();
       }
     );
   }
 
+  getGeneVariant(id: string): Observable<GeneVariantModel> {
+    return Observable.create(
+      (observer) => {
+        for (let geneVariant of this.testData.geneVariants) {
+          if (geneVariant.id === id) {
+            observer.next(geneVariant);
+          }
+        }
+        observer.complete();
+      }
+    );
+  }
 }

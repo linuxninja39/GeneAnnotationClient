@@ -9,5 +9,5 @@ import {AnnotationModel} from "./annotation.model";
 export interface GeneVariantLiteratureModel extends BaseModel {
   geneVariant: GeneVariantModel;
   literature: LiteratureModel;
-  annotations: AnnotationModel[];
+  annotations?: AnnotationModel[];
 }

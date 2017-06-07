@@ -27,6 +27,8 @@ import { GeneDetailsComponent } from './components/gene/components/gene/gene-det
 import { GeneVariantsComponent } from './components/gene/components/gene/gene-variants/gene-variants.component';
 import { GeneAnnotationsComponent } from './components/gene/components/gene/gene-annotations/gene-annotations.component';
 import { GeneVariantComponent } from './components/gene-variant/gene-variant.component';
+import { GeneVariantLiteratureDataTableComponent } from './components/gene-variant-literature-data-table/gene-variant-literature-data-table.component';
+import { GeneVariantAnnotationsComponent } from './components/gene-variant/gene-variant-annotations/gene-variant-annotations.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { GeneVariantComponent } from './components/gene-variant/gene-variant.com
     GeneDetailsComponent,
     GeneVariantsComponent,
     GeneAnnotationsComponent,
-    GeneVariantComponent
+    GeneVariantComponent,
+    GeneVariantLiteratureDataTableComponent,
+    GeneVariantAnnotationsComponent
 
   ],
   imports: [

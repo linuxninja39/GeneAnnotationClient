@@ -1,6 +1,6 @@
 <div>
   <p-dataTable [value]="gene.annotations" selectionMode="single" [(selection)]="selectedAnnotation" (onRowSelect)="onRowSelect($event)">
-    <p-column field="author.name" header="Author"></p-column>
+    <p-column field="user.name" header="User"></p-column>
     <p-column field="createdAt" header="Created"></p-column>
     <p-column field="modifiedAt" header="Modified"></p-column>
     <p-column field="annotation" header="Annotation">

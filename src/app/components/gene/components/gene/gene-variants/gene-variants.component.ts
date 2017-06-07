@@ -1,12 +1,12 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {GeneModel} from "../../../../../models/api/gene.model";
-import {
-  GeneVariantCallType, GeneVariantModel, GeneVariantType,
-  GeneVariantZygosityType
-} from "../../../../../models/api/gene-variant.model";
 import { Log } from 'ng2-logger';
 import {Router} from "@angular/router";
 import {SelectItem} from "primeng/primeng";
+import {GeneVariantModel} from "../../../../../models/api/gene-variant.model";
+import {GeneVariantZygosityType} from "../../../../../models/api/types/gene-variant-zygosity.type";
+import {GeneVariantType} from "../../../../../models/api/types/gene-variant.type";
+import {GeneVariantCallType} from "../../../../../models/api/types/gene-variant-call.type";
 
 const log = Log.create('GeneVariantsComponent');
 
