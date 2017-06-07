@@ -1,0 +1,9 @@
+<p-dataTable [value]="geneVariant.literatures" selectionMode="single" [(selection)]="selectedLiterature" (onRowSelect)="onRowSelect($event)">
+  <p-column field="literature.title" header="Title"></p-column>
+  <p-column field="literature.url" header="Url"></p-column>
+  <p-footer>
+    <div class="ui-helper-clearfix" style="width:100%">
+      <button type="button" pButton icon="fa-plus" style="float:left" (click)="showNewAnnotationDialog()" label="Add"></button>
+    </div>
+  </p-footer>
+</p-dataTable>
