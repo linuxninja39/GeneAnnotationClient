@@ -8,6 +8,7 @@ import {UserModel} from "../models/api/user.model";
 import {GeneVariantZygosityType} from "../models/api/types/gene-variant-zygosity.type";
 import {GeneVariantType} from "../models/api/types/gene-variant.type";
 import {GeneVariantCallType} from "../models/api/types/gene-variant-call.type";
+import {GeneVariantLiteratureModel} from "../models/api/gene-variant-literature.model";
 /**
  * Created by jboswell on 5/30/2017.
  */
@@ -181,8 +182,32 @@ export class TestData {
     }
   ];
 
+  geneVariantLiteratures: GeneVariantLiteratureModel[] = [
+    {
+      id: "1",
+      geneVariant: this.geneVariants[0],
+      literature: this.literatures[0],
+      annotations: [
+        {
+          id: "gva1",
+          annotation: "this lit doesn't apply",
+          user: this.users[0],
+          createdAt: new Date(),
+          modifiedAt: new Date()
+        },
+        {
+          id: "gva2",
+          annotation: "this lit applies",
+          user: this.users[0],
+          createdAt: new Date(),
+          modifiedAt: new Date()
+        }
+      ]
+    }
+  ];
+
   constructor() {
-    this.geneVariants[0].literatures = [{id: "1", geneVariant: this.geneVariants[0], literature: this.literatures[0]}];
+    this.geneVariants[0].literatures = [this.geneVariantLiteratures[0]];
 
     this.genes[0].variants = [this.geneVariants[0]];
     this.genes[1].variants = [this.geneVariants[1]];

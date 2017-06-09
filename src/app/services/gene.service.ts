@@ -3,10 +3,7 @@ import {Http} from "@angular/http";
 import {GeneModel} from "../models/api/gene.model";
 import {Observable} from "rxjs/Observable";
 import { Log } from 'ng2-logger';
-import {ChromosomeModel} from "../models/api/chromosome.model";
-import {HumanGenomeModel} from "../models/api/human-genome.model";
 import {TestData} from "./test-data";
-import {observable} from "rxjs/symbol/observable";
 import {GeneVariantModel} from "../models/api/gene-variant.model";
 
 const log = Log.create('GeneService');
