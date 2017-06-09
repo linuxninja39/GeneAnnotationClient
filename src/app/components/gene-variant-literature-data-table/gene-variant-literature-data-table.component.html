@@ -29,6 +29,13 @@
     <button pButton label="Save" (click)="saveAnnotation()"></button>
   </div>
 </p-dialog>
+
+
 <p-dialog header="Add Gene Variant/Literature" [(visible)]="addLiteratureDialogVisible">
-  yeah man
+  <div>
+    <p-listbox [options]="literatureOptions" [(ngModel)]="selectedLiterature" filter="filter"></p-listbox>
+  </div>
+  <div>
+    <button pButton label="Add" (click)="saveLiterature()"></button>
+  </div>
 </p-dialog>

@@ -28,7 +28,7 @@ export class LiteratureService {
   getLiteratures(page?: number): Observable<LiteratureModel[]> {
     return Observable.create(
       (observable) => {
-        observable.next(this.testData.literatures)
+        observable.next(this.testData.literatures);
         observable.complete();
       }
     );

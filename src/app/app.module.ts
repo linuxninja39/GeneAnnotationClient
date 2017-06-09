@@ -6,7 +6,7 @@ import {
   AccordionModule, ButtonModule, DataTableModule, DialogModule, DropdownModule, InputTextModule, OverlayPanelModule,
   PanelModule,
   EditorModule,
-  SharedModule
+  SharedModule, ListboxModule
 } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
@@ -65,7 +65,8 @@ import { GeneVariantAnnotationsComponent } from './components/gene-variant/gene-
     DialogModule,
     ButtonModule,
     DropdownModule,
-    EditorModule
+    EditorModule,
+    ListboxModule
   ],
   providers: [
     GeneService,
