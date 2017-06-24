@@ -1,3 +1,7 @@
 <app-navbar></app-navbar>
+<input type="text" [(ngModel)]="username" />
+<input type="text" [(ngModel)]="pass" />
+<button pButton label="Login" (click)="login()"></button>
+<button pButton label="Logout" (click)="logout()"></button>
 <router-outlet></router-outlet>
 <!--app-footer></app-footer-->

@@ -1,6 +1,6 @@
 <div class="ui-g">
   <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
-  <div class="card ui-g-12 ui-md-6 ui-lg-4"><h1>Genes</h1></div>
+  <div class="card ui-g-12 ui-md-6 ui-lg-4"><h1>Literature</h1></div>
   <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
 </div>
 
@@ -15,7 +15,39 @@
       <p-column field="title" header="Title" [sortable]="true"></p-column>
       <p-column field="url" header="Url" [sortable]="false"></p-column>
       <p-column field="details" header="Details" [sortable]="false"></p-column>
+      <p-column header="Annotations">
+        <ng-template let-col let-literature="rowData" pTemplate="body">
+          <md-card *ngFor="let annotation of literature.annotations" [innerHTML]="annotation.annotation"></md-card>
+          <button pButton label="Add Annotation" (click)="showNewAnnotationDialog(literature)"></button>
+        </ng-template>
+      </p-column>
     </p-dataTable>
   </div>
   <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
 </div>
+
+<p-dialog
+  header="New Annotation"
+  [(visible)]="displayNewAnnotationDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [width]="600"
+  [height]="450"
+>
+  <div *ngIf="newAnnotation">
+    <div class="ui-g">
+      <div class="ui-g-6">User: </div>
+      <div class="ui-g-6">{{newAnnotation.user.name}}</div>
+      <div class="ui-g-6">Created: </div>
+      <div class="ui-g-6">{{newAnnotation.createdAt | date: 'medium'}}</div>
+      <div class="ui-g-12">
+        <p-editor [(ngModel)]="newAnnotation.annotation" [style]="{'height':'220px'}"></p-editor>
+      </div>
+      <div class="ui-g-6"></div>
+      <div class="ui-g-6">
+        <button pButton label="Save" (click)="saveAnnotation()"></button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

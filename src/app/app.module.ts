@@ -29,6 +29,7 @@ import { GeneAnnotationsComponent } from './components/gene/components/gene/gene
 import { GeneVariantComponent } from './components/gene-variant/gene-variant.component';
 import { GeneVariantLiteratureDataTableComponent } from './components/gene-variant-literature-data-table/gene-variant-literature-data-table.component';
 import { GeneVariantAnnotationsComponent } from './components/gene-variant/gene-variant-annotations/gene-variant-annotations.component';
+import { IdentityServiceCallbackComponent } from './identity-service-callback/identity-service-callback.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { GeneVariantAnnotationsComponent } from './components/gene-variant/gene-
     GeneAnnotationsComponent,
     GeneVariantComponent,
     GeneVariantLiteratureDataTableComponent,
-    GeneVariantAnnotationsComponent
+    GeneVariantAnnotationsComponent,
+    IdentityServiceCallbackComponent
 
   ],
   imports: [

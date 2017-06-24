@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Log } from 'ng2-logger';
 import {LiteratureService} from "../../services/literature.service";
 import {LiteratureModel} from "../../models/api/literature.model";
+import {AnnotationModel} from "../../models/api/annotation.model";
+import {TestData} from "../../services/test-data";
 
 declare const jlinq: any;
 
@@ -15,6 +17,10 @@ const log = Log.create('LiteratureComponent');
 export class LiteratureComponent implements OnInit {
   literatures: LiteratureModel[];
   literaturesOrig: LiteratureModel[];
+  displayNewAnnotationDialog = false;
+  newAnnotation: AnnotationModel;
+  selectedLiterature: LiteratureModel;
+  testData = new TestData();
 
   constructor(
     private literatureService: LiteratureService
@@ -44,6 +50,22 @@ export class LiteratureComponent implements OnInit {
   }
 
   onRowSelect(event) {
+    log.info('selected thing', this.selectedLiterature);
     log.info('row selected', event);
+  }
+
+  showNewAnnotationDialog(literature: LiteratureModel) {
+    this.selectedLiterature = literature;
+    this.newAnnotation = <AnnotationModel>{createdAt: new Date(), modifiedAt: new Date(), user: this.testData.users[0]};
+    this.displayNewAnnotationDialog = true;
+    log.info('selected thing', this.selectedLiterature);
+  }
+
+  saveAnnotation() {
+    if (!this.selectedLiterature.annotations) {
+      this.selectedLiterature.annotations = [];
+    }
+    this.selectedLiterature.annotations = [...this.selectedLiterature.annotations, this.newAnnotation];
+    this.displayNewAnnotationDialog = false;
   }
 }

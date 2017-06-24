@@ -10,6 +10,7 @@ import {GenesComponent} from "./components/genes/genes.component";
 import {GeneComponent} from "./components/gene/gene.component";
 import {LiteratureComponent} from "./components/literature/literature.component";
 import {GeneVariantComponent} from "./components/gene-variant/gene-variant.component";
+import {IdentityServiceCallbackComponent} from "./identity-service-callback/identity-service-callback.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'gene-variant/:id',
     component: GeneVariantComponent
+  },
+  {
+    path: 'identity-service-callback',
+    component: IdentityServiceCallbackComponent
   },
   {
     path: '**',
