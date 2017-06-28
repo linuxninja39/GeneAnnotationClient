@@ -30,7 +30,7 @@ import { GeneVariantComponent } from './components/gene-variant/gene-variant.com
 import { GeneVariantLiteratureDataTableComponent } from './components/gene-variant-literature-data-table/gene-variant-literature-data-table.component';
 import { GeneVariantAnnotationsComponent } from './components/gene-variant/gene-variant-annotations/gene-variant-annotations.component';
 import { IdentityServiceCallbackComponent } from './identity-service-callback/identity-service-callback.component';
-import {NgxOidcClientModule} from 'ngx-oidc-client';
+import {NgxOidcClientModule, OIDC_CLIENT_CONFIG} from 'ngx-oidc-client';
 
 @NgModule({
   declarations: [
@@ -74,7 +74,13 @@ import {NgxOidcClientModule} from 'ngx-oidc-client';
   ],
   providers: [
     GeneService,
-    LiteratureService
+    LiteratureService,
+    {
+      provide: OIDC_CLIENT_CONFIG,
+      useValue: {
+        client_id: "bob"
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })

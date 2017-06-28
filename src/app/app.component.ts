@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Http, RequestOptions, Headers, URLSearchParams} from "@angular/http";
 import { Log } from 'ng2-logger';
-import {NgxOidcClientService} from 'ngx-oidc-client'
+import {NgxOidcClientService, OIDC_CLIENT_CONFIG} from 'ngx-oidc-client';
 
 const log = Log.create('AppComponent');
 
@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
   mgr;
 
   constructor(
-    private ngxOidcClientService: NgxOidcClientService
+    private ngxOidcClientService: NgxOidcClientService,
+    @Inject(OIDC_CLIENT_CONFIG) public config
   ) {
   }
 
