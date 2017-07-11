@@ -1,7 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GeneVariantModel} from "../../../models/api/gene-variant.model";
-import {AnnotationModel} from "../../../models/api/annotation.model";
-import {TestData} from "../../../services/test-data";
+import {GeneVariantModel} from '../../../models/api/gene-variant.model';
+import {AnnotationModel} from '../../../models/api/annotation.model';
+import {TestData} from '../../../services/test-data';
+import {Log} from 'ng2-logger';
+
+const log = Log.create('GeneVariantAnnotationsComponent');
 
 @Component({
   selector: 'app-gene-variant-annotations',
@@ -14,6 +17,7 @@ export class GeneVariantAnnotationsComponent implements OnInit {
   testData = new TestData();
   newAnnotation: AnnotationModel;
   displayNewAnnotationDialog = false;
+  selectedAnnotation;
 
   constructor() { }
 
@@ -28,5 +32,10 @@ export class GeneVariantAnnotationsComponent implements OnInit {
   saveAnnotation() {
     this.geneVariant.annotations = [...this.geneVariant.annotations, this.newAnnotation];
     this.displayNewAnnotationDialog = false;
+  }
+
+
+  onRowSelect(row) {
+    log.info('row selected', row);
   }
 }

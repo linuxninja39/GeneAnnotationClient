@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GeneModel} from "../../../../../models/api/gene.model";
-import {AnnotationModel} from "../../../../../models/api/annotation.model";
-import {Log} from "ng2-logger";
+import {GeneModel} from '../../../../../models/api/gene.model';
+import {AnnotationModel} from '../../../../../models/api/annotation.model';
+import {Log} from 'ng2-logger';
 
 const log = Log.create('GeneVariantsComponent');
 
@@ -14,7 +14,7 @@ export class GeneAnnotationsComponent implements OnInit {
   @Input()
   gene: GeneModel;
   selectedAnnotation: AnnotationModel = <AnnotationModel>{};
-  displayNewAnnotationDialog: boolean = false;
+  displayNewAnnotationDialog = false;
 
   constructor() { }
 
@@ -23,7 +23,7 @@ export class GeneAnnotationsComponent implements OnInit {
 
   showNewAnnotationDialog() {
     this.selectedAnnotation = <AnnotationModel>{};
-    this.selectedAnnotation.user = {id: "joe", name: "Joe"};
+    this.selectedAnnotation.user = {id: 'joe', name: 'Joe'};
     this.selectedAnnotation.createdAt = new Date();
     this.selectedAnnotation.modifiedAt = new Date();
     this.displayNewAnnotationDialog = true;
@@ -31,8 +31,14 @@ export class GeneAnnotationsComponent implements OnInit {
 
   saveAnnotation() {
     this.displayNewAnnotationDialog = false;
-    if (!this.gene.annotations) this.gene.annotations = [];
+    if (!this.gene.annotations) {
+      this.gene.annotations = [];
+    }
 
     this.gene.annotations = [...this.gene.annotations, this.selectedAnnotation];
+  }
+
+  onRowSelect(row) {
+    log.info('row selected', row);
   }
 }
