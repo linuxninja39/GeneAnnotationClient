@@ -1,7 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {Http, RequestOptions, Headers, URLSearchParams} from "@angular/http";
+import {Component, OnInit} from '@angular/core';
 import { Log } from 'ng2-logger';
-import {NgxOidcClientService, OIDC_CLIENT_CONFIG} from 'ngx-oidc-client';
+import {NgxOidcClientService} from 'ngx-oidc-client';
 
 const log = Log.create('AppComponent');
 
@@ -13,11 +12,9 @@ const log = Log.create('AppComponent');
 export class AppComponent implements OnInit {
   username: string;
   pass: string;
-  mgr;
 
   constructor(
     private ngxOidcClientService: NgxOidcClientService,
-    @Inject(OIDC_CLIENT_CONFIG) public config
   ) {
   }
 
@@ -25,12 +22,18 @@ export class AppComponent implements OnInit {
   }
 
   login() {
+    this.ngxOidcClientService
+      .signin()
+      .subscribe(
+        (user) => {
+          log.info('got user', user);
+        },
+        (err) => {
+          log.error('got error', err);
+        }
+      );
   }
 
   logout() {
-  }
-
-  checkLoggedIn() {
-
   }
 }

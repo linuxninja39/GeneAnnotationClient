@@ -30,7 +30,8 @@ import { GeneVariantComponent } from './components/gene-variant/gene-variant.com
 import { GeneVariantLiteratureDataTableComponent } from './components/gene-variant-literature-data-table/gene-variant-literature-data-table.component';
 import { GeneVariantAnnotationsComponent } from './components/gene-variant/gene-variant-annotations/gene-variant-annotations.component';
 import { IdentityServiceCallbackComponent } from './identity-service-callback/identity-service-callback.component';
-import {NgxOidcClientModule, OIDC_CLIENT_CONFIG} from 'ngx-oidc-client';
+import {NgxOidcClientModule, OIDC_CLIENT_CONFIG, NgxOidcClientService} from 'ngx-oidc-client';
+import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {NgxOidcClientModule, OIDC_CLIENT_CONFIG} from 'ngx-oidc-client';
     GeneVariantComponent,
     GeneVariantLiteratureDataTableComponent,
     GeneVariantAnnotationsComponent,
-    IdentityServiceCallbackComponent
+    IdentityServiceCallbackComponent,
+    AuthCallbackComponent
 
   ],
   imports: [
@@ -75,10 +77,16 @@ import {NgxOidcClientModule, OIDC_CLIENT_CONFIG} from 'ngx-oidc-client';
   providers: [
     GeneService,
     LiteratureService,
+    NgxOidcClientService,
     {
       provide: OIDC_CLIENT_CONFIG,
       useValue: {
-        client_id: "bob"
+        authority: 'http://localhost:5000',
+        client_id: 'js',
+        popup_redirect_uri: 'http://localhost:4200/auth.html',
+        response_type: 'id_token token',
+        scope: 'openid profile api1',
+        post_logout_redirect_uri : 'http://localhost:4200'
       }
     }
   ],

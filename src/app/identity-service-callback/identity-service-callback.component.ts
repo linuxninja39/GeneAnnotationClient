@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as Oidc from 'oidc-client/lib/oidc-client.js';
 import { Log } from 'ng2-logger';
+import {NgxOidcClientService} from "ngx-oidc-client";
 
 const log = Log.create('IdentityServiceCallbackComponent');
 
@@ -11,21 +11,24 @@ const log = Log.create('IdentityServiceCallbackComponent');
 })
 export class IdentityServiceCallbackComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private ngxOidcClientService: NgxOidcClientService
+  ) {
+    log.info('oidc client service', ngxOidcClientService);
+  }
 
   ngOnInit() {
-    new Oidc.UserManager().signinPopupCallback()
-      .then(
-        () => {
-          log.info('signin popup redirect callback success');
+    log.info('called ngOnInit');
+    this.ngxOidcClientService
+      .signinCallback()
+      .subscribe(
+        (user) => {
+          log.info('got user, n stuff', user);
+        },
+        (err) => {
+          log.info('got error', err);
         }
-      )
-      .catch(
-        (e) => {
-          log.error('got error', e);
-        }
-      )
-    ;
+      );
   }
 
 }
