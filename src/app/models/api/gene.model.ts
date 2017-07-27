@@ -7,7 +7,7 @@ import {AnnotationModel} from "./annotation.model";
  * Created by jboswell on 5/24/2017.
  */
 
-export interface GeneModel extends BaseModel{
+export interface GeneModel extends BaseModel {
   symbol: string;
   previousSymobls?: string[];
   hg: HumanGenomeModel;

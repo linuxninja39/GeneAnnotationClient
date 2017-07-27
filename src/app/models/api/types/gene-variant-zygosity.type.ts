@@ -3,8 +3,8 @@
  */
 
 export enum GeneVariantZygosityType {
-  HETORZYGOUS = <any>'Hetorzygous',
-  HOMOZYGOUS = <any>'Homozygous',
-  COMPOUND = <any>'Compound Heterozygous'
+  HETORZYGOUS, // = <any>'Hetorzygous',
+  HOMOZYGOUS, // = <any>'Homozygous',
+  COMPOUND // = <any>'Compound Heterozygous'
 }
 

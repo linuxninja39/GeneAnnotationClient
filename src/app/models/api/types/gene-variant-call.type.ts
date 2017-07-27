@@ -3,9 +3,9 @@
  */
 
 export enum GeneVariantCallType {
-  VOUS_ = <any>'VOUS',
-  LIKELY_PATHOGENIC = <any>'Likely pathogenic',
-  PATHOGNEIC = <any>'Pathogenic',
-  BENIGN = <any>'Benign',
-  AUTOSOMAL = <any>'autosomal recessive carrier'
+  VOUS, // = <any>'VOUS',
+  LIKELY_PATHOGENIC, //  <any>'Likely pathogenic',
+  PATHOGNEIC, //  <any>'Pathogenic',
+  BENIGN, //  <any>'Benign',
+  AUTOSOMAL //  <any>'autosomal recessive carrier'
 }
