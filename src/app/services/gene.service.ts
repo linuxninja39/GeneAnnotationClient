@@ -15,7 +15,16 @@ export class GeneService {
   }
 
   getGene(id: string): Observable<GeneModel> {
-    return null;
+        return this.http
+      .get('http://localhost:5000/api/genes/' + id)
+      .map(
+        (res, num) => {
+          log.info('res is: ', res);
+          const ret: GeneModel = res.json();
+          log.info('ret is: ', ret);
+          return ret;
+        }
+      );
   }
 
   getGenes(page?: number): Observable<GeneModel[]> {
