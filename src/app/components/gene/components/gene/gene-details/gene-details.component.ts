@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GeneModel} from "../../../../../models/api/gene.model";
+import {GeneModel} from '../../../../../models/api/gene.model';
 
 @Component({
   selector: 'app-gene-details',

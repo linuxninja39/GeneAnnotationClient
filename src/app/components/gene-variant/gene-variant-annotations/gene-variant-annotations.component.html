@@ -3,12 +3,12 @@
     <p-column field="user.name" header="User"></p-column>
     <p-column field="createdAt" header="Created">
       <ng-template let-col let-annotation="rowData" pTemplate="body">
-        {{annotation.createdAt | date:'medium'}}
+        {{note.createdAt | date:'medium'}}
       </ng-template>
     </p-column>
     <p-column field="modifiedAt" header="Modified">
       <ng-template let-col let-annotation="rowData" pTemplate="body">
-        {{annotation.createdAt | date:'medium'}}
+        {{note.createdAt | date:'medium'}}
       </ng-template>
     </p-column>
     <p-column field="annotation" header="Annotation">
@@ -36,11 +36,11 @@
   <div *ngIf="newAnnotation">
     <div class="ui-g">
       <div class="ui-g-6">User: </div>
-      <div class="ui-g-6">{{newAnnotation.user.name}}</div>
+      <div class="ui-g-6">{{newAnnotation.appUser.name}}</div>
       <div class="ui-g-6">Created: </div>
       <div class="ui-g-6">{{newAnnotation.createdAt | date: 'medium'}}</div>
       <div class="ui-g-12">
-        <p-editor [(ngModel)]="newAnnotation.annotation" [style]="{'height':'220px'}"></p-editor>
+        <p-editor [(ngModel)]="newAnnotation.note" [style]="{'height':'220px'}"></p-editor>
       </div>
       <div class="ui-g-6"></div>
       <div class="ui-g-6">

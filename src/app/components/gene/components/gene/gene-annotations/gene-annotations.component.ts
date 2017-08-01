@@ -23,7 +23,7 @@ export class GeneAnnotationsComponent implements OnInit {
 
   showNewAnnotationDialog() {
     this.selectedAnnotation = <AnnotationModel>{};
-    this.selectedAnnotation.user = {id: 'joe', name: 'Joe'};
+    this.selectedAnnotation.appUser = {id: 'joe', name: 'Joe'};
     this.selectedAnnotation.createdAt = new Date();
     this.selectedAnnotation.modifiedAt = new Date();
     this.displayNewAnnotationDialog = true;
@@ -31,11 +31,11 @@ export class GeneAnnotationsComponent implements OnInit {
 
   saveAnnotation() {
     this.displayNewAnnotationDialog = false;
-    if (!this.gene.annotations) {
-      this.gene.annotations = [];
+    if (!this.gene.annotation) {
+      this.gene.annotation = [];
     }
 
-    this.gene.annotations = [...this.gene.annotations, this.selectedAnnotation];
+    this.gene.annotation = [...this.gene.annotation, this.selectedAnnotation];
   }
 
   onRowSelect(row) {

@@ -1,6 +1,6 @@
 import { GeneAnnotationClientPage } from './app.po';
 
-describe('gene-annotation-client App', () => {
+describe('gene-note-client App', () => {
   let page: GeneAnnotationClientPage;
 
   beforeEach(() => {

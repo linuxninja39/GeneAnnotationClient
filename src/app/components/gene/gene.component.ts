@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {GeneService} from "../../services/gene.service";
-import {GeneModel} from "../../models/api/gene.model";
+import {ActivatedRoute} from '@angular/router';
+import {GeneService} from '../../services/gene.service';
+import {GeneModel} from '../../models/api/gene.model';
 
 @Component({
   selector: 'app-gene',

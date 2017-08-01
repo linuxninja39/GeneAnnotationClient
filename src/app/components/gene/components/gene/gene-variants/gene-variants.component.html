@@ -5,7 +5,7 @@
     <p-column field="call" header="Call"></p-column>
     <p-column header="Annotations">
       <ng-template pTemplate="body" let-row="rowData">
-        <div *ngFor="let annotation of row.annotations" class="md-card">{{annotation?.annotation | words : 10 : "..." }}</div>
+        <div *ngFor="let annotation of row.annotations" class="md-card">{{annotation?.note | words : 10 : "..." }}</div>
       </ng-template>
     </p-column>
     <p-footer>

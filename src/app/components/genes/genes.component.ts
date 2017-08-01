@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {GeneModel} from "../../models/api/gene.model";
-import {GeneService} from "../../services/gene.service";
+import {GeneModel} from '../../models/api/gene.model';
+import {GeneService} from '../../services/gene.service';
 import { Log } from 'ng2-logger';
-import {Router} from "@angular/router";
-import {OverlayPanel} from "primeng/primeng";
+import {Router} from '@angular/router';
+import {OverlayPanel} from 'primeng/primeng';
 
 const log = Log.create('GenesComponent');
 

@@ -1,6 +1,6 @@
-import {BaseModel} from "./base.model";
-import {AuthorModel} from "./author.model";
-import {AnnotationModel} from "./annotation.model";
+import {BaseModel} from './base.model';
+import {AuthorModel} from './author.model';
+import {AnnotationModel} from './annotation.model';
 /**
  * Created by jboswell on 5/30/2017.
  */
@@ -8,7 +8,6 @@ import {AnnotationModel} from "./annotation.model";
 export interface LiteratureModel extends BaseModel {
   title: string;
   url: URL;
-  details?: string;
-  author: AuthorModel;
-  annotations?: AnnotationModel[];
+  author: AuthorModel[];
+  annotation?: AnnotationModel[];
 }

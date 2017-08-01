@@ -1,7 +1,8 @@
 /**
  * Created by jboswell on 6/7/2017.
  */
-export enum GeneVariantType {
+export interface VariantTypeModel {
+  /*
   DELETION_WHOLE_GENE = <any>'Deletion (whole gene)',
   PARTIAL_DELETION_INTRAGENIC = <any>'Partial Deletion (intragenic)',
   PARTIAL_DELETION_DELETED_5 = <any>'Partial Deletion (deleted 5\')',
@@ -14,5 +15,7 @@ export enum GeneVariantType {
   SNV_PREDICTED_GOF = <any>'SNV, predicted gof',
   SPLICE_SITE = <any>'Splice site',
   GWAS = <any>'GWAS (within gene or nearest to this gene)'
+  */
+  name: string;
 }
 

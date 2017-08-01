@@ -1,27 +1,26 @@
-import {BaseModel} from "./base.model";
-import {ChromosomeModel} from "./chromosome.model";
-import {HumanGenomeModel} from "./human-genome.model";
-import {GeneVariantModel} from "./gene-variant.model";
-import {AnnotationModel} from "./annotation.model";
+import {BaseModel} from './base.model';
+import {ChromosomeModel} from './chromosome.model';
+import {GeneVariantModel} from './gene-variant.model';
+import {AnnotationModel} from './annotation.model';
+import {SymbolModel} from './symbol.model';
+import {GeneNameModel} from './gene-name.model';
+import {SynonymModel} from './synonym.model';
+import {GeneLocationModel} from './gene-location.model';
+import {OriginTypeModel} from './origin-type.model';
 /**
  * Created by jboswell on 5/24/2017.
  */
 
 export interface GeneModel extends BaseModel {
-  symbol: string;
-  previousSymobls?: string[];
-  hg: HumanGenomeModel;
+  symbol: SymbolModel[];
   chromosome: ChromosomeModel;
-  name: string;
-  previousNames?: string[];
-  synonyms?: string[];
+  geneName: GeneNameModel;
+  synonym?: SynonymModel[];
   lastModifiedDate?: Date;
   geneNameExpansion?: string;
   knownGeneFunction?: string;
-  locus: string;
-  start: number;
-  end: number;
-  origin?: string;
-  variants?: GeneVariantModel[];
-  annotations?: AnnotationModel[];
+  geneLocation: GeneLocationModel[];
+  origin: OriginTypeModel[];
+  geneVariant?: GeneVariantModel[];
+  annotation?: AnnotationModel[];
 }

@@ -1,12 +1,12 @@
-import {BaseModel} from "./base.model";
-import {UserModel} from "./user.model";
+import {BaseModel} from './base.model';
+import {AppUserModel} from './app-user.model';
 /**
  * Created by jboswell on 6/1/2017.
  */
 
 export interface AnnotationModel extends BaseModel {
-  annotation: string;
-  user: UserModel;
+  note: string;
+  appUser: AppUserModel;
   createdAt: Date;
   modifiedAt: Date;
 }

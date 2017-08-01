@@ -28,11 +28,11 @@
   <div *ngIf="selectedAnnotation">
     <div class="ui-g">
       <div class="ui-g-6">User: </div>
-      <div class="ui-g-6">{{selectedAnnotation.user?.name}}</div>
+      <div class="ui-g-6">{{selectedAnnotation.appUser?.name}}</div>
       <div class="ui-g-6">Created: </div>
       <div class="ui-g-6">{{selectedAnnotation.createdAt | date:'medium'}}</div>
       <div class="ui-g-12">
-        <p-editor [(ngModel)]="selectedAnnotation.annotation" [style]="{'height':'220px'}"></p-editor>
+        <p-editor [(ngModel)]="selectedAnnotation.note" [style]="{'height':'220px'}"></p-editor>
       </div>
       <div class="ui-g-6"></div>
       <div class="ui-g-6">

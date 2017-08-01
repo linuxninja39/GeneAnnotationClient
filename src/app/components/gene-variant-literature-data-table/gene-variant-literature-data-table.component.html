@@ -8,7 +8,7 @@
     <ng-template let-col let-row="rowData" pTemplate="body">
       <div class="ui-g">
         <div class="ui-g-12">
-          <md-card *ngFor="let annotation of row.annotations" [innerHTML]="annotation.annotation | words:5"></md-card>
+          <md-card *ngFor="let annotation of row.annotations" [innerHTML]="annotation.note | words:5"></md-card>
           <button pButton label="Add" (click)="showAddAnnotationDialog(row)"></button>
         </div>
       </div>
@@ -23,7 +23,7 @@
 
 <p-dialog header="Add Gene Variant/Literature Annotation" [(visible)]="addAnnotationDialogVisible">
   <div *ngIf="currentGeneVariantLiterature">
-    <p-editor [(ngModel)]="currentGeneVariantLiteratureAnnotation.annotation" [style]="{'height':'200px'}"></p-editor>
+    <p-editor [(ngModel)]="currentGeneVariantLiteratureAnnotation.note" [style]="{'height':'200px'}"></p-editor>
   </div>
   <div>
     <button pButton label="Save" (click)="saveAnnotation()"></button>

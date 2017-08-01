@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       .signin()
       .subscribe(
         (user) => {
-          log.info('got user', user);
+          log.info('got appUser', user);
         },
         (err) => {
           log.error('got error', err);

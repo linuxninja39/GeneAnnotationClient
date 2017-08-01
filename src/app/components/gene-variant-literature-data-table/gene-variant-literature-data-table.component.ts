@@ -32,7 +32,7 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    log.info('geneVariant.literatures', this.geneVariant.literatures);
+    log.info('geneVariant.literatures', this.geneVariant.literature);
     this.literatureService
       .getLiteratures()
       .subscribe(
@@ -72,8 +72,8 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   saveLiterature() {
     log.info('selectedLit', this.selectedLiterature);
     this.addLiteratureDialogVisible = false;
-    this.geneVariant.literatures = [
-      ...this.geneVariant.literatures,
+    this.geneVariant.literature = [
+      ...this.geneVariant.literature,
       {
         id: 'gv434', geneVariant: this.geneVariant, literature: this.selectedLiterature
       }

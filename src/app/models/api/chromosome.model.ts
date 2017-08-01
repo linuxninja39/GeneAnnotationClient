@@ -1,5 +1,4 @@
-import {BaseModel} from "./base.model";
-import {HumanGenomeModel} from "./human-genome.model";
+import {BaseModel} from './base.model';
 /**
  * Created by jboswell on 5/24/2017.
  */

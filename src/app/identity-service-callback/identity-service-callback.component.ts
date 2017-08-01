@@ -23,7 +23,7 @@ export class IdentityServiceCallbackComponent implements OnInit {
       .signinCallback()
       .subscribe(
         (user) => {
-          log.info('got user, n stuff', user);
+          log.info('got appUser, n stuff', user);
         },
         (err) => {
           log.info('got error', err);

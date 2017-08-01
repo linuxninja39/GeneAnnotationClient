@@ -1,52 +1,37 @@
 import { Injectable } from '@angular/core';
-import {Http} from "@angular/http";
-import {GeneModel} from "../models/api/gene.model";
-import {Observable} from "rxjs/Observable";
+import {Http} from '@angular/http';
+import {GeneModel} from '../models/api/gene.model';
+import {Observable} from 'rxjs/Observable';
 import { Log } from 'ng2-logger';
-import {TestData} from "./test-data";
-import {GeneVariantModel} from "../models/api/gene-variant.model";
+import {GeneVariantModel} from '../models/api/gene-variant.model';
+import 'rxjs/add/operator/map';
 
 const log = Log.create('GeneService');
 
 @Injectable()
 export class GeneService {
-  private testData: TestData = new TestData();
 
   constructor(private http: Http) {
   }
 
   getGene(id: string): Observable<GeneModel> {
-      return Observable.create(
-        (observer) => {
-          for (let gene of this.testData.genes) {
-            if (gene.id === id) {
-              observer.next(gene);
-            }
-          }
-          observer.complete();
+    return null;
+  }
+
+  getGenes(page?: number): Observable<GeneModel[]> {
+    return this.http
+      .get('http://localhost:5000/api/genes')
+      .map(
+        (res, num) => {
+          log.info('res is: ', res);
+          const ret: Array<GeneModel> = res.json();
+          log.info('ret is: ', ret);
+          return ret;
         }
       );
   }
 
-  getGenes(page?: number): Observable<GeneModel[]> {
-    return Observable.create(
-      (observable) => {
-        observable.next(this.testData.genes);
-        observable.complete();
-      }
-    );
-  }
-
   getGeneVariant(id: string): Observable<GeneVariantModel> {
-    return Observable.create(
-      (observer) => {
-        for (let geneVariant of this.testData.geneVariants) {
-          if (geneVariant.id === id) {
-            observer.next(geneVariant);
-          }
-        }
-        observer.complete();
-      }
-    );
+    return null;
   }
 }
