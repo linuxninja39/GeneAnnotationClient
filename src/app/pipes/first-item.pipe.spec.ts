@@ -27,7 +27,7 @@ describe('FirstItemPipe', () => {
 
     items.sort(
       (a, b) => {
-        log.info('in spec comparing a to b', a, b);
+        // log.info('in spec comparing a to b', a, b);
         const field = 'date';
         if (a[field] > b[field]) {
           return -1;
@@ -39,7 +39,7 @@ describe('FirstItemPipe', () => {
       }
     );
 
-    log.info('items now', [...items]);
+    // log.info('items now', [...items]);
 
     expect(pipe.transform(items, 'date', false))
       .toBe(thing1, 'should get the right object with date descending');

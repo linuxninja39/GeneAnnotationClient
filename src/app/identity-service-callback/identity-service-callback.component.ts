@@ -14,19 +14,19 @@ export class IdentityServiceCallbackComponent implements OnInit {
   constructor(
     private ngxOidcClientService: NgxOidcClientService
   ) {
-    log.info('oidc client service', ngxOidcClientService);
+    console.log('oidc client service', ngxOidcClientService);
   }
 
   ngOnInit() {
-    log.info('called ngOnInit');
+    // log.info('called ngOnInit');
     this.ngxOidcClientService
       .signinCallback()
       .subscribe(
         (user) => {
-          log.info('got appUser, n stuff', user);
+          console.log('got appUser, n stuff', user);
         },
         (err) => {
-          log.info('got error', err);
+          console.log('got error', err);
         }
       );
   }

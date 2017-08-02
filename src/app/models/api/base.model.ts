@@ -3,5 +3,5 @@
  */
 
 export interface BaseModel {
-  id: string;
+  id?: number | string;
 }

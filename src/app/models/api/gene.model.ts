@@ -15,6 +15,7 @@ export interface GeneModel extends BaseModel {
   symbol: SymbolModel[];
   chromosome: ChromosomeModel;
   geneName: GeneNameModel[];
+  currentGeneName?: GeneNameModel;
   synonym?: SynonymModel[];
   lastModifiedDate?: Date;
   geneNameExpansion?: string;
