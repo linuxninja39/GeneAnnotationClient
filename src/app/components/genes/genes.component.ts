@@ -20,6 +20,7 @@ export class GenesComponent implements OnInit {
   selectedGene: GeneModel;
   @ViewChild('knownFunctionPanel')
   knownFunctionPanel: ElementRef;
+  spinner = true;
 
   constructor(private geneService: GeneService, private router: Router) { }
 
@@ -30,6 +31,11 @@ export class GenesComponent implements OnInit {
         (genes: GeneModel[]) => {
           this.genes = genes;
           this.genesOrig = genes;
+          this.spinner = false;
+        },
+        (error) => {
+          log.error('got error trying to get genes', error);
+          this.spinner = false;
         }
       )
     ;

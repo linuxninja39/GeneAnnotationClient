@@ -1,27 +1,30 @@
     <div class="ui-g">
       <div class="ui-g-12">
         <md-card>
-          <div class="center-block">Symbol: {{gene.symbol}}</div>
+          <div class="center-block">Symbol: {{gene?.symbol}}</div>
         </md-card>
       </div>
       <div class="ui-g-3">
         <md-card>
-          Chromosome: {{gene.chromosome?.name}}
+          Chromosome: {{gene?.chromosome?.name}}
         </md-card>
       </div>
       <div class="ui-g-3">
         <md-card>
-          Start: {{gene.start}}
+          Start: {{gene?.start}}
         </md-card>
       </div>
       <div class="ui-g-3">
         <md-card>
-          End: {{gene.end}}
+          End: {{gene?.end}}
         </md-card>
       </div>
       <div class="ui-g-3">
         <md-card>
-          Locus: {{gene.locus}}
+          Locus:
+          <div *ngFor="let location of gene?.geneLocation">
+            {{location.locus}}
+          </div>
         </md-card>
       </div>
       <div class="ui-g-6">
@@ -30,7 +33,7 @@
               Expantion of gene name:
             </div>
             <div>
-              {{gene.geneNameExpansion}}
+              {{gene?.geneNameExpansion}}
             </div>
         </md-card>
       </div>
@@ -40,7 +43,7 @@
             Known Function
           </div>
           <div>
-            {{gene.knownGeneFunction}}
+            {{gene?.knownGeneFunction}}
           </div>
         </md-card>
       </div>
@@ -48,8 +51,8 @@
         <md-card>
           <div>Previous Symbols: </div>
           <div>
-            <div *ngFor="let symbol of gene.previousSymobls">
-              {{symbol}}
+            <div *ngFor="let sym of gene?.symbol">
+              {{sym}}
             </div>
           </div>
         </md-card>
@@ -58,8 +61,8 @@
         <md-card>
           <div>Previous Names: </div>
           <div>
-            <div *ngFor="let n of gene.previousNames">
-              {{n}}
+            <div *ngFor="let name of gene?.geneName">
+              {{name}}
             </div>
           </div>
         </md-card>

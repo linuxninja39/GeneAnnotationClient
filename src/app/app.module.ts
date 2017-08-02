@@ -10,28 +10,35 @@ import {
 } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
-import {AppRoutingModule} from "./app-routing.module";
-import {HomeComponent} from "./components/home/home.component";
+import {AppRoutingModule} from './app-routing.module';
+import {HomeComponent} from './components/home/home.component';
 import { Error404Component } from './components/error-404/error-404.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GenesComponent } from './components/genes/genes.component';
-import {GeneService} from "./services/gene.service";
+import {GeneService} from './services/gene.service';
 import { GeneComponent } from './components/gene/gene.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MdCardModule} from "@angular/material";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  MdCardModule,
+  MdProgressSpinnerModule
+
+} from '@angular/material';
 import { LiteratureComponent } from './components/literature/literature.component';
-import {LiteratureService} from "./services/literature.service";
+import {LiteratureService} from './services/literature.service';
 import { TruncateModule } from 'ng2-truncate';
 import { GeneDetailsComponent } from './components/gene/components/gene/gene-details/gene-details.component';
 import { GeneVariantsComponent } from './components/gene/components/gene/gene-variants/gene-variants.component';
 import { GeneAnnotationsComponent } from './components/gene/components/gene/gene-annotations/gene-annotations.component';
 import { GeneVariantComponent } from './components/gene-variant/gene-variant.component';
-import { GeneVariantLiteratureDataTableComponent } from './components/gene-variant-literature-data-table/gene-variant-literature-data-table.component';
+import {
+  GeneVariantLiteratureDataTableComponent
+} from './components/gene-variant-literature-data-table/gene-variant-literature-data-table.component';
 import { GeneVariantAnnotationsComponent } from './components/gene-variant/gene-variant-annotations/gene-variant-annotations.component';
 import { IdentityServiceCallbackComponent } from './identity-service-callback/identity-service-callback.component';
 import {NgxOidcClientModule, OIDC_CLIENT_CONFIG, NgxOidcClientService} from 'ngx-oidc-client';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
+import { FirstItemPipe } from './pipes/first-item.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +57,8 @@ import { AuthCallbackComponent } from './components/auth-callback/auth-callback.
     GeneVariantLiteratureDataTableComponent,
     GeneVariantAnnotationsComponent,
     IdentityServiceCallbackComponent,
-    AuthCallbackComponent
+    AuthCallbackComponent,
+    FirstItemPipe
 
   ],
   imports: [
@@ -64,6 +72,7 @@ import { AuthCallbackComponent } from './components/auth-callback/auth-callback.
     AccordionModule,
     BrowserAnimationsModule,
     MdCardModule,
+    MdProgressSpinnerModule,
     TruncateModule,
     OverlayPanelModule,
     PanelModule,

@@ -1,6 +1,6 @@
 
 <p-accordion [multiple]="true">
-  <p-accordionTab header="{{gene.symbol}}">
+  <p-accordionTab header="Gene: {{gene?.symbol | json}}">
     <app-gene-details [(gene)]="gene"></app-gene-details>
   </p-accordionTab>
   <p-accordionTab header="Variants">
