@@ -8,15 +8,17 @@ export const TestGenes: GeneModel[] = [
     symbol: [],
     chromosome: {id: 1, name: '1'},
     geneLocation: [],
-    geneName: [TestGeneNames[0]],
-    origin: []
+    geneName: [TestGeneNames[0], TestGeneNames[1]],
+    origin: [],
+    synonym: []
   },
-    {
+  {
     id: 2,
     symbol: [],
     chromosome: {id: 1, name: '1'},
     geneLocation: [],
-    geneName: [TestGeneNames[1]],
-    origin: []
+    geneName: [TestGeneNames[2], TestGeneNames[3]],
+    origin: [],
+    synonym: []
   }
 ];

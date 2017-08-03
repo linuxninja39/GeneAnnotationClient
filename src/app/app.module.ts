@@ -39,6 +39,7 @@ import { IdentityServiceCallbackComponent } from './identity-service-callback/id
 import {NgxOidcClientModule, OIDC_CLIENT_CONFIG, NgxOidcClientService} from 'ngx-oidc-client';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { FirstItemPipe } from './pipes/first-item.pipe';
+import {CurrentPreviousItemsService} from './services/current-previous-items.service';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { FirstItemPipe } from './pipes/first-item.pipe';
         scope: 'openid profile api1',
         post_logout_redirect_uri : 'http://localhost:4200'
       }
-    }
+    },
+    CurrentPreviousItemsService
   ],
   bootstrap: [AppComponent]
 })

@@ -6,13 +6,14 @@ import { Log } from 'ng2-logger';
 import {GeneVariantModel} from '../models/api/gene-variant.model';
 import 'rxjs/add/operator/map';
 import {GeneNameModel} from '../models/api/gene-name.model';
+import {CurrentPreviousItemsService} from './current-previous-items.service';
 
 const log = Log.create('GeneService');
 
 @Injectable()
 export class GeneService {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private currentPreviousItemsService: CurrentPreviousItemsService) {
   }
 
   getGene(id: string | number): Observable<GeneModel> {
@@ -21,7 +22,7 @@ export class GeneService {
       .map(
         (res, num) => {
           const gene: GeneModel = res.json();
-          gene.currentGeneName = this.getCurrentGeneName(gene);
+          this.currentPreviousItemsService.updateGeneModel(gene);
           return gene;
         }
       );
@@ -34,7 +35,7 @@ export class GeneService {
         (res, num) => {
           const genes: Array<GeneModel> = res.json();
           for (const gene of genes) {
-            gene.currentGeneName = this.getCurrentGeneName(gene);
+            this.currentPreviousItemsService.updateGeneModel(gene);
           }
           return genes;
         }
@@ -43,21 +44,5 @@ export class GeneService {
 
   getGeneVariant(id: string): Observable<GeneVariantModel> {
     return null;
-  }
-
-  private getCurrentGeneName(gene: GeneModel): GeneNameModel {
-    gene.geneName.sort(
-      (a, b) => {
-        if (a.activeDate < b.activeDate) {
-          return -1;
-        }
-        if (a.activeDate > b.activeDate) {
-          return 1;
-        }
-        return 0;
-      }
-    );
-
-    return gene.geneName.pop();
   }
 }

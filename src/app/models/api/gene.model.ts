@@ -16,11 +16,13 @@ export interface GeneModel extends BaseModel {
   chromosome: ChromosomeModel;
   geneName: GeneNameModel[];
   currentGeneName?: GeneNameModel;
-  synonym?: SynonymModel[];
+  synonym: SynonymModel[];
+  currentSynonym?: SynonymModel;
   lastModifiedDate?: Date;
   geneNameExpansion?: string;
   knownGeneFunction?: string;
   geneLocation: GeneLocationModel[];
+  currentGeneLocation?: GeneLocationModel;
   origin: OriginTypeModel[];
   geneVariant?: GeneVariantModel[];
   annotation?: AnnotationModel[];
