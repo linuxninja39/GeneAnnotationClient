@@ -31,7 +31,7 @@
       <p-column field="knownGeneFunction" header="Known Function" [sortable]="true">
         <ng-template let-col let-row="rowData" pTemplate="body">
           <!--div (click)="handleKnowFunctionClick($event, row, knownFunctionPanel)">{{row.knownGeneFunction | words : 10 : "..."}}</div-->
-          <div (click)="handleKnowFunctionClick($event, row, knownFunctionPanel)">{{row.knownGeneFunction}}</div>
+          <div (click)="handleKnowFunctionClick($event, row, knownFunctionPanel); $event.stopPropagation()">{{row.knownGeneFunction}}</div>
         </ng-template>
       </p-column>
     </p-dataTable>
