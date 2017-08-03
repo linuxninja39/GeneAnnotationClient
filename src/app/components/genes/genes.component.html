@@ -19,10 +19,14 @@
         </ng-template>
       </p-column>
       <p-column field="chromosome.name" header="Chromosome" [sortable]="true"></p-column>
-      <p-column field="start" header="Start" [sortable]="true"></p-column>
-      <p-column field="end" header="End" [sortable]="true"></p-column>
-      <p-column field="locus" header="Locus" [sortable]="true"></p-column>
-      <p-column field="origin" header="Origin" [sortable]="true"></p-column>
+      <p-column field="currentGeneLocation.start" header="Start" [sortable]="true"></p-column>
+      <p-column field="currentGeneLocation.end" header="End" [sortable]="true"></p-column>
+      <p-column field="currentGeneLocation.locus" header="Locus" [sortable]="true"></p-column>
+      <p-column field="origin" header="Origin" [sortable]="true">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+          <div *ngFor="let or of row.origin">{{or.name}}</div>
+        </ng-template>
+      </p-column>
       <p-column field="geneNameExpansion" header="Expansion of gene name" [sortable]="true"></p-column>
       <p-column field="knownGeneFunction" header="Known Function" [sortable]="true">
         <ng-template let-col let-row="rowData" pTemplate="body">
