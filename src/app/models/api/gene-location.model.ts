@@ -5,9 +5,9 @@ import {BaseModel} from './base.model';
 
 export interface GeneLocationModel extends BaseModel{
   chr: string;
-  start: number;
-  end: number;
+  start: number | string;
+  end: number | string;
   locus: string;
-  hgVersion: number;
+  hgVersion: number | string;
 }
 

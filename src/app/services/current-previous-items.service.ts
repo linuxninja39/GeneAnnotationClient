@@ -8,6 +8,7 @@ export class CurrentPreviousItemsService {
     'GeneName',
     'Synonym',
     'GeneLocation',
+    'Symbol'
   ];
 
   static readonly PROPERTY_PREFACE = 'current';

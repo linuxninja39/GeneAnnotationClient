@@ -43,8 +43,8 @@ export class GenesComponent implements OnInit {
 
   searchGenes(event) {
     const searchTerm = event.target.value;
-    log.error('event', event);
-    log.error('searchTerm', searchTerm);
+    log.info('event', event);
+    log.info('searchTerm', searchTerm);
     this.genes = jlinq.from(this.genesOrig)
       .match('symbol', searchTerm)
       .orMatch('hgncId', searchTerm)

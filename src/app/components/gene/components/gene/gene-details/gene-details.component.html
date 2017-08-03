@@ -1,30 +1,27 @@
     <div class="ui-g">
       <div class="ui-g-12">
         <md-card>
-          <div class="center-block">Symbol: {{gene?.symbol}}</div>
+          <div class="center-block symbolEl">Symbol: {{gene?.currentSymbol.name}}</div>
         </md-card>
       </div>
       <div class="ui-g-3">
-        <md-card>
+        <md-card class="chromosomeNameEl">
           Chromosome: {{gene?.chromosome?.name}}
         </md-card>
       </div>
       <div class="ui-g-3">
-        <md-card>
-          Start: {{gene?.start}}
+        <md-card class="startEl">
+          Start: {{gene?.currentGeneLocation?.start}}
         </md-card>
       </div>
       <div class="ui-g-3">
-        <md-card>
-          End: {{gene?.end}}
+        <md-card class="endEl">
+          End: {{gene?.currentGeneLocation?.end}}
         </md-card>
       </div>
       <div class="ui-g-3">
-        <md-card>
-          Locus:
-          <div *ngFor="let location of gene?.geneLocation">
-            {{location.locus}}
-          </div>
+        <md-card class="locusEl">
+          Locus: {{gene?.currentGeneLocation?.locus}}
         </md-card>
       </div>
       <div class="ui-g-6">
@@ -32,7 +29,7 @@
             <div>
               Expantion of gene name:
             </div>
-            <div>
+            <div class="nameExpansionEl">
               {{gene?.geneNameExpansion}}
             </div>
         </md-card>
@@ -42,7 +39,7 @@
           <div>
             Known Function
           </div>
-          <div>
+          <div class="knownFunctionEl">
             {{gene?.knownGeneFunction}}
           </div>
         </md-card>

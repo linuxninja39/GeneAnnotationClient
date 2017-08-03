@@ -10,7 +10,9 @@ export const TestGenes: GeneModel[] = [
     geneLocation: [],
     geneName: [TestGeneNames[0], TestGeneNames[1]],
     origin: [],
-    synonym: []
+    synonym: [],
+    geneNameExpansion: 'name expansion',
+    knownGeneFunction: 'known function'
   },
   {
     id: 2,

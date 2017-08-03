@@ -13,6 +13,7 @@ import {OriginTypeModel} from './origin-type.model';
 
 export interface GeneModel extends BaseModel {
   symbol: SymbolModel[];
+  currentSymbol?: SymbolModel;
   chromosome: ChromosomeModel;
   geneName: GeneNameModel[];
   currentGeneName?: GeneNameModel;
