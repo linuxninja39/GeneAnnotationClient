@@ -7,6 +7,7 @@ import {GeneVariantModel} from '../../../../../models/api/gene-variant.model';
 import {ZygosityTypeModel} from '../../../../../models/api/zygosity-type.model';
 import {VariantTypeModel} from '../../../../../models/api/variant-type.model';
 import {GeneVariantCallTypeModel} from '../../../../../models/api/gene-variant-call-type.model';
+import {GeneService} from '../../../../../services/gene.service';
 
 const log = Log.create('GeneVariantsComponent');
 
@@ -25,7 +26,10 @@ export class GeneVariantsComponent implements OnInit {
   calls: SelectItem[] = [];
   selectedVariant: GeneVariantModel;
 
-  constructor(private router: Router, private changeDetector: ChangeDetectorRef
+  constructor(
+    private router: Router,
+    private changeDetector: ChangeDetectorRef,
+    private geneService: GeneService
   ) { }
 
   ngOnInit() {

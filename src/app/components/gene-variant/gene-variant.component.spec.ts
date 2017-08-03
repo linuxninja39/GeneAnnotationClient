@@ -5,9 +5,11 @@ import {Component, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {GeneService} from '../../services/gene.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {GeneVariantModel} from '../../models/api/gene-variant.model';
+import {GeneVariantService} from '../../test-data/services/gene-variant.service';
+import {MockBackend} from '@angular/http/testing';
+import {HttpModule} from '@angular/http';
 
 @Component(
   {
@@ -31,16 +33,12 @@ class MockGeneVariantAnnotationsComponent {
   geneVariant;
 }
 
-class MockGeneService {
-  getGeneVariant() {
-    return Observable.of(<GeneVariantModel>{});
-  }
-}
-
 describe('GeneVariantComponent', () => {
   let component: GeneVariantComponent;
   let fixture: ComponentFixture<GeneVariantComponent>;
-  const geneService = new MockGeneService();
+  let geneVariantService: GeneVariantService;
+  let geneVariantServiceSpy: jasmine.Spy;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -49,6 +47,7 @@ describe('GeneVariantComponent', () => {
         MockGeneVariantLiteratureDataTableComponent
       ],
       imports: [
+        HttpModule,
         AccordionModule,
         DataTableModule,
         DialogModule,
@@ -56,16 +55,14 @@ describe('GeneVariantComponent', () => {
         NoopAnimationsModule
       ],
       providers: [
+        MockBackend,
         {
           provide: ActivatedRoute,
           useValue: {
             params: Observable.of({id: 123})
           }
         },
-        {
-          provide: GeneService,
-          useValue: geneService
-        }
+        GeneVariantService
       ]
     })
     .compileComponents();
@@ -73,6 +70,9 @@ describe('GeneVariantComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GeneVariantComponent);
+    geneVariantService = fixture.debugElement.injector.get(GeneVariantService);
+    geneVariantServiceSpy = spyOn(geneVariantService, 'getGeneVariant')
+      .and.returnValue(Observable.of(<GeneVariantModel>{}));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

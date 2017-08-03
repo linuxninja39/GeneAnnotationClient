@@ -42,7 +42,4 @@ export class GeneService {
       );
   }
 
-  getGeneVariant(id: string): Observable<GeneVariantModel> {
-    return null;
-  }
 }

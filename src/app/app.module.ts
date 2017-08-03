@@ -40,6 +40,7 @@ import {NgxOidcClientModule, OIDC_CLIENT_CONFIG, NgxOidcClientService} from 'ngx
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { FirstItemPipe } from './pipes/first-item.pipe';
 import {CurrentPreviousItemsService} from './services/current-previous-items.service';
+import {GeneVariantService} from './test-data/services/gene-variant.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import {CurrentPreviousItemsService} from './services/current-previous-items.ser
         post_logout_redirect_uri : 'http://localhost:4200'
       }
     },
-    CurrentPreviousItemsService
+    CurrentPreviousItemsService,
+    GeneVariantService
   ],
   bootstrap: [AppComponent]
 })

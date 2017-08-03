@@ -1,7 +1,9 @@
 /**
  * Created by jboswell on 6/7/2017.
  */
-export interface VariantTypeModel {
+import {BaseModel} from './base.model';
+
+export interface VariantTypeModel extends BaseModel {
   /*
   DELETION_WHOLE_GENE = <any>'Deletion (whole gene)',
   PARTIAL_DELETION_INTRAGENIC = <any>'Partial Deletion (intragenic)',
