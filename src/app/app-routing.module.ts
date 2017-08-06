@@ -4,12 +4,12 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {Error404Component} from "./components/error-404/error-404.component";
-import {GenesComponent} from "./components/genes/genes.component";
-import {GeneComponent} from "./components/gene/gene.component";
-import {LiteratureComponent} from "./components/literature/literature.component";
-import {GeneVariantComponent} from "./components/gene-variant/gene-variant.component";
-import {IdentityServiceCallbackComponent} from "./identity-service-callback/identity-service-callback.component";
+import {Error404Component} from './components/error-404/error-404.component';
+import {GenesComponent} from './components/genes/genes.component';
+import {GeneComponent} from './components/gene/gene.component';
+import {LiteratureComponent} from './components/literature/literature.component';
+import {GeneVariantComponent} from './components/gene-variant/gene-variant.component';
+import {IdentityServiceCallbackComponent} from './identity-service-callback/identity-service-callback.component';
 
 const routes: Routes = [
   {

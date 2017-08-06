@@ -1,6 +1,7 @@
 
 import {GeneModel} from '../models/api/gene.model';
 import {TestGeneNames} from './test-gene-names.spec';
+import {TestGeneVariants} from './test-gene-variants.spec';
 
 export const TestGenes: GeneModel[] = [
   {
@@ -12,7 +13,12 @@ export const TestGenes: GeneModel[] = [
     origin: [],
     synonym: [],
     geneNameExpansion: 'name expansion',
-    knownGeneFunction: 'known function'
+    knownGeneFunction: 'known function',
+    currentGeneLocation: {id: 1, chr: 'b', start: 1, end: 2, hgVersion: 19, locus: 'l'},
+    currentGeneName: TestGeneNames[0],
+    currentSymbol: {id: 1, name: 'sym', activeDate: new Date()},
+    currentSynonym: {id: 1, name: 'syn', activeDate: new Date()},
+    geneVariant: TestGeneVariants
   },
   {
     id: 2,

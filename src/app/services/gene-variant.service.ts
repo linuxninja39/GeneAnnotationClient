@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {GeneVariantModel} from '../../models/api/gene-variant.model';
+import {GeneVariantModel} from '../models/api/gene-variant.model';
 import {Http, Response} from '@angular/http';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class GeneVariantService {

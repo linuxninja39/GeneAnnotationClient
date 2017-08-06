@@ -4,6 +4,8 @@ import {GeneService} from '../../services/gene.service';
 import { Log } from 'ng2-logger';
 import {Router} from '@angular/router';
 import {OverlayPanel} from 'primeng/primeng';
+import {environment} from '../../../environments/environment';
+import {TestGenes} from '../../test-data/test-genes.spec';
 
 const log = Log.create('GenesComponent');
 
@@ -36,6 +38,9 @@ export class GenesComponent implements OnInit {
         (error) => {
           log.error('got error trying to get genes', error);
           this.spinner = false;
+          if (!environment.production) {
+            this.genes = TestGenes;
+          }
         }
       )
     ;

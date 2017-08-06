@@ -3,8 +3,8 @@ import { TestBed, inject } from '@angular/core/testing';
 import { GeneVariantService } from './gene-variant.service';
 import {BaseRequestOptions, HttpModule, ResponseOptions, XHRBackend, Response} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {TestGeneVariants} from '../test-gene-variants.spec';
-import {GeneVariantModel} from '../../models/api/gene-variant.model';
+import {TestGeneVariants} from '../test-data/test-gene-variants.spec';
+import {GeneVariantModel} from '../models/api/gene-variant.model';
 
 describe('GeneVariantService', () => {
   beforeEach(() => {

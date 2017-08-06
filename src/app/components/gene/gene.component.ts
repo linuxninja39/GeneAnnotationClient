@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {GeneService} from '../../services/gene.service';
 import {GeneModel} from '../../models/api/gene.model';
+import { Log } from 'ng2-logger';
+import {environment} from '../../../environments/environment';
+import {TestGenes} from '../../test-data/test-genes.spec';
+
+const log = Log.create('GeneComponent');
 
 @Component({
   selector: 'app-gene',
@@ -23,7 +28,13 @@ export class GeneComponent implements OnInit {
       this.geneService
         .getGene(this.id)
         .subscribe(
-          (gene: GeneModel) => this.gene = gene
+          (gene: GeneModel) => this.gene = gene,
+          (err) => {
+            log.error('failed to get gene data', err);
+            if (!environment.production) {
+              this.gene = TestGenes[0];
+            }
+          }
         )
       ;
     });

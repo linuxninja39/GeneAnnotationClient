@@ -22,6 +22,7 @@ export class GeneService {
       .map(
         (res, num) => {
           const gene: GeneModel = res.json();
+          log.info('got gene', gene);
           this.currentPreviousItemsService.updateGeneModel(gene);
           return gene;
         }

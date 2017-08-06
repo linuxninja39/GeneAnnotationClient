@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {GeneService} from '../../services/gene.service';
 import {GeneVariantModel} from '../../models/api/gene-variant.model';
-import {GeneVariantService} from '../../test-data/services/gene-variant.service';
+import {GeneVariantService} from '../../services/gene-variant.service';
 
 @Component({
   selector: 'app-gene-variant',

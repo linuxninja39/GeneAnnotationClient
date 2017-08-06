@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {GeneVariantModel} from '../../models/api/gene-variant.model';
-import {GeneVariantService} from '../../test-data/services/gene-variant.service';
+import {GeneVariantService} from '../../services/gene-variant.service';
 import {MockBackend} from '@angular/http/testing';
 import {HttpModule} from '@angular/http';
 
