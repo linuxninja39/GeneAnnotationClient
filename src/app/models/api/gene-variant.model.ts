@@ -10,6 +10,7 @@ import {GeneVariantCallTypeModel} from './gene-variant-call-type.model';
  */
 
 export interface GeneVariantModel extends BaseModel {
+  geneId: number | string;
   zygosityType: ZygosityTypeModel;
   variantType: VariantTypeModel;
   callType: GeneVariantCallTypeModel;

@@ -136,6 +136,8 @@ export class GeneVariantsComponent implements OnInit {
   }
 
   saveVariant() {
+    log.info('newVariat obj', this.newVariant);
+    log.info('newVariat string', JSON.stringify(this.newVariant));
     this.gene.geneVariant = [...this.gene.geneVariant, this.newVariant];
     this.displayNewVariantDialog = false;
     this.changeDetector.detectChanges();
