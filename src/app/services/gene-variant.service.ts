@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {GeneVariantModel} from '../models/api/gene-variant.model';
-import {Http, Response} from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
 
 @Injectable()
 export class GeneVariantService {
-  private static readonly BASE = 'geneVariants';
+  private static readonly BASE = 'GeneVariants';
+
+
 
   private url: string;
 
@@ -26,11 +28,21 @@ export class GeneVariantService {
   }
 
   saveGeneVariant(geneVariant: GeneVariantModel): Observable<GeneVariantModel> {
+    let headers = new Headers();
+    headers.set('Content-Type', 'application/json');
     let ob: Observable<any>;
     if (geneVariant.id) {
-      ob = this.http.put(this.url + '/' + geneVariant.id, JSON.stringify(geneVariant));
+      ob = this.http.put(
+        this.url + '/' + geneVariant.id,
+        JSON.stringify(geneVariant),
+        { headers: headers }
+      );
     } else {
-      ob = this.http.post(this.url, JSON.stringify(geneVariant));
+      ob = this.http.post(
+        this.url,
+        JSON.stringify(geneVariant),
+        { headers: headers }
+      );
     }
     return ob.map((res: Response) => res.json());
   }

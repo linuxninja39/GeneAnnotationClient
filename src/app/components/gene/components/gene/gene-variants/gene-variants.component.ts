@@ -4,10 +4,8 @@ import { Log } from 'ng2-logger';
 import {Router} from '@angular/router';
 import {SelectItem} from 'primeng/primeng';
 import {GeneVariantModel} from '../../../../../models/api/gene-variant.model';
-import {ZygosityTypeModel} from '../../../../../models/api/zygosity-type.model';
-import {VariantTypeModel} from '../../../../../models/api/variant-type.model';
-import {GeneVariantCallTypeModel} from '../../../../../models/api/gene-variant-call-type.model';
-import {GeneService} from '../../../../../services/gene.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {GeneVariantService} from '../../../../../services/gene-variant.service';
 
 const log = Log.create('GeneVariantsComponent');
 
@@ -26,102 +24,116 @@ export class GeneVariantsComponent implements OnInit {
   calls: SelectItem[] = [];
   selectedVariant: GeneVariantModel;
 
+  newVariantForm: FormGroup;
   constructor(
     private router: Router,
     private changeDetector: ChangeDetectorRef,
-    private geneService: GeneService
+    private geneVariantService: GeneVariantService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.setupDropdownOptions();
+    this.setupNewVariantForm();
+  }
+
+  private setupNewVariantForm() {
+    this.newVariantForm = this.formBuilder.group(
+      {
+        geneId: ['', Validators.required],
+        zygosityTypeId: ['', Validators.required],
+        variantTypeId: ['', Validators.required],
+        callTypeId: ['', Validators.required]
+      }
+    );
   }
 
   private setupDropdownOptions() {
     this.zygosities = [
       {
         label: 'Hetorzygous',
-        value: 'Hetorzygous'
+        value: 1
       },
       {
         label: 'Homozygous',
-        value: 'Homozygous'
+        value: 2
       },
       {
         label: 'Compound Heterozygous',
-        value: 'Compound Heterozygous'
+        value: 3
       },
     ];
     this.calls = [
       {
         label: 'VOUS',
-        value: 'VOUS'
+        value: 1
       },
       {
         label: 'Likely pathogenic',
-        value: 'Likely pathogenic'
+        value: 2
       },
       {
         label: 'Pathogenic',
-        value: 'Pathogenic'
+        value: 3
       },
       {
         label: 'Benign',
-        value: 'Benign'
+        value: 4
       },
       {
         label: 'autosomal recessive carrier',
-        value: 'autosomal recessive carrier'
+        value: 5
       },
     ];
 
     this.types = [
       {
         label: 'Deletion (whole gene)',
-        value: 'Deletion (whole gene)'
+        value: 1
       },
       {
         label: 'Partial Deletion (intragenic)',
-        value: 'Partial Deletion (intragenic)'
+        value: 2
       },
       {
         label: 'Partial Deletion (deleted 5\')',
-        value: 'Partial Deletion (deleted 5\')'
+        value: 3
       },
       {
         label: 'Partial Deletion (deleted 3\')',
-        value: 'Partial Deletion (deleted 3\')'
+        value: 4
       },
       {
         label: 'Duplication (whole gene)',
-        value: 'Duplication (whole gene)'
+        value: 5
       },
       {
         label: 'Partial Duplication (intragenic)',
-        value: 'Partial Duplication (intragenic)'
+        value: 6
       },
       {
         label: 'Partial Duplication (duplicated 5\')',
-        value: 'Partial Duplication (duplicated 5\')'
+        value: 7
       },
       {
         label: 'Partial Duplication (duplicated 3\')',
-        value: 'Partial Duplication (duplicated 3\')'
+        value: 8
       },
       {
         label: 'SNV, predicted lof',
-        value: 'SNV, predicted lof'
+        value: 9
       },
       {
         label: 'SNV, predicted gof',
-        value: 'SNV, predicted gof'
+        value: 10
       },
       {
         label: 'Splice site',
-        value: 'Splice site'
+        value: 11
       },
       {
         label: 'GWAS (within gene or nearest to this gene)',
-        value: 'GWAS (within gene or nearest to this gene)'
+        value: 12
       },
     ];
   }
@@ -136,10 +148,19 @@ export class GeneVariantsComponent implements OnInit {
   }
 
   saveVariant() {
-    log.info('newVariat obj', this.newVariant);
-    log.info('newVariat string', JSON.stringify(this.newVariant));
-    this.gene.geneVariant = [...this.gene.geneVariant, this.newVariant];
-    this.displayNewVariantDialog = false;
-    this.changeDetector.detectChanges();
+    const newVariant = <GeneVariantModel>{...this.newVariantForm.value};
+    newVariant.geneId = this.gene.id;
+    log.info('newVariat obj', newVariant);
+    log.info('newVariat string', JSON.stringify(newVariant));
+    this.geneVariantService
+      .saveGeneVariant(this.newVariant)
+      .subscribe(
+        (geneVariant) => {
+          this.gene.geneVariant = [...this.gene.geneVariant, geneVariant];
+          this.displayNewVariantDialog = false;
+          this.newVariantForm.reset();
+          this.changeDetector.detectChanges();
+        }
+      );
   }
 }
