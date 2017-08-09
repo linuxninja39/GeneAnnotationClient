@@ -3,6 +3,9 @@ import {Observable} from 'rxjs/Observable';
 import {GeneVariantModel} from '../models/api/gene-variant.model';
 import {Http, Headers, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
+import { Log } from 'ng2-logger';
+
+const log = Log.create('GeneVariantService');
 
 @Injectable()
 export class GeneVariantService {
@@ -38,6 +41,7 @@ export class GeneVariantService {
         { headers: headers }
       );
     } else {
+      log.info('sending geneVariant', JSON.stringify(geneVariant));
       ob = this.http.post(
         this.url,
         JSON.stringify(geneVariant),

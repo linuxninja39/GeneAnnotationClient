@@ -153,7 +153,7 @@ export class GeneVariantsComponent implements OnInit {
     log.info('newVariat obj', newVariant);
     log.info('newVariat string', JSON.stringify(newVariant));
     this.geneVariantService
-      .saveGeneVariant(this.newVariant)
+      .saveGeneVariant(newVariant)
       .subscribe(
         (geneVariant) => {
           this.gene.geneVariant = [...this.gene.geneVariant, geneVariant];

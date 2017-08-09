@@ -6,16 +6,20 @@ import {MockPipeResolver} from '@angular/compiler/testing';
 import {PipeResolver} from '@angular/compiler';
 import {TestGenes} from '../../../../../test-data/test-genes.spec';
 import {TruncateModule} from 'ng2-truncate';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ChangeDetectorRef} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {TestGeneVariants} from '../../../../../test-data/test-gene-variants.spec';
-import {GeneService} from '../../../../../services/gene.service';
+import {GeneVariantService} from '../../../../../services/gene-variant.service';
+import {GeneVariantModel} from '../../../../../models/api/gene-variant.model';
+import {Observable} from "rxjs/Observable";
 
-class MockGeneService {
-  getGeneVariant() {}
+class MockGeneVariantService {
+  saveGeneVariant: (geneVariant: GeneVariantModel) => Observable<GeneVariantModel>;
+  getGeneVariant: (id: string | number) => Observable<GeneVariantModel>;
+
 }
 
 describe('GeneVariantsComponent', () => {
@@ -33,11 +37,12 @@ describe('GeneVariantsComponent', () => {
         DialogModule,
         DropdownModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterTestingModule,
         NoopAnimationsModule
       ],
       providers: [
-        { provide: GeneService, useClass: MockGeneService }
+        { provide: GeneVariantService, useClass: MockGeneVariantService }
       ]
     })
     .compileComponents();
@@ -82,5 +87,47 @@ describe('GeneVariantsComponent', () => {
         .toBe(JSON.stringify({}), 'should be empty object');
       expect(component.displayNewVariantDialog).toBeTruthy();
     }
+  );
+
+  it (
+    'should call gene-variant.service to save new variant',
+    inject(
+      [
+        GeneVariantService
+      ],
+      (geneVariantService) => {
+        let callCount = 0;
+        let correctDataStructure = false;
+        component.newVariantForm.setValue(
+          {
+            geneId: 1,
+            zygosityTypeId: 1,
+            callTypeId: 1,
+            variantTypeId: 1
+          }
+        );
+        geneVariantService.saveGeneVariant = (geneVariant: GeneVariantModel) => {
+          callCount++;
+          if (geneVariant.geneId
+            && geneVariant.geneId === 1
+            && geneVariant.zygosityTypeId
+            && geneVariant.zygosityTypeId === 1
+            && geneVariant.callTypeId
+            && geneVariant.callTypeId === 1
+            && geneVariant.variantTypeId
+            && geneVariant.variantTypeId === 1
+          ) {
+            correctDataStructure = true;
+          }
+          return Observable.of(TestGeneVariants[0]);
+        };
+
+        component.saveVariant();
+
+        expect(callCount).toBe(1, 'saveGeneVariant not called exactly once');
+        expect(correctDataStructure).toBe(true,'form values not set correctly');
+
+      }
+    )
   );
 });
