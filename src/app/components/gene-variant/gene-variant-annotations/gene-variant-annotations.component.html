@@ -1,19 +1,19 @@
 <div>
-  <p-dataTable [value]="geneVariant.annotations" selectionMode="single" [(selection)]="selectedAnnotation" (onRowSelect)="onRowSelect($event)">
+  <p-dataTable [value]="geneVariant?.annotation" selectionMode="single" [(selection)]="selectedAnnotation" (onRowSelect)="onRowSelect($event)">
     <p-column field="user.name" header="User"></p-column>
     <p-column field="createdAt" header="Created">
       <ng-template let-col let-annotation="rowData" pTemplate="body">
-        {{note.createdAt | date:'medium'}}
+        {{annotation.createdAt | date:'medium'}}
       </ng-template>
     </p-column>
     <p-column field="modifiedAt" header="Modified">
       <ng-template let-col let-annotation="rowData" pTemplate="body">
-        {{note.createdAt | date:'medium'}}
+        {{annotation.modifiedAt | date:'medium'}}
       </ng-template>
     </p-column>
-    <p-column field="annotation" header="Annotation">
+    <p-column field="note" header="Note">
       <ng-template let-col let-row="rowData" pTemplate="body">
-        <div [innerHTML]="row.annotation"></div>
+        <div [innerHTML]="row.note"></div>
       </ng-template>
     </p-column>
     <p-footer>

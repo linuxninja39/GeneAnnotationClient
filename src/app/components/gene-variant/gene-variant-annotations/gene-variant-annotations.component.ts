@@ -12,7 +12,7 @@ const log = Log.create('GeneVariantAnnotationsComponent');
 })
 export class GeneVariantAnnotationsComponent implements OnInit {
   @Input()
-  geneVariant = <GeneVariantModel>null;
+  geneVariant: GeneVariantModel;
   newAnnotation: AnnotationModel;
   displayNewAnnotationDialog = false;
   selectedAnnotation;

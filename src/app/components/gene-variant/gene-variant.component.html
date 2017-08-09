@@ -1,16 +1,16 @@
 
 <p-accordion  [multiple]="true">
   <p-accordionTab header="Variant" [selected]="true">
-    <div>
-      Gene: {{gene?.name}}
+    <div class="geneNameEl">
+      Gene: {{gene?.currentGeneName?.name}}
     </div>
-    <div>
+    <div class="zygosityTypeNameEl">
       Zygosity: {{geneVariant?.zygosityType?.name}}
     </div>
-    <div>
+    <div class="variantTypeNameEl">
       Type: {{geneVariant?.variantType?.name}}
     </div>
-    <div>
+    <div class="callTypeNameEl">
       Call: {{geneVariant?.callType?.name}}
     </div>
   </p-accordionTab>
