@@ -1,5 +1,11 @@
 <div>
-  <p-dataTable [value]="gene?.geneVariant" selectionMode="single" [(selection)]="selectedVariant" (onRowSelect)="onRowSelect($event)">
+  <p-dataTable
+    class="geneVariantsTableEl"
+    [value]="gene?.geneVariant"
+    selectionMode="single"
+    [(selection)]="selectedVariant"
+    (onRowSelect)="onRowSelect($event)"
+  >
     <p-column class="zygosityEl" field="zygosityType.name" header="Zygosity"></p-column>
     <p-column field="variantType.name" header="Type"></p-column>
     <p-column field="callType.name" header="Call"></p-column>

@@ -15,6 +15,7 @@ import {TestGeneVariants} from '../../../../../test-data/test-gene-variants.spec
 import {GeneVariantService} from '../../../../../services/gene-variant.service';
 import {GeneVariantModel} from '../../../../../models/api/gene-variant.model';
 import {Observable} from "rxjs/Observable";
+import {By} from '@angular/platform-browser';
 
 class MockGeneVariantService {
   saveGeneVariant: (geneVariant: GeneVariantModel) => Observable<GeneVariantModel>;
@@ -51,7 +52,7 @@ describe('GeneVariantsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GeneVariantsComponent);
     component = fixture.componentInstance;
-    component.gene = TestGenes[0];
+    component.gene = JSON.parse(JSON.stringify(TestGenes[0]));
     fixture.detectChanges();
   });
 
@@ -130,4 +131,62 @@ describe('GeneVariantsComponent', () => {
       }
     )
   );
+
+  it(
+    'html rows should match geneVariants',
+    () => {
+      const dataTableElement = fixture.debugElement.query(By.css('tbody'));
+      const children = dataTableElement.children;
+      expect(children.length)
+        .toBe(TestGeneVariants.length, 'table size and number of variants mismatch');
+
+      let rowCount = 0;
+      for(const row of children) {
+        expect(row.nativeElement.innerHTML).toContain(TestGeneVariants[rowCount].zygosityType.name);
+      }
+    }
+  );
+
+  it (
+    'should update table after saveVariant',
+    inject(
+      [
+        GeneVariantService
+      ],
+      (geneVariantService) => {
+        let callCount = 0;
+        let correctDataStructure = false;
+        component.newVariantForm.setValue(
+          {
+            geneId: 1,
+            zygosityTypeId: 1,
+            callTypeId: 1,
+            variantTypeId: 1
+          }
+        );
+        const zygosityTypeName = 'Vital Signs';
+        geneVariantService.saveGeneVariant = (geneVariant: GeneVariantModel) => {
+          return Observable.of(
+            {
+              id: 3,
+              geneId: 1,
+              zygosityType: {id: 5, name: zygosityTypeName},
+              variantType: {id: 5, name: 'varT'},
+              callType: {id: 5, name: 'other call'},
+            }
+          );
+        };
+
+
+        component.saveVariant();
+
+        const dataTableElement = fixture.debugElement.query(By.css('tbody'));
+        const children = dataTableElement.children;
+        expect(component.gene.geneVariant.length)
+          .toBe(TestGeneVariants.length + 1, 'geneVariant should have one more now');
+        expect(children[children.length - 1].nativeElement.innerHTML).toContain(zygosityTypeName);
+      }
+    )
+  );
+
 });
