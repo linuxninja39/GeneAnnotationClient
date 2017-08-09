@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
 import {GeneModel} from '../models/api/gene.model';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 import { Log } from 'ng2-logger';
 import {GeneVariantModel} from '../models/api/gene-variant.model';
 import 'rxjs/add/operator/map';

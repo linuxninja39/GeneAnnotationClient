@@ -1,4 +1,4 @@
-<p-dataTable [value]="geneVariant?.literatures" selectionMode="single" [(selection)]="selectedLiterature" (onRowSelect)="onRowSelect($event)">
+<p-dataTable [value]="geneVariant?.literature" selectionMode="single" [(selection)]="selectedLiterature" (onRowSelect)="onRowSelect($event)">
   <p-column field="literature.title" header="Title/URL">
     <ng-template let-col let-row="rowData" pTemplate="body">
       {{row?.literature?.title | json }} / {{row?.literature?.url}}

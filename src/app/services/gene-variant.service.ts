@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/observable/merge';
 import {GeneVariantModel} from '../models/api/gene-variant.model';
 import {Http, Headers, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
@@ -10,8 +11,6 @@ const log = Log.create('GeneVariantService');
 @Injectable()
 export class GeneVariantService {
   private static readonly BASE = 'GeneVariants';
-
-
 
   private url: string;
 
@@ -48,6 +47,6 @@ export class GeneVariantService {
         { headers: headers }
       );
     }
-    return ob.map((res: Response) => res.json());
+    return ob.map((res: Response) => <GeneVariantModel>res.json());
   }
 }

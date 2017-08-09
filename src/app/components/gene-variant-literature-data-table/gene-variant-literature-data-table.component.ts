@@ -32,7 +32,6 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    log.info('geneVariant.literatures', this.geneVariant.literature);
     this.literatureService
       .getLiteratures()
       .subscribe(
