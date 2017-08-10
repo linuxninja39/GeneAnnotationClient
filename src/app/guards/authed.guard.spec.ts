@@ -1,11 +1,14 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
 import { AuthedGuard } from './authed.guard';
+import {CookieService} from 'ng2-cookies';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AuthedGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthedGuard]
+      providers: [AuthedGuard, CookieService],
+      imports: [RouterTestingModule.withRoutes([])]
     });
   });
 

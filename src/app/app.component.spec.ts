@@ -6,6 +6,8 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import {NgxOidcClientService, OIDC_CLIENT_CONFIG} from 'ngx-oidc-client/lib';
+import {AuthService} from './services/auth.service';
+import {CookieService} from 'ng2-cookies';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -21,17 +23,19 @@ describe('AppComponent', () => {
       ],
       providers: [
         NgxOidcClientService,
-    {
-      provide: OIDC_CLIENT_CONFIG,
-      useValue: {
-        authority: 'http://localhost:5000',
-        client_id: 'js',
-        popup_redirect_uri: 'http://localhost:4200/auth.html',
-        response_type: 'id_token token',
-        scope: 'openid profile api1',
-        post_logout_redirect_uri : 'http://localhost:4200'
-      }
-    }
+        AuthService,
+        CookieService,
+        {
+          provide: OIDC_CLIENT_CONFIG,
+          useValue: {
+            authority: 'http://localhost:5000',
+            client_id: 'js',
+            popup_redirect_uri: 'http://localhost:4200/auth.html',
+            response_type: 'id_token token',
+            scope: 'openid profile api1',
+            post_logout_redirect_uri : 'http://localhost:4200'
+          }
+        }
       ]
     }).compileComponents();
   }));
