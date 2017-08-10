@@ -29,6 +29,7 @@
     "font-awesome": "^4.7.0",
     "install": "^0.10.1",
     "jquery": "^3.2.1",
+    "ng2-cookies": "^1.0.12",
     "ng2-logger": "^1.0.3",
     "ng2-truncate": "^1.3.7",
     "ngx-oidc-client": "git+https://github.com/Lineagen/ngx-oidc-client.git",

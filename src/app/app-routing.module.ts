@@ -10,27 +10,13 @@ import {GeneComponent} from './components/gene/gene.component';
 import {LiteratureComponent} from './components/literature/literature.component';
 import {GeneVariantComponent} from './components/gene-variant/gene-variant.component';
 import {IdentityServiceCallbackComponent} from './identity-service-callback/identity-service-callback.component';
+import {WhoAreYouComponent} from './components/who-are-you/who-are-you.component';
+import {AuthedGuard} from './guards/authed.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    component: GenesComponent
-  },
-  {
-    path: 'genes',
-    component: GenesComponent
-  },
-  {
-    path: 'literatures',
-    component: LiteratureComponent
-  },
-  {
-    path: 'gene/:id',
-    component: GeneComponent
-  },
-  {
-    path: 'gene-variant/:id',
-    component: GeneVariantComponent
+    path: 'who',
+    component: WhoAreYouComponent
   },
   {
     path: 'identity-service-callback',
@@ -41,9 +27,36 @@ const routes: Routes = [
     component: IdentityServiceCallbackComponent
   },
   {
-    path: '**',
-    component: Error404Component
-  }
+    path: '',
+    canActivate: [AuthedGuard],
+    children: [
+      {
+        path: '',
+        component: GenesComponent
+      },
+      {
+        path: 'genes',
+        component: GenesComponent
+      },
+      {
+        path: 'literatures',
+        component: LiteratureComponent
+      },
+      {
+        path: 'gene/:id',
+        component: GeneComponent
+      },
+      {
+        path: 'gene-variant/:id',
+        component: GeneVariantComponent
+      },
+      {
+        path: '**',
+        component: Error404Component
+      },
+    ]
+  },
+
 ];
 
 @NgModule({

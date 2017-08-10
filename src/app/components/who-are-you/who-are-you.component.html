@@ -1,0 +1,9 @@
+<div>
+  <form [formGroup]="emailForm">
+    <label for="email">Email:</label>
+    <input formControlName="email" id="email"/>
+    <input type="submit" (click)="onSave()"/>
+  </form>
+  <div *ngIf="!validForm">Not a valid email</div>
+
+</div>

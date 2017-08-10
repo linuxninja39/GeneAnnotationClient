@@ -41,6 +41,10 @@ import { AuthCallbackComponent } from './components/auth-callback/auth-callback.
 import { FirstItemPipe } from './pipes/first-item.pipe';
 import {CurrentPreviousItemsService} from './services/current-previous-items.service';
 import {GeneVariantService} from './services/gene-variant.service';
+import { WhoAreYouComponent } from './components/who-are-you/who-are-you.component';
+import {CookieService} from 'ng2-cookies';
+import {AuthService} from './services/auth.service';
+import {AuthedGuard} from './guards/authed.guard';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,8 @@ import {GeneVariantService} from './services/gene-variant.service';
     GeneVariantAnnotationsComponent,
     IdentityServiceCallbackComponent,
     AuthCallbackComponent,
-    FirstItemPipe
+    FirstItemPipe,
+    WhoAreYouComponent
 
   ],
   imports: [
@@ -89,6 +94,9 @@ import {GeneVariantService} from './services/gene-variant.service';
   providers: [
     GeneService,
     LiteratureService,
+    CookieService,
+    AuthService,
+    AuthedGuard,
     NgxOidcClientService,
     {
       provide: OIDC_CLIENT_CONFIG,
