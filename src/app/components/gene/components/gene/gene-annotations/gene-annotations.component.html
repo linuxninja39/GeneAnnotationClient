@@ -4,8 +4,8 @@
     <p-column field="createdAt" header="Created"></p-column>
     <p-column field="modifiedAt" header="Modified"></p-column>
     <p-column field="annotation" header="Annotation">
-      <ng-template let-col let-row="rowData" pTemplate="body">
-        <div [innerHTML]="row.annotation"></div>
+      <ng-template let-col let-annotation="rowData" pTemplate="body">
+        <div [innerHTML]="annotation.note"></div>
       </ng-template>
     </p-column>
     <p-footer>
@@ -17,7 +17,7 @@
 </div>
 
 <p-dialog
-  header="New Variant"
+  header="New Gene Annotation"
   [(visible)]="displayNewAnnotationDialog"
   [responsive]="true"
   showEffect="fade"

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CookieService} from 'ng2-cookies';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AppUserModel} from '../../models/api/app-user.model';
 
 @Component({
   selector: 'app-who-are-you',
@@ -28,7 +29,8 @@ export class WhoAreYouComponent implements OnInit {
 
   onSave() {
     if (this.emailForm.valid) {
-      this.cookieService.set('appUser', this.emailForm.value.email);
+      const appUser = <AppUserModel>{name: this.emailForm.value.email};
+      this.cookieService.set('appUser', JSON.stringify(appUser));
       this.router.navigate(['/']);
     } else {
       this.validForm = false;

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GeneModel} from '../../../../../models/api/gene.model';
 import {AnnotationModel} from '../../../../../models/api/annotation.model';
 import {Log} from 'ng2-logger';
+import {AuthService} from '../../../../../services/auth.service';
 
 const log = Log.create('GeneVariantsComponent');
 
@@ -16,7 +17,9 @@ export class GeneAnnotationsComponent implements OnInit {
   selectedAnnotation: AnnotationModel = <AnnotationModel>{};
   displayNewAnnotationDialog = false;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
