@@ -6,6 +6,7 @@ import {AppUserModel} from './app-user.model';
 
 export interface AnnotationModel extends BaseModel {
   note: string;
+  appUserId?: number | string;
   appUser: AppUserModel;
   createdAt: Date;
   modifiedAt: Date;

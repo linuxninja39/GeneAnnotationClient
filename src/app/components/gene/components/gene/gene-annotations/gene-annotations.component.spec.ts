@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
 import { GeneAnnotationsComponent } from './gene-annotations.component';
 import {Component, Input} from '@angular/core';
@@ -7,7 +7,11 @@ import {MockDataTableComponent} from '../../../../../test-components/mock-data-t
 import {MockColumnComponent} from '../../../../../test-components/mock-column.component.spec';
 import {AuthService} from '../../../../../services/auth.service';
 import {CookieService} from 'ng2-cookies';
-
+import {AnnotationService} from '../../../../../services/annotation.service';
+import {HttpModule} from '@angular/http';
+import {TestAnnotations} from '../../../../../test-data/test-annotations.spec';
+import {Observable} from 'rxjs/Observable';
+import {TestGenes} from '../../../../../test-data/test-genes.spec';
 
 
 @Component( { selector: 'p-footer', template: '' } )
@@ -42,15 +46,18 @@ describe('GeneAnnotationsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpModule
+      ],
       declarations: [
         GeneAnnotationsComponent,
         MockDataTableComponent,
         MockColumnComponent,
         MockFooterComponent,
         MockDialogComponent,
-        MockEditorComponent
+        MockEditorComponent,
       ],
-      providers: [AuthService, CookieService]
+      providers: [AuthService, CookieService, AnnotationService]
     })
     .compileComponents();
   }));
@@ -58,10 +65,29 @@ describe('GeneAnnotationsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GeneAnnotationsComponent);
     component = fixture.componentInstance;
+    component.gene = JSON.parse(JSON.stringify(TestGenes[0]));
     fixture.detectChanges();
   });
 
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it(
+    'should call annotation service to save',
+    inject(
+      [
+        AnnotationService
+      ],
+      (annotationService: AnnotationService) => {
+        spyOn(annotationService, 'addGeneAnnotations')
+          .and.returnValue(Observable.of(TestAnnotations[0]));
+
+        component.saveAnnotation();
+
+        const newLength = component.gene.annotation.length + 1;
+        expect(annotationService.addGeneAnnotations).toHaveBeenCalled();
+      }
+    )
+  );
 });

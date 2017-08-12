@@ -15,6 +15,8 @@ export class AnnotationService {
 
   addGeneAnnotations(geneId: string | number, annotation: AnnotationModel): Observable<AnnotationModel> {
     const url = sprintf(AnnotationService.ADD_GENE_ANNOTATION_EP, geneId);
+    annotation.appUserId = annotation.appUser.id;
+    annotation.appUser = null;
     return this.http.post(url, annotation).map((r) => r.json());
   }
 

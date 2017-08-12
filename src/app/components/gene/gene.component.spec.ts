@@ -23,7 +23,7 @@ class MockGeneVariantsComponent {
   gene;
 }
 
-@Component( { selector: 'app-gene-notes', template: '' } )
+@Component( { selector: 'app-gene-annotations', template: '' } )
 class MockGeneAnnotationsComponent {
   @Input()
   gene;

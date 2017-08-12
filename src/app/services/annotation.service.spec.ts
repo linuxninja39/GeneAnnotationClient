@@ -37,12 +37,13 @@ describe('AnnotationService', () => {
         AnnotationService
       ],
       (mockBackend: MockBackend, service: AnnotationService) => {
-        const data = JSON.parse(JSON.stringify(TestAnnotations[0]));
+        const controlAnnotation: AnnotationModel = JSON.parse(JSON.stringify(TestAnnotations[0]));
+        const passedAnnotation: AnnotationModel = JSON.parse(JSON.stringify(TestAnnotations[0]));
         let lastConnection: MockConnection;
         mockBackend.connections.subscribe(
           (connection: MockConnection) => {
             lastConnection = connection;
-            const resOptions = new ResponseOptions({body: JSON.stringify(data)});
+            const resOptions = new ResponseOptions({body: JSON.stringify(controlAnnotation)});
             const res = new Response(resOptions);
             connection.mockRespond(res);
           }
@@ -51,7 +52,7 @@ describe('AnnotationService', () => {
         service
           .addGeneAnnotations(
             geneId,
-            data
+            passedAnnotation
           )
           .subscribe(
             (annotation: AnnotationModel) => {
@@ -59,13 +60,15 @@ describe('AnnotationService', () => {
                 sprintf(AnnotationService.ADD_GENE_ANNOTATION_EP, geneId)
               );
               expect(lastConnection.request.method).toBe(RequestMethod.Post);
+              controlAnnotation.appUserId = controlAnnotation.appUser.id;
+              controlAnnotation.appUser = null;
               expect(
                 JSON.stringify(
                   JSON.parse(
                     lastConnection.request.getBody()
                   )
                 )
-              ).toBe(JSON.stringify(data));
+              ).toBe(JSON.stringify(controlAnnotation));
             }
           );
 
