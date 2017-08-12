@@ -5,6 +5,8 @@ import {Component, Input} from '@angular/core';
 import {MdCardModule} from '@angular/material';
 import {MockDataTableComponent} from '../../../../../test-components/mock-data-table-component.spec';
 import {MockColumnComponent} from '../../../../../test-components/mock-column.component.spec';
+import {AuthService} from '../../../../../services/auth.service';
+import {CookieService} from 'ng2-cookies';
 
 
 
@@ -47,7 +49,8 @@ describe('GeneAnnotationsComponent', () => {
         MockFooterComponent,
         MockDialogComponent,
         MockEditorComponent
-      ]
+      ],
+      providers: [AuthService, CookieService]
     })
     .compileComponents();
   }));

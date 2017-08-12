@@ -45,6 +45,7 @@ import { WhoAreYouComponent } from './components/who-are-you/who-are-you.compone
 import {CookieService} from 'ng2-cookies';
 import {AuthService} from './services/auth.service';
 import {AuthedGuard} from './guards/authed.guard';
+import {AnnotationService} from './services/annotation.service';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import {AuthedGuard} from './guards/authed.guard';
     CookieService,
     AuthService,
     AuthedGuard,
+    AnnotationService,
     NgxOidcClientService,
     {
       provide: OIDC_CLIENT_CONFIG,
