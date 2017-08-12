@@ -5,6 +5,9 @@ import {AnnotationModel} from '../models/api/annotation.model';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {sprintf} from 'sprintf-js';
+import {Log} from 'ng2-logger';
+
+const log = Log.create('AnnotationService');
 
 @Injectable()
 export class AnnotationService {
@@ -17,6 +20,7 @@ export class AnnotationService {
     const url = sprintf(AnnotationService.ADD_GENE_ANNOTATION_EP, geneId);
     annotation.appUserId = annotation.appUser.id;
     annotation.appUser = null;
+    log.info('submitting annotation on gene', annotation, geneId);
     return this.http.post(url, annotation).map((r) => r.json());
   }
 

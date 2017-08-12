@@ -1,8 +1,11 @@
 <div>
   <p-dataTable [value]="gene?.annotation" selectionMode="single" [(selection)]="selectedAnnotation" (onRowSelect)="onRowSelect($event)">
     <p-column field="user.name" header="User"></p-column>
-    <p-column field="createdAt" header="Created"></p-column>
-    <p-column field="modifiedAt" header="Modified"></p-column>
+    <p-column field="createdAt" header="Created">
+      <ng-template let-col let-annotation="rowData" pTemplate="body">
+        <div>{{annotation.createdAt | date:'medium'}}</div>
+      </ng-template>
+    </p-column>
     <p-column field="annotation" header="Annotation">
       <ng-template let-col let-annotation="rowData" pTemplate="body">
         <div [innerHTML]="annotation.note"></div>
