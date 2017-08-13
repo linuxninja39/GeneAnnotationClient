@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GeneVariantModel} from '../../../models/api/gene-variant.model';
 import {AnnotationModel} from '../../../models/api/annotation.model';
 import {Log} from 'ng2-logger';
+import {AnnotationService} from '../../../services/annotation.service';
 
 const log = Log.create('GeneVariantAnnotationsComponent');
 
@@ -17,7 +18,9 @@ export class GeneVariantAnnotationsComponent implements OnInit {
   displayNewAnnotationDialog = false;
   selectedAnnotation;
 
-  constructor() { }
+  constructor(
+    private annotationService: AnnotationService
+  ) { }
 
   ngOnInit() {
   }
@@ -28,10 +31,22 @@ export class GeneVariantAnnotationsComponent implements OnInit {
   }
 
   saveAnnotation() {
-    this.geneVariant.annotation = [...this.geneVariant.annotation, this.newAnnotation];
-    this.displayNewAnnotationDialog = false;
+    this.annotationService
+      .addGeneVariantAnnotation(this.geneVariant.id, this.newAnnotation)
+      .subscribe(
+        (annotation: AnnotationModel) => {
+          if(!this.geneVariant.annotation) {
+            this.geneVariant.annotation = [];
+          }
+          this.geneVariant.annotation = [...this.geneVariant.annotation, this.newAnnotation];
+          this.displayNewAnnotationDialog = false;
+        },
+        (err) => {
+          log.error('failed to save annotation', err);
+          this.displayNewAnnotationDialog = false;
+        }
+      );
   }
-
 
   onRowSelect(row) {
     log.info('row selected', row);

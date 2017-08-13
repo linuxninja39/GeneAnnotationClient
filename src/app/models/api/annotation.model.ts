@@ -9,5 +9,5 @@ export interface AnnotationModel extends BaseModel {
   appUserId?: number | string;
   appUser: AppUserModel;
   createdAt: Date;
-  modifiedAt: Date;
+  modifiedAt?: Date;
 }
