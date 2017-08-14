@@ -46,6 +46,7 @@ import {CookieService} from 'ng2-cookies';
 import {AuthService} from './services/auth.service';
 import {AuthedGuard} from './guards/authed.guard';
 import {AnnotationService} from './services/annotation.service';
+import {AppUserService} from './services/app-user.service';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import {AnnotationService} from './services/annotation.service';
     AuthService,
     AuthedGuard,
     AnnotationService,
+    AppUserService,
     NgxOidcClientService,
     {
       provide: OIDC_CLIENT_CONFIG,
