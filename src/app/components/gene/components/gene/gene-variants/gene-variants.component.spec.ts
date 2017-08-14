@@ -154,8 +154,6 @@ describe('GeneVariantsComponent', () => {
         GeneVariantService
       ],
       (geneVariantService) => {
-        let callCount = 0;
-        let correctDataStructure = false;
         component.newVariantForm.setValue(
           {
             geneId: 1,

@@ -2,6 +2,7 @@
 import {GeneModel} from '../models/api/gene.model';
 import {TestGeneNames} from './test-gene-names.spec';
 import {TestGeneVariants} from './test-gene-variants.spec';
+import {TestAnnotations} from './test-annotations.spec';
 
 export const TestGenes: GeneModel[] = [
   {
@@ -18,7 +19,10 @@ export const TestGenes: GeneModel[] = [
     currentGeneName: TestGeneNames[0],
     currentSymbol: {id: 1, name: 'sym', activeDate: new Date()},
     currentSynonym: {id: 1, name: 'syn', activeDate: new Date()},
-    geneVariant: TestGeneVariants
+    geneVariant: TestGeneVariants,
+    annotation: [
+      TestAnnotations[0]
+    ]
   },
   {
     id: 2,

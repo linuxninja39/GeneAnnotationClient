@@ -1,10 +1,6 @@
 import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
 import { GeneAnnotationsComponent } from './gene-annotations.component';
-import {Component, Input} from '@angular/core';
-import {MdCardModule} from '@angular/material';
-import {MockDataTableComponent} from '../../../../../test-components/mock-data-table-component.spec';
-import {MockColumnComponent} from '../../../../../test-components/mock-column.component.spec';
 import {AuthService} from '../../../../../services/auth.service';
 import {CookieService} from 'ng2-cookies';
 import {AnnotationService} from '../../../../../services/annotation.service';
@@ -12,33 +8,10 @@ import {HttpModule} from '@angular/http';
 import {TestAnnotations} from '../../../../../test-data/test-annotations.spec';
 import {Observable} from 'rxjs/Observable';
 import {TestGenes} from '../../../../../test-data/test-genes.spec';
-
-
-@Component( { selector: 'p-footer', template: '' } )
-class MockFooterComponent {
-}
-
-@Component( { selector: 'p-dialog', template: '' } )
-class MockDialogComponent {
-  @Input()
-  visible;
-  @Input()
-  responsive;
-  @Input()
-  modal;
-  @Input()
-  width;
-  @Input()
-  height;
-}
-
-@Component( { selector: 'p-editor', template: '' } )
-class MockEditorComponent {
-  @Input()
-  ngModel;
-  @Input()
-  style;
-}
+import {By} from '@angular/platform-browser';
+import {DataTableModule, DialogModule, EditorModule} from 'primeng/primeng';
+import {FormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('GeneAnnotationsComponent', () => {
   let component: GeneAnnotationsComponent;
@@ -47,15 +20,15 @@ describe('GeneAnnotationsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule
+        HttpModule,
+        DataTableModule,
+        DialogModule,
+        FormsModule,
+        EditorModule,
+        NoopAnimationsModule
       ],
       declarations: [
         GeneAnnotationsComponent,
-        MockDataTableComponent,
-        MockColumnComponent,
-        MockFooterComponent,
-        MockDialogComponent,
-        MockEditorComponent,
       ],
       providers: [AuthService, CookieService, AnnotationService]
     })
@@ -89,5 +62,22 @@ describe('GeneAnnotationsComponent', () => {
         expect(annotationService.addGeneAnnotations).toHaveBeenCalled();
       }
     )
+  );
+
+  it(
+    'should have the right content in table',
+    () => {
+      const dataTableElement = fixture.debugElement.query(By.css('tbody'));
+      const children = dataTableElement.children;
+      expect(children.length)
+        .toBe(
+          TestGenes[0].annotation.length,
+          'table should have same number of children as there are in gene.annotation'
+        );
+
+      const cells = children[0].query(By.css('td'));
+      const innerText = cells.nativeElement.innerText;
+      expect(innerText).toBe(TestGenes[0].annotation[0].appUser.name);
+    }
   );
 });

@@ -3,6 +3,7 @@ import {GeneVariantModel} from '../../../models/api/gene-variant.model';
 import {AnnotationModel} from '../../../models/api/annotation.model';
 import {Log} from 'ng2-logger';
 import {AnnotationService} from '../../../services/annotation.service';
+import {AuthService} from '../../../services/auth.service';
 
 const log = Log.create('GeneVariantAnnotationsComponent');
 
@@ -19,14 +20,15 @@ export class GeneVariantAnnotationsComponent implements OnInit {
   selectedAnnotation;
 
   constructor(
-    private annotationService: AnnotationService
+    private annotationService: AnnotationService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
   }
 
   showNewAnnotationDialog() {
-    this.newAnnotation = <AnnotationModel>{createdAt: new Date(), modifiedAt: new Date(), appUser: {name: 'bob'}};
+    this.newAnnotation = <AnnotationModel>{createdAt: new Date(), modifiedAt: new Date(), appUser: this.authService.User};
     this.displayNewAnnotationDialog = true;
   }
 
@@ -35,7 +37,7 @@ export class GeneVariantAnnotationsComponent implements OnInit {
       .addGeneVariantAnnotation(this.geneVariant.id, this.newAnnotation)
       .subscribe(
         (annotation: AnnotationModel) => {
-          if(!this.geneVariant.annotation) {
+          if (!this.geneVariant.annotation) {
             this.geneVariant.annotation = [];
           }
           this.geneVariant.annotation = [...this.geneVariant.annotation, this.newAnnotation];
