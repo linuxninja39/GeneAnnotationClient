@@ -5,6 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CookieService} from 'ng2-cookies';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
+import {AuthService} from '../../services/auth.service';
 
 describe('WhoAreYouComponent', () => {
   let component: WhoAreYouComponent;
@@ -17,7 +18,7 @@ describe('WhoAreYouComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule.withRoutes([])
       ],
-      providers: [CookieService]
+      providers: [AuthService, CookieService]
     })
     .compileComponents();
   }));

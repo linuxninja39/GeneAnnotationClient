@@ -28,7 +28,7 @@ export class GeneAnnotationsComponent implements OnInit {
 
   showNewAnnotationDialog() {
     this.selectedAnnotation = <AnnotationModel>{};
-    this.selectedAnnotation.appUser = {id: 1, name: 'Joe'};
+    this.selectedAnnotation.appUser = this.authService.User;
     this.selectedAnnotation.createdAt = new Date();
     this.selectedAnnotation.modifiedAt = new Date();
     this.displayNewAnnotationDialog = true;
