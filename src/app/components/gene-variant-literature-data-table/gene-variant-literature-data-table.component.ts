@@ -71,12 +71,13 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   saveLiterature() {
     log.info('selectedLit', this.selectedLiterature);
     this.addLiteratureDialogVisible = false;
-    this.geneVariant.literature = [
-      ...this.geneVariant.literature,
-      {
-        id: 'gv434', geneVariant: this.geneVariant, literature: this.selectedLiterature
-      }
-    ];
+    this.literatureService
+      .addGeneVariantLiterature(this.geneVariant.id, this.selectedLiterature.id)
+      .subscribe(
+        (literature: LiteratureModel) => {
+        }
+      );
+
   }
 
   onRowSelect(row) {

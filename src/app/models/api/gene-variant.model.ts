@@ -1,5 +1,4 @@
 import {BaseModel} from './base.model';
-import {GeneModel} from './gene.model';
 import {AnnotationModel} from './annotation.model';
 import {GeneVariantLiteratureModel} from './gene-variant-literature.model';
 import {VariantTypeModel} from './variant-type.model';
@@ -18,5 +17,5 @@ export interface GeneVariantModel extends BaseModel {
   callType: GeneVariantCallTypeModel;
   callTypeId?: number | string;
   annotation?: AnnotationModel[];
-  literature?: GeneVariantLiteratureModel[];
+  geneVariantLiterature?: GeneVariantLiteratureModel[];
 }

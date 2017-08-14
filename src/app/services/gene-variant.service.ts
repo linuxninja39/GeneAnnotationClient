@@ -30,7 +30,7 @@ export class GeneVariantService {
   }
 
   saveGeneVariant(geneVariant: GeneVariantModel): Observable<GeneVariantModel> {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.set('Content-Type', 'application/json');
     let ob: Observable<any>;
     if (geneVariant.id) {
