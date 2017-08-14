@@ -3,6 +3,8 @@ import {LiteratureService} from './literature.service';
 import {BaseRequestOptions, Response, HttpModule, ResponseOptions, XHRBackend} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {TestLiteratures} from '../test-data/test-literatures.spec';
+import {LiteratureModel} from '../models/api/literature.model';
+import {Observable} from 'rxjs/Observable';
 
 describe('LiteratureService', () => {
   beforeEach(() => {
@@ -44,6 +46,33 @@ describe('LiteratureService', () => {
           .subscribe(
             (literatures) => {
               expect(literatures.length).toBe(2);
+            }
+          );
+      }
+    )
+  );
+
+    it(
+    'should do http call to add gene variant literature',
+    inject(
+      [
+        LiteratureService,
+        XHRBackend
+      ],
+      (service: LiteratureService, mockBackend: MockBackend) => {
+        const data = JSON.parse(JSON.stringify(TestLiteratures[0]));
+        mockBackend.connections.subscribe(
+          (connection: MockConnection) => {
+            const resOptions = new ResponseOptions({body: JSON.stringify(data)});
+            const res = new Response(resOptions);
+            connection.mockRespond(res);
+          }
+        );
+
+        service.addGeneVariantLiterature(1, 1)
+          .subscribe(
+            (literature: LiteratureModel) => {
+              expect(literature).toBeTruthy();
             }
           );
       }
