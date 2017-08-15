@@ -49,7 +49,7 @@
           <div>Previous Symbols: </div>
           <div>
             <div *ngFor="let sym of gene?.symbol">
-              {{sym}}
+              {{sym.name}}
             </div>
           </div>
         </md-card>
@@ -59,7 +59,7 @@
           <div>Previous Names: </div>
           <div>
             <div *ngFor="let name of gene?.geneName">
-              {{name}}
+              {{name.name}}
             </div>
           </div>
         </md-card>
