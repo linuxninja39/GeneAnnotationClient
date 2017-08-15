@@ -40,7 +40,7 @@ export class GeneVariantAnnotationsComponent implements OnInit {
           if (!this.geneVariant.annotation) {
             this.geneVariant.annotation = [];
           }
-          this.geneVariant.annotation = [...this.geneVariant.annotation, this.newAnnotation];
+          this.geneVariant.annotation = [...this.geneVariant.annotation, annotation];
           this.displayNewAnnotationDialog = false;
         },
         (err) => {

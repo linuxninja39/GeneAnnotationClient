@@ -6,11 +6,6 @@
         {{annotation.createdAt | date:'medium'}}
       </ng-template>
     </p-column>
-    <p-column field="modifiedAt" header="Modified">
-      <ng-template let-col let-annotation="rowData" pTemplate="body">
-        {{annotation.modifiedAt | date:'medium'}}
-      </ng-template>
-    </p-column>
     <p-column field="note" header="Note">
       <ng-template let-col let-row="rowData" pTemplate="body">
         <div [innerHTML]="row.note"></div>
