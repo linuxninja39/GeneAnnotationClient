@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {GeneVariantModel} from '../../models/api/gene-variant.model';
 import {Log} from 'ng2-logger';
 import {GeneVariantLiteratureModel} from '../../models/api/gene-variant-literature.model';
@@ -6,6 +6,9 @@ import {AnnotationModel} from '../../models/api/annotation.model';
 import {LiteratureModel} from '../../models/api/literature.model';
 import {SelectItem} from 'primeng/primeng';
 import {LiteratureService} from '../../services/literature.service';
+import {GeneVariantService} from '../../services/gene-variant.service';
+import {AnnotationService} from '../../services/annotation.service';
+import {AuthService} from '../../services/auth.service';
 
 const log = Log.create('GeneVariantLiteratureDataTableComponent');
 
@@ -22,13 +25,16 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   addLiteratureDialogVisible = false;
 
   currentGeneVariantLiterature: GeneVariantLiteratureModel;
-  currentGeneVariantLiteratureAnnotation: AnnotationModel;
+  annotation: AnnotationModel;
 
   literatureOptions: SelectItem[] = [];
   selectedLiterature: LiteratureModel;
 
   constructor(
-    private literatureService: LiteratureService
+    private literatureService: LiteratureService,
+    private annotationService: AnnotationService,
+    private authService: AuthService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -52,7 +58,10 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
 
   showAddAnnotationDialog(geneVariantLiterature: GeneVariantLiteratureModel) {
     this.currentGeneVariantLiterature = geneVariantLiterature;
-    this.currentGeneVariantLiteratureAnnotation = <AnnotationModel>{};
+    this.annotation = <AnnotationModel>{
+      appUserId: this.authService.User.id,
+      createdAt: new Date()
+    };
     this.addAnnotationDialogVisible = true;
   }
 
@@ -61,11 +70,22 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   }
 
   saveAnnotation() {
-    if (!this.currentGeneVariantLiterature.annotations) {
-      this.currentGeneVariantLiterature.annotations = [];
-    }
-    this.currentGeneVariantLiterature.annotations.push(this.currentGeneVariantLiteratureAnnotation);
-    this.addAnnotationDialogVisible = false;
+    this.annotationService
+      .addGeneVariantLiteratureAnnotation(this.currentGeneVariantLiterature.id, this.annotation)
+      .subscribe(
+        (annotation: AnnotationModel) => {
+          if (!this.currentGeneVariantLiterature.annotations) {
+            this.currentGeneVariantLiterature.annotations = [];
+          }
+          this.currentGeneVariantLiterature.annotations = [
+            ...this.currentGeneVariantLiterature.annotations,
+            this.annotation
+          ];
+          this.changeDetector.detectChanges();
+          this.addAnnotationDialogVisible = false;
+        }
+      );
+
   }
 
   saveLiterature() {
@@ -74,7 +94,14 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
     this.literatureService
       .addGeneVariantLiterature(this.geneVariant.id, this.selectedLiterature.id)
       .subscribe(
-        (literature: LiteratureModel) => {
+        (geneVariantLiterature: GeneVariantLiteratureModel) => {
+          this.geneVariant.geneVariantLiterature = [
+            ...this.geneVariant.geneVariantLiterature,
+            geneVariantLiterature
+          ];
+        },
+        (err) => {
+          log.error('got error adding geneVariantLiterature', err);
         }
       );
 

@@ -5,24 +5,25 @@ import {GeneVariantModel} from '../models/api/gene-variant.model';
 import {Http, Headers, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
 import { Log } from 'ng2-logger';
+import {sprintf} from 'sprintf-js';
+import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
 
 const log = Log.create('GeneVariantService');
 
 @Injectable()
 export class GeneVariantService {
-  private static readonly BASE = 'GeneVariants';
-
-  private url: string;
+  public static readonly BASE_EP = environment.apiServerUrl + '/GeneVariants';
+  public static readonly GENE_VARIANT_EP = GeneVariantService.BASE_EP + '/%s';
+  public static readonly GENE_VARIANT_LITERATURE_EP = GeneVariantService.GENE_VARIANT_EP + '/Literature';
 
   constructor(
     private http: Http
   ) {
-    this.url = environment.apiServerUrl + '/' + GeneVariantService.BASE;
   }
 
   getGeneVariant(id: string | number): Observable<GeneVariantModel> {
     return this.http
-      .get(this.url + '/' + id)
+      .get(sprintf(GeneVariantService.GENE_VARIANT_EP, id))
       .map(
         (res: Response) => <GeneVariantModel>res.json()
       )
@@ -35,18 +36,25 @@ export class GeneVariantService {
     let ob: Observable<any>;
     if (geneVariant.id) {
       ob = this.http.put(
-        this.url + '/' + geneVariant.id,
+        sprintf(GeneVariantService.GENE_VARIANT_EP, geneVariant.id),
         JSON.stringify(geneVariant),
         { headers: headers }
       );
     } else {
       log.info('sending geneVariant', JSON.stringify(geneVariant));
       ob = this.http.post(
-        this.url,
+        GeneVariantService.BASE_EP,
         JSON.stringify(geneVariant),
         { headers: headers }
       );
     }
     return ob.map((res: Response) => <GeneVariantModel>res.json());
+  }
+
+  getLiteratures(geneVariantId: string | number): Observable<GeneVariantLiteratureModel[]> {
+    return this.http.get(sprintf(GeneVariantService.GENE_VARIANT_LITERATURE_EP, geneVariantId))
+      .map(
+        (res: Response) => res.json()
+      );
   }
 }

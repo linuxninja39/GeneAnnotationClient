@@ -1,4 +1,4 @@
-<p-dataTable [value]="geneVariant?.literature" selectionMode="single" [(selection)]="selectedLiterature" (onRowSelect)="onRowSelect($event)">
+<p-dataTable [value]="geneVariant?.geneVariantLiterature" selectionMode="single" [(selection)]="selectedLiterature" (onRowSelect)="onRowSelect($event)">
   <p-column field="literature.title" header="Title/URL">
     <ng-template let-col let-row="rowData" pTemplate="body">
       {{row?.literature?.title | json }} / {{row?.literature?.url}}
@@ -24,7 +24,7 @@
 
 <p-dialog header="Add Gene Variant/Literature Annotation" [(visible)]="addAnnotationDialogVisible">
   <div *ngIf="currentGeneVariantLiterature">
-    <p-editor [(ngModel)]="currentGeneVariantLiteratureAnnotation.note" [style]="{'height':'200px'}"></p-editor>
+    <p-editor [(ngModel)]="annotation.note" [style]="{'height':'200px'}"></p-editor>
   </div>
   <div>
     <button pButton label="Save" (click)="saveAnnotation()"></button>

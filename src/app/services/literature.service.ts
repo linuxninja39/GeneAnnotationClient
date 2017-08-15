@@ -4,11 +4,12 @@ import {LiteratureModel} from '../models/api/literature.model';
 import {Http, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
 import {sprintf} from 'sprintf-js';
+import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
 
 @Injectable()
 export class LiteratureService {
-  public static BASE_EP: string = environment.apiServerUrl + '/literatures';
-  public static ADD_GENE_VARIANT_LITERATURE_EP: string = environment.apiServerUrl + '/Literatures/%s/%s';
+  public static BASE_EP = environment.apiServerUrl + '/Literatures';
+  public static ADD_GENE_VARIANT_LITERATURE_EP = LiteratureService.BASE_EP + '/%s/GeneVariant/%s';
 
   constructor(
     private http: Http
@@ -18,13 +19,13 @@ export class LiteratureService {
   getLiteratures(page?: number): Observable<LiteratureModel[]> {
     return this.http
       .get(LiteratureService.BASE_EP)
-      .map((res: Response) => <LiteratureModel[]>res.json())
+      .map((res: Response) => <LiteratureModel[]>res.json());
   }
 
-  addGeneVariantLiterature(geneVariantId: number | string, literatureId: number | string): Observable<LiteratureModel> {
+  addGeneVariantLiterature(geneVariantId: number | string, literatureId: number | string): Observable<GeneVariantLiteratureModel> {
     return this.http
-      .post(sprintf(LiteratureService.ADD_GENE_VARIANT_LITERATURE_EP, geneVariantId, literatureId), '')
-      .map((res: Response) => <LiteratureModel>res.json())
+      .post(sprintf(LiteratureService.ADD_GENE_VARIANT_LITERATURE_EP, literatureId, geneVariantId), '')
+      .map((res: Response) => <GeneVariantLiteratureModel>res.json());
   }
 
 }
