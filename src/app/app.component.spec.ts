@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {NgxOidcClientService, OIDC_CLIENT_CONFIG} from 'ngx-oidc-client/lib';
 import {AuthService} from './services/auth.service';
 import {CookieService} from 'ng2-cookies';
+import {HttpModule} from '@angular/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -19,6 +20,7 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule,
+        HttpModule,
         FormsModule
       ],
       providers: [

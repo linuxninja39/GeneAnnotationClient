@@ -9,6 +9,8 @@ import {HttpModule} from '@angular/http';
 import {TestAnnotations} from '../../../test-data/test-annotations.spec';
 import {TestGeneVariants} from '../../../test-data/test-gene-variants.spec';
 import {Observable} from 'rxjs/Observable';
+import {AuthService} from '../../../services/auth.service';
+import {CookieService} from 'ng2-cookies';
 
 describe('GeneVariantAnnotationsComponent', () => {
   let component: GeneVariantAnnotationsComponent;
@@ -25,7 +27,7 @@ describe('GeneVariantAnnotationsComponent', () => {
         HttpModule
       ],
       declarations: [ GeneVariantAnnotationsComponent ],
-      providers: [AnnotationService]
+      providers: [AnnotationService, AuthService, CookieService]
     })
     .compileComponents();
   }));
@@ -56,7 +58,7 @@ describe('GeneVariantAnnotationsComponent', () => {
         component.newAnnotation = data;
         component.saveAnnotation();
 
-        expect(service.addGeneVariantAnnotation).toHaveBeenCalledWith(component.geneVariant.id, data)
+        expect(service.addGeneVariantAnnotation).toHaveBeenCalledWith(component.geneVariant.id, data);
       }
     )
   );

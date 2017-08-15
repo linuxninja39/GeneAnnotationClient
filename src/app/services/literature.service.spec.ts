@@ -3,8 +3,7 @@ import {LiteratureService} from './literature.service';
 import {BaseRequestOptions, Response, HttpModule, ResponseOptions, XHRBackend} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {TestLiteratures} from '../test-data/test-literatures.spec';
-import {LiteratureModel} from '../models/api/literature.model';
-import {Observable} from 'rxjs/Observable';
+import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
 
 describe('LiteratureService', () => {
   beforeEach(() => {
@@ -71,8 +70,8 @@ describe('LiteratureService', () => {
 
         service.addGeneVariantLiterature(1, 1)
           .subscribe(
-            (literature: LiteratureModel) => {
-              expect(literature).toBeTruthy();
+            (geneVariantLiterature: GeneVariantLiteratureModel) => {
+              expect(geneVariantLiterature).toBeTruthy();
             }
           );
       }

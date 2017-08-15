@@ -1,14 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LiteratureComponent } from './literature.component';
 import {DataTableModule, DialogModule, EditorModule} from 'primeng/primeng';
 import {MdCardModule} from '@angular/material';
-import {MockEditorComponent} from '../../test-components/mock-editor.spec';
 import {LiteratureService} from '../../services/literature.service';
-
-class MockLiteratureService {
-  getLiteratures() {}
-}
+import {AnnotationService} from '../../services/annotation.service';
+import {HttpModule} from '@angular/http';
+import {AuthService} from '../../services/auth.service';
+import {CookieService} from 'ng2-cookies';
+import {FormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('LiteratureComponent', () => {
   let component: LiteratureComponent;
@@ -17,19 +18,22 @@ describe('LiteratureComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        LiteratureComponent,
-        MockEditorComponent
+        LiteratureComponent
       ],
       imports: [
         DataTableModule,
         MdCardModule,
         DialogModule,
+        HttpModule,
+        EditorModule,
+        FormsModule,
+        NoopAnimationsModule
       ],
       providers: [
-        {
-          provide: LiteratureService,
-          useClass: MockLiteratureService
-        }
+        AnnotationService,
+        AuthService,
+        CookieService,
+        LiteratureService
       ]
     })
     .compileComponents();
