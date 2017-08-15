@@ -11,5 +11,5 @@ export interface GeneVariantLiteratureModel extends BaseModel {
   geneVariant: GeneVariantModel;
   literature: LiteratureModel;
   literatureId?: number;
-  annotations?: AnnotationModel[];
+  annotation?: AnnotationModel[];
 }

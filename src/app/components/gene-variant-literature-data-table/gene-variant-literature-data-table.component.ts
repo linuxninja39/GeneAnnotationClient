@@ -21,6 +21,8 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   @Input()
   geneVariant: GeneVariantModel;
 
+  dataKey;
+
   addAnnotationDialogVisible = false;
   addLiteratureDialogVisible = false;
 
@@ -74,13 +76,15 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
       .addGeneVariantLiteratureAnnotation(this.currentGeneVariantLiterature.id, this.annotation)
       .subscribe(
         (annotation: AnnotationModel) => {
-          if (!this.currentGeneVariantLiterature.annotations) {
-            this.currentGeneVariantLiterature.annotations = [];
+          if (!this.currentGeneVariantLiterature.annotation) {
+            this.currentGeneVariantLiterature.annotation = [];
           }
-          this.currentGeneVariantLiterature.annotations = [
-            ...this.currentGeneVariantLiterature.annotations,
+          this.currentGeneVariantLiterature.annotation = [
+            ...this.currentGeneVariantLiterature.annotation,
             this.annotation
           ];
+
+          log.info('geneVariant is no', this.geneVariant);
           this.changeDetector.detectChanges();
           this.addAnnotationDialogVisible = false;
         }
@@ -109,5 +113,6 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
 
   onRowSelect(row) {
     log.info('row selected', row);
+    log.info('data key', this.dataKey);
   }
 }

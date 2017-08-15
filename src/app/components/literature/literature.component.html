@@ -38,9 +38,9 @@
   <div *ngIf="newAnnotation">
     <div class="ui-g">
       <div class="ui-g-6">User: </div>
-      <div class="ui-g-6">{{newAnnotation.appUser.name}}</div>
+      <div class="ui-g-6">{{newAnnotation?.appUser?.name}}</div>
       <div class="ui-g-6">Created: </div>
-      <div class="ui-g-6">{{newAnnotation.createdAt | date: 'medium'}}</div>
+      <div class="ui-g-6">{{newAnnotation?.createdAt | date: 'medium'}}</div>
       <div class="ui-g-12">
         <p-editor [(ngModel)]="newAnnotation.note" [style]="{'height':'220px'}"></p-editor>
       </div>

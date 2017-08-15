@@ -16,6 +16,7 @@ export class AnnotationService {
   public static ADD_GENE_ANNOTATION_EP = AnnotationService.BASE_EP + '/gene/%s';
   public static ADD_GENE_VARIANT_ANNOTATION_EP = AnnotationService.BASE_EP + '/GeneVariant/%s';
   public static ADD_GENE_VARIANT_LITERATURE_ANNOTATION_EP = AnnotationService.BASE_EP + '/GeneVariantLiterature/%s';
+  public static ADD_LITERATURE_ANNOTATION_EP = AnnotationService.BASE_EP + '/Literature/%s';
 
   constructor(private http: Http) {}
 
@@ -34,6 +35,11 @@ export class AnnotationService {
     annotation: AnnotationModel
   ): Observable<AnnotationModel> {
     const url = sprintf(AnnotationService.ADD_GENE_VARIANT_LITERATURE_ANNOTATION_EP, geneVariantLiteratureId);
+    return this.postAnnotation(url, annotation);
+  }
+
+  addLiteratureAnnotation(literatureId: string | number, annotation: AnnotationModel) {
+    const url = sprintf(AnnotationService.ADD_LITERATURE_ANNOTATION_EP, literatureId);
     return this.postAnnotation(url, annotation);
   }
 

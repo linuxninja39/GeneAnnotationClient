@@ -3,6 +3,8 @@ import { Log } from 'ng2-logger';
 import {LiteratureService} from '../../services/literature.service';
 import {LiteratureModel} from '../../models/api/literature.model';
 import {AnnotationModel} from '../../models/api/annotation.model';
+import {AnnotationService} from '../../services/annotation.service';
+import {AuthService} from '../../services/auth.service';
 
 declare const jlinq: any;
 
@@ -21,7 +23,9 @@ export class LiteratureComponent implements OnInit {
   selectedLiterature: LiteratureModel;
 
   constructor(
-    private literatureService: LiteratureService
+    private literatureService: LiteratureService,
+    private annotationService: AnnotationService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -54,16 +58,30 @@ export class LiteratureComponent implements OnInit {
 
   showNewAnnotationDialog(literature: LiteratureModel) {
     this.selectedLiterature = literature;
-    this.newAnnotation = <AnnotationModel>{createdAt: new Date(), modifiedAt: new Date(), appUser: {name: 'bob'}};
+    this.newAnnotation = <AnnotationModel>{
+      createdAt: new Date(),
+      appUser: this.authService.User
+    };
     this.displayNewAnnotationDialog = true;
     log.info('selected thing', this.selectedLiterature);
   }
 
   saveAnnotation() {
-    if (!this.selectedLiterature.annotation) {
-      this.selectedLiterature.annotation = [];
-    }
-    this.selectedLiterature.annotation = [...this.selectedLiterature.annotation, this.newAnnotation];
-    this.displayNewAnnotationDialog = false;
+    this.annotationService
+      .addLiteratureAnnotation(this.selectedLiterature.id, this.newAnnotation)
+      .subscribe(
+        (annotation: AnnotationModel) => {
+          if (!this.selectedLiterature.annotation) {
+            this.selectedLiterature.annotation = [];
+          }
+          this.selectedLiterature.annotation = [...this.selectedLiterature.annotation, annotation];
+          this.displayNewAnnotationDialog = false;
+        },
+        err => {
+          log.error('save literature annotation', err);
+        }
+
+      );
+
   }
 }
