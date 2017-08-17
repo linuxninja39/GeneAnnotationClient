@@ -23,7 +23,7 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   dataKey;
 
   addAnnotationDialogVisible = false;
-  addLiteratureDialogVisible = true;
+  addLiteratureDialogVisible = false;
 
   currentGeneVariantLiterature: GeneVariantLiteratureModel;
   annotation: AnnotationModel;

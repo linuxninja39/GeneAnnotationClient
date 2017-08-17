@@ -7,7 +7,7 @@ export class GeneVariantLiteratureService {
 
   constructor() { }
 
-  // TODO: unit test
+  // TODO: unit test and write api
   addGeneVariantLiterature(geneVariantLiterature: GeneVariantLiteratureModel): Observable<GeneVariantLiteratureModel> {
     return Observable.of(geneVariantLiterature);
   }

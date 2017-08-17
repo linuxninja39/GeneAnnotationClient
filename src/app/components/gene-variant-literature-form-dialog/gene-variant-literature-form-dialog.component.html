@@ -8,10 +8,13 @@
       Creation Date: {{geneVariantLiteratureFormGroup.value.addedAt | date : 'medium'}}
     </div>
     <div>
-      <p-dropdown [options]="literatureOptions" formControlName="literature" filter="filter"></p-dropdown>
+      <label for="literatureOptions">Literature</label>
+      <p-dropdown id="literatureOptions" [options]="literatureOptions" formControlName="literature" filter="filter"></p-dropdown>
     </div>
     <div>
+      <label for="categoryOptions">Pathogenic Support</label>
       <p-dropdown
+        id="categoryOptions"
         [options]="categoryOptions"
         formControlName="pathogenicSupportCategory"
         placeholder="Pathogenic Support Category"
