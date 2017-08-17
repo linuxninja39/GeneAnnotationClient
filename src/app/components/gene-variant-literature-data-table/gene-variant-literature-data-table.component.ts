@@ -3,9 +3,6 @@ import {GeneVariantModel} from '../../models/api/gene-variant.model';
 import {Log} from 'ng2-logger';
 import {GeneVariantLiteratureModel} from '../../models/api/gene-variant-literature.model';
 import {AnnotationModel} from '../../models/api/annotation.model';
-import {LiteratureModel} from '../../models/api/literature.model';
-import {SelectItem} from 'primeng/primeng';
-import {LiteratureService} from '../../services/literature.service';
 import {AnnotationService} from '../../services/annotation.service';
 import {AuthService} from '../../services/auth.service';
 
@@ -31,7 +28,6 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   constructor(
     private annotationService: AnnotationService,
     private authService: AuthService,
-    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -54,17 +50,15 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
     this.annotationService
       .addGeneVariantLiteratureAnnotation(this.currentGeneVariantLiterature.id, this.annotation)
       .subscribe(
-        (annotation: AnnotationModel) => {
+        (a: AnnotationModel) => {
           if (!this.currentGeneVariantLiterature.annotation) {
             this.currentGeneVariantLiterature.annotation = [];
           }
           this.currentGeneVariantLiterature.annotation = [
             ...this.currentGeneVariantLiterature.annotation,
-            this.annotation
+            a
           ];
 
-          log.info('geneVariant is no', this.geneVariant);
-          this.changeDetector.detectChanges();
           this.addAnnotationDialogVisible = false;
         }
       );

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
-import {GeneModel} from '../models/api/gene.model';
 import {AnnotationModel} from '../models/api/annotation.model';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {sprintf} from 'sprintf-js';
 import {Log} from 'ng2-logger';
-import {GeneVariantModel} from '../models/api/gene-variant.model';
+import {FrontEndOnlyServiceUtil} from '../front-end-only-service-util';
 
 const log = Log.create('AnnotationService');
 
@@ -35,7 +34,10 @@ export class AnnotationService {
     annotation: AnnotationModel
   ): Observable<AnnotationModel> {
     const url = sprintf(AnnotationService.ADD_GENE_VARIANT_LITERATURE_ANNOTATION_EP, geneVariantLiteratureId);
-    return this.postAnnotation(url, annotation);
+    return FrontEndOnlyServiceUtil.frontEndReturn(
+      annotation,
+      this.postAnnotation(url, annotation)
+    );
   }
 
   addLiteratureAnnotation(literatureId: string | number, annotation: AnnotationModel) {
