@@ -6,10 +6,21 @@
   (onRowSelect)="onRowSelect($event)"
   immutable="false"
 >
-  <p-column field="literature.title" header="Title/URL">
+  <p-column field="literature.title" header="Title">
     <ng-template let-col let-row="rowData" pTemplate="body">
-      {{row?.literature?.title | json }} / {{row?.literature?.url}}
+      {{row?.literature?.title}}
     </ng-template>
+  </p-column>
+  <p-column field="literature.url" header="URL">
+  </p-column>
+  <p-column field="addedAt" header="Added">
+    <ng-template let-col let-geneVariantLiterature="rowData" pTemplate="body">
+      {{geneVariantLiterature.addedAt | date : 'medium'}}
+    </ng-template>
+  </p-column>
+  <p-column field="appUser.name" header="Added By">
+  </p-column>
+  <p-column field="pathogenicSupportCategory.name" header="Pathogentic Support Category">
   </p-column>
   <p-column header="Annotations">
     <ng-template let-col let-row="rowData" pTemplate="body">

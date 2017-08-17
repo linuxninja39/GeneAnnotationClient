@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {GeneModel} from '../models/api/gene.model';
 import {Observable} from 'rxjs/Rx';
-import { Log } from 'ng2-logger';
-import {GeneVariantModel} from '../models/api/gene-variant.model';
+import {Log} from 'ng2-logger';
 import 'rxjs/add/operator/map';
-import {GeneNameModel} from '../models/api/gene-name.model';
 import {CurrentPreviousItemsService} from './current-previous-items.service';
+import {environment} from '../../environments/environment';
+import {TestGenes} from '../test-data/test-genes.spec';
+import {FrontEndOnlyServiceUtil} from '../front-end-only-service-util';
 
 const log = Log.create('GeneService');
 
@@ -17,19 +18,25 @@ export class GeneService {
   }
 
   getGene(id: string | number): Observable<GeneModel> {
-        return this.http
-      .get('http://localhost:5000/api/genes/' + id)
-      .map(
-        (res, num) => {
-          const gene: GeneModel = res.json();
-          log.info('got gene', gene);
-          this.currentPreviousItemsService.updateGeneModel(gene);
-          return gene;
-        }
-      );
+    return FrontEndOnlyServiceUtil.frontEndReturn<GeneModel>(
+      TestGenes[0],
+      this.http
+        .get('http://localhost:5000/api/genes/' + id)
+        .map(
+          (res, num) => {
+            const gene: GeneModel = res.json();
+            log.info('got gene', gene);
+            this.currentPreviousItemsService.updateGeneModel(gene);
+            return gene;
+          }
+        )
+    );
   }
 
   getGenes(page?: string | number): Observable<GeneModel[]> {
+    if (environment.frontendOnly) {
+      return Observable.of(JSON.parse(JSON.stringify(TestGenes)));
+    }
     return this.http
       .get('http://localhost:5000/api/genes')
       .map(

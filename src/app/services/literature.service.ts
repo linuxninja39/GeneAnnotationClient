@@ -5,6 +5,8 @@ import {Http, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
 import {sprintf} from 'sprintf-js';
 import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
+import {FrontEndOnlyServiceUtil} from '../front-end-only-service-util';
+import {TestLiteratures} from '../test-data/test-literatures.spec';
 
 @Injectable()
 export class LiteratureService {
@@ -17,9 +19,12 @@ export class LiteratureService {
   }
 
   getLiteratures(page?: number): Observable<LiteratureModel[]> {
-    return this.http
-      .get(LiteratureService.BASE_EP)
-      .map((res: Response) => <LiteratureModel[]>res.json());
+    return FrontEndOnlyServiceUtil.frontEndReturn<LiteratureModel[]>(
+      TestLiteratures,
+      this.http
+        .get(LiteratureService.BASE_EP)
+        .map((res: Response) => <LiteratureModel[]>res.json())
+    );
   }
 
   addGeneVariantLiterature(geneVariantId: number | string, literatureId: number | string): Observable<GeneVariantLiteratureModel> {

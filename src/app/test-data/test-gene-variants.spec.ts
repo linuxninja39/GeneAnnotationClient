@@ -1,7 +1,5 @@
 
 import {GeneVariantModel} from '../models/api/gene-variant.model';
-import {TestGenes} from './test-genes.spec';
-import {TestGeneNames} from './test-gene-names.spec';
 
 export const TestGeneVariants: GeneVariantModel[] = [
   {
@@ -15,7 +13,20 @@ export const TestGeneVariants: GeneVariantModel[] = [
         id: 1,
         note: 'yo',
         createdAt: new Date(),
-        appUser: {id: 1, name: "jacob"}
+        appUser: {id: 1, name: 'jacob'}
+      }
+    ],
+    geneVariantLiterature: [
+      {
+        geneVariantId: 1,
+        literature: {
+          title: 'my lit title',
+          url: 'http://liturl',
+          author: []
+        },
+        pathogenicSupportCategory: {name: 'suppotive'},
+        appUser: {id: 1, name: 'j@j.com'},
+        addedAt: new Date()
       }
     ]
   },

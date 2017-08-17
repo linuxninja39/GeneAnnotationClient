@@ -3,8 +3,9 @@ import {CookieService} from 'ng2-cookies';
 import {AppUserModel} from '../models/api/app-user.model';
 import {Http, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 import {Observer} from 'rxjs/Observer';
+import {TestAppUsers} from '../test-data/test-app-users.spec';
 
 @Injectable()
 export class AuthService {
@@ -40,6 +41,11 @@ export class AuthService {
   }
 
   authenticate(email: string): Observable<AppUserModel> {
+    if (environment.frontendOnly) {
+      const appUser = JSON.parse(JSON.stringify(TestAppUsers[0]));
+      this.cookieService.set(AuthService.COOKIE_NAME, JSON.stringify(appUser));
+      return Observable.of(appUser);
+    }
     return this.http
       .post(AuthService.BASE_EP, {name: email})
       .map(

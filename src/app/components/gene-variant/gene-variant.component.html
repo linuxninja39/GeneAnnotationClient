@@ -14,7 +14,7 @@
       Call: {{geneVariant?.callType?.name}}
     </div>
   </p-accordionTab>
-  <p-accordionTab header="Variant Literature">
+  <p-accordionTab header="Variant Literature" [selected]="true">
     <app-gene-variant-literature-data-table [geneVariant]="geneVariant"></app-gene-variant-literature-data-table>
   </p-accordionTab>
   <p-accordionTab header="Variant Annotations" [selected]="true">

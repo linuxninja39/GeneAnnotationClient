@@ -7,11 +7,11 @@ import {MdCardModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {EditorModule} from 'primeng/components/editor/editor';
 import {LiteratureService} from '../../services/literature.service';
-import {SymbolModel} from '../../models/api/symbol.model';
-import {GeneModel} from '../../models/api/gene.model';
-import {ZygosityTypeModel} from '../../models/api/zygosity-type.model';
-import {VariantTypeModel} from '../../models/api/variant-type.model';
-import {GeneVariantCallTypeModel} from '../../models/api/gene-variant-call-type.model';
+import {HttpModule} from '@angular/http';
+import {AnnotationService} from '../../services/annotation.service';
+import {AuthService} from '../../services/auth.service';
+import {CookieService} from 'ng2-cookies';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('GeneVariantLiteratureDataTableComponent', () => {
   let component: GeneVariantLiteratureDataTableComponent;
@@ -30,37 +30,26 @@ describe('GeneVariantLiteratureDataTableComponent', () => {
         FormsModule,
         EditorModule,
         ListboxModule,
+        HttpModule,
+        NoopAnimationsModule
       ],
       providers: [
-        LiteratureService
+        LiteratureService,
+        AnnotationService,
+        AuthService,
+        CookieService
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    /*
     fixture = TestBed.createComponent(GeneVariantLiteratureDataTableComponent);
     component = fixture.componentInstance;
-    component.geneVariant = {
-      id: '1',
-      gene: <GeneModel>{
-        id: '1',
-        symbol: [],
-        chromosome: {name: '1'},
-        geneName: [],
-        geneLocation: [],
-        origin: []
-      },
-      zygosityType: <ZygosityTypeModel>{},
-      variantType: <VariantTypeModel>{},
-      callType: <GeneVariantCallTypeModel>{}
-    };
     fixture.detectChanges();
   });
 
   it('should be created', () => {
-    // expect(component).toBeTruthy();
-    */
+     expect(component).toBeTruthy();
   });
 });

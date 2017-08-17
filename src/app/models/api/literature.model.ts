@@ -7,7 +7,7 @@ import {AnnotationModel} from './annotation.model';
 
 export interface LiteratureModel extends BaseModel {
   title: string;
-  url: URL;
+  url: string;
   author: AuthorModel[];
   annotation?: AnnotationModel[];
 }

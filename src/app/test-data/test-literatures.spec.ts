@@ -3,7 +3,7 @@ import {LiteratureModel} from '../models/api/literature.model';
 export const TestLiteratures: LiteratureModel[] = [
   {
     title: 'lit 1',
-    url: new URL('http://lit1.com'),
+    url: 'http://lit1.com',
     author: [
       {
         id: 1,
@@ -13,7 +13,7 @@ export const TestLiteratures: LiteratureModel[] = [
   },
     {
     title: 'lit 2',
-    url: new URL('http://lit2.com'),
+    url: 'http://lit2.com',
     author: [
       {
         id: 2,

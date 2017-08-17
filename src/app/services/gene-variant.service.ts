@@ -7,6 +7,8 @@ import {environment} from '../../environments/environment';
 import { Log } from 'ng2-logger';
 import {sprintf} from 'sprintf-js';
 import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
+import {TestGeneVariants} from '../test-data/test-gene-variants.spec';
+import {FrontEndOnlyServiceUtil} from '../front-end-only-service-util';
 
 const log = Log.create('GeneVariantService');
 
@@ -22,12 +24,14 @@ export class GeneVariantService {
   }
 
   getGeneVariant(id: string | number): Observable<GeneVariantModel> {
-    return this.http
-      .get(sprintf(GeneVariantService.GENE_VARIANT_EP, id))
-      .map(
-        (res: Response) => <GeneVariantModel>res.json()
-      )
-      ;
+    return FrontEndOnlyServiceUtil.frontEndReturn<GeneVariantModel>(
+      TestGeneVariants[0],
+      this.http
+        .get(sprintf(GeneVariantService.GENE_VARIANT_EP, id))
+        .map(
+          (res: Response) => <GeneVariantModel>res.json()
+        )
+    );
   }
 
   saveGeneVariant(geneVariant: GeneVariantModel): Observable<GeneVariantModel> {
@@ -48,7 +52,10 @@ export class GeneVariantService {
         { headers: headers }
       );
     }
-    return ob.map((res: Response) => <GeneVariantModel>res.json());
+    return FrontEndOnlyServiceUtil.frontEndReturn(
+      TestGeneVariants[0],
+      ob.map((res: Response) => <GeneVariantModel>res.json())
+    );
   }
 
   getLiteratures(geneVariantId: string | number): Observable<GeneVariantLiteratureModel[]> {
