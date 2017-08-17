@@ -6,7 +6,6 @@ import {AnnotationModel} from '../../models/api/annotation.model';
 import {LiteratureModel} from '../../models/api/literature.model';
 import {SelectItem} from 'primeng/primeng';
 import {LiteratureService} from '../../services/literature.service';
-import {GeneVariantService} from '../../services/gene-variant.service';
 import {AnnotationService} from '../../services/annotation.service';
 import {AuthService} from '../../services/auth.service';
 
@@ -24,38 +23,18 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
   dataKey;
 
   addAnnotationDialogVisible = false;
-  addLiteratureDialogVisible = false;
+  addLiteratureDialogVisible = true;
 
   currentGeneVariantLiterature: GeneVariantLiteratureModel;
   annotation: AnnotationModel;
 
-  literatureOptions: SelectItem[] = [];
-  selectedLiterature: LiteratureModel;
-
   constructor(
-    private literatureService: LiteratureService,
     private annotationService: AnnotationService,
     private authService: AuthService,
     private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.literatureService
-      .getLiteratures()
-      .subscribe(
-        (literatures) => {
-          for (const lit of literatures) {
-            log.info('lit: ', lit);
-            this.literatureOptions.push(
-              {
-                label: lit.title,
-                value: lit
-              }
-            );
-          }
-        }
-      )
-    ;
   }
 
   showAddAnnotationDialog(geneVariantLiterature: GeneVariantLiteratureModel) {
@@ -92,24 +71,6 @@ export class GeneVariantLiteratureDataTableComponent implements OnInit {
 
   }
 
-  saveLiterature() {
-    log.info('selectedLit', this.selectedLiterature);
-    this.addLiteratureDialogVisible = false;
-    this.literatureService
-      .addGeneVariantLiterature(this.geneVariant.id, this.selectedLiterature.id)
-      .subscribe(
-        (geneVariantLiterature: GeneVariantLiteratureModel) => {
-          this.geneVariant.geneVariantLiterature = [
-            ...this.geneVariant.geneVariantLiterature,
-            geneVariantLiterature
-          ];
-        },
-        (err) => {
-          log.error('got error adding geneVariantLiterature', err);
-        }
-      );
-
-  }
 
   onRowSelect(row) {
     log.info('row selected', row);

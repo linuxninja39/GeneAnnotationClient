@@ -1,5 +1,6 @@
 
 import {GeneVariantModel} from '../models/api/gene-variant.model';
+import {PathogenicSupportCategory} from '../models/api/pathogenic-support-category.model';
 
 export const TestGeneVariants: GeneVariantModel[] = [
   {
@@ -24,7 +25,7 @@ export const TestGeneVariants: GeneVariantModel[] = [
           url: 'http://liturl',
           author: []
         },
-        pathogenicSupportCategory: {name: 'suppotive'},
+        pathogenicSupportCategory: {name: PathogenicSupportCategory.Supportive},
         appUser: {id: 1, name: 'j@j.com'},
         addedAt: new Date()
       }

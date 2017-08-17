@@ -47,6 +47,8 @@ import {AuthService} from './services/auth.service';
 import {AuthedGuard} from './guards/authed.guard';
 import {AnnotationService} from './services/annotation.service';
 import {AppUserService} from './services/app-user.service';
+import { GeneVariantLiteratureFormDialogComponent } from './components/gene-variant-literature-form-dialog/gene-variant-literature-form-dialog.component';
+import {GeneVariantLiteratureService} from './services/gene-variant-literature.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import {AppUserService} from './services/app-user.service';
     IdentityServiceCallbackComponent,
     AuthCallbackComponent,
     FirstItemPipe,
-    WhoAreYouComponent
+    WhoAreYouComponent,
+    GeneVariantLiteratureFormDialogComponent
 
   ],
   imports: [
@@ -102,6 +105,7 @@ import {AppUserService} from './services/app-user.service';
     AnnotationService,
     AppUserService,
     NgxOidcClientService,
+    GeneVariantLiteratureService,
     {
       provide: OIDC_CLIENT_CONFIG,
       useValue: {

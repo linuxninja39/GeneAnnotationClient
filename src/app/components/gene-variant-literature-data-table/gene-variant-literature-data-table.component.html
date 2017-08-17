@@ -39,6 +39,7 @@
     </div>
   </p-footer>
 </p-dataTable>
+<div>addLiteratureDialogVisible: {{addLiteratureDialogVisible}}</div>
 
 <p-dialog header="Add Gene Variant/Literature Annotation" [(visible)]="addAnnotationDialogVisible">
   <div *ngIf="currentGeneVariantLiterature">
@@ -49,12 +50,5 @@
   </div>
 </p-dialog>
 
-
-<p-dialog header="Add Gene Variant/Literature" [(visible)]="addLiteratureDialogVisible">
-  <div>
-    <p-listbox [options]="literatureOptions" [(ngModel)]="selectedLiterature" filter="filter"></p-listbox>
-  </div>
-  <div>
-    <button pButton label="Add" (click)="saveLiterature()"></button>
-  </div>
-</p-dialog>
+<app-gene-variant-literature-form-dialog [(display)]="addLiteratureDialogVisible" [geneVariant]="geneVariant" >
+</app-gene-variant-literature-form-dialog>

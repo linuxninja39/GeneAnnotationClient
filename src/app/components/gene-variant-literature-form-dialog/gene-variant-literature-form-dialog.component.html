@@ -1,0 +1,30 @@
+<p-dialog header="Add Gene Variant/Literature" [(visible)]="display">
+  <form [formGroup]="geneVariantLiteratureFormGroup">
+
+    <div>
+      User: {{geneVariantLiteratureFormGroup.value.appUser.name}}
+    </div>
+    <div>
+      Creation Date: {{geneVariantLiteratureFormGroup.value.addedAt | date : 'medium'}}
+    </div>
+    <div>
+      <p-dropdown [options]="literatureOptions" formControlName="literature" filter="filter"></p-dropdown>
+    </div>
+    <div>
+      <p-dropdown
+        [options]="categoryOptions"
+        formControlName="pathogenicSupportCategory"
+        placeholder="Pathogenic Support Category"
+      >
+      </p-dropdown>
+    </div>
+    <div formArrayName="annotation">
+      <div *ngFor="let ann of annotationFormArray.controls; let i=index" [formGroupName]="i">
+        <p-editor formControlName="note"></p-editor>
+      </div>
+    </div>
+    <div>
+      <button pButton label="Add" (click)="saveLiterature()"></button>
+    </div>
+  </form>
+</p-dialog>
