@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Log } from 'ng2-logger';
+import {Component, OnInit} from '@angular/core';
+import {Log} from 'ng2-logger';
 import {LiteratureService} from '../../services/literature.service';
 import {LiteratureModel} from '../../models/api/literature.model';
 import {AnnotationModel} from '../../models/api/annotation.model';
@@ -21,12 +21,12 @@ export class LiteratureComponent implements OnInit {
   displayNewAnnotationDialog = false;
   newAnnotation: AnnotationModel;
   selectedLiterature: LiteratureModel;
+  displayLiteratureForm = true;
 
-  constructor(
-    private literatureService: LiteratureService,
-    private annotationService: AnnotationService,
-    private authService: AuthService
-  ) { }
+  constructor(private literatureService: LiteratureService,
+              private annotationService: AnnotationService,
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.literatureService
@@ -80,8 +80,15 @@ export class LiteratureComponent implements OnInit {
         err => {
           log.error('save literature annotation', err);
         }
-
       );
 
+  }
+
+  showNewLiteratureDialog() {
+    this.displayLiteratureForm = true;
+  }
+
+  addToLiterature(lit: LiteratureModel) {
+    this.literatures = [...this.literatures, lit];
   }
 }

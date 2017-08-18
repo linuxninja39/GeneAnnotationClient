@@ -18,14 +18,14 @@ const log = Log.create('GeneVariantLiteratureFormDialogComponent');
 })
 export class GeneVariantLiteratureFormDialogComponent implements OnInit {
   private _display: boolean;
-  @Input()
-  get display(): boolean {
-    return this._display;
-  }
 
+  @Input()
   set display(d: boolean) {
     this.displayChange.emit(d);
     this._display = d;
+  }
+  get display(): boolean {
+    return this._display;
   }
 
   @Output()
@@ -45,14 +45,13 @@ export class GeneVariantLiteratureFormDialogComponent implements OnInit {
   constructor(private literatureService: LiteratureService,
               private geneVariantLiteratureService: GeneVariantLiteratureService,
               private formBuilder: FormBuilder,
-              private authService: AuthService,) {
+              private authService: AuthService) {
   }
 
   ngOnInit() {
     this.getLiterature();
     this.setupForm();
     this.setupPathogenicOptions();
-    log.info('annotationFormArray', this.annotationFormArray);
   }
 
   private setupPathogenicOptions() {

@@ -24,6 +24,7 @@
     </p-dataTable>
   </div>
   <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
+  <div><button (click)="showNewLiteratureDialog()">Add Lit</button></div>
 </div>
 
 <p-dialog
@@ -51,3 +52,5 @@
     </div>
   </div>
 </p-dialog>
+
+<app-literature-form-dialog [(display)]="displayLiteratureForm" (literatureSaved)="addToLiterature($event)"></app-literature-form-dialog>

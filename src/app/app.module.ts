@@ -47,8 +47,11 @@ import {AuthService} from './services/auth.service';
 import {AuthedGuard} from './guards/authed.guard';
 import {AnnotationService} from './services/annotation.service';
 import {AppUserService} from './services/app-user.service';
-import { GeneVariantLiteratureFormDialogComponent } from './components/gene-variant-literature-form-dialog/gene-variant-literature-form-dialog.component';
+import {
+  GeneVariantLiteratureFormDialogComponent
+} from './components/gene-variant-literature-form-dialog/gene-variant-literature-form-dialog.component';
 import {GeneVariantLiteratureService} from './services/gene-variant-literature.service';
+import { LiteratureFormDialogComponent } from './components/literature-form-dialog/literature-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,8 @@ import {GeneVariantLiteratureService} from './services/gene-variant-literature.s
     AuthCallbackComponent,
     FirstItemPipe,
     WhoAreYouComponent,
-    GeneVariantLiteratureFormDialogComponent
+    GeneVariantLiteratureFormDialogComponent,
+    LiteratureFormDialogComponent
 
   ],
   imports: [

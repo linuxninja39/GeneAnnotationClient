@@ -1,0 +1,66 @@
+<p-dialog header="Add Literature" [(visible)]="display">
+  <form [formGroup]="literatureFormGroup">
+    <div>
+      <label for="title">Title</label>
+      <input id="title" formControlName="title"/>
+      <div
+        *ngIf="controls.title.invalid && (controls.title.dirty || controls.title.touched)"
+        style="color: red"
+      >
+        <div *ngIf="controls.title.errors.required">
+          Title required.
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="url">Url</label>
+      <input id="url" formControlName="url"/>
+      <div
+        *ngIf="controls.url.invalid && (controls.url.dirty || controls.url.touched)"
+        style="color: red"
+      >
+        <div *ngIf="controls.url.errors.required">
+          URL required.
+        </div>
+        <div *ngIf="controls.url.errors.pattern">
+          Must be a valid URL.
+        </div>
+      </div>
+    </div>
+    <div formArrayName="author">
+      <div *ngFor="let authorControl of authorFormArray.controls; let i=index" [formGroupName]="i">
+        <label for="authorName">Author Name</label>
+        <input id="authorName" formControlName="name"/>
+        <div>
+        </div>
+        <div
+          *ngIf="authorControl.controls.name.invalid && (authorControl.controls.name.dirty || authorControl.controls.name.touched)"
+          style="color: red"
+        >
+          <div *ngIf="authorControl.controls.name.errors.required">
+            Author name required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div formArrayName="annotation">
+      <div *ngFor="let annotationControl of annotationFormArray.controls; let i=index" [formGroupName]="i">
+        <p-editor formControlName="note"></p-editor>
+                <div
+          *ngIf="annotationControl.controls.note.invalid && (annotationControl.controls.note.dirty || annotationControl.controls.note.touched)"
+          style="color: red"
+        >
+          <div *ngIf="annotationControl.controls.note.errors.required">
+            Note required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button (click)="addAnnotation()">Add Annotation</button>
+    </div>
+    <div>
+      <button (click)="saveLiterature()">Save Literature</button>
+    </div>
+  </form>
+</p-dialog>

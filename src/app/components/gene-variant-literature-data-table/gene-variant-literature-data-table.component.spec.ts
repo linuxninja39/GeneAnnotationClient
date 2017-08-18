@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GeneVariantLiteratureDataTableComponent } from './gene-variant-literature-data-table.component';
-import {DataTableModule, DialogModule, ListboxModule} from 'primeng/primeng';
+import {DataTableModule, DialogModule, DropdownModule, ListboxModule} from 'primeng/primeng';
 import {TruncateWordsPipe} from 'ng2-truncate/dist/truncate-words.pipe';
 import {MdCardModule} from '@angular/material';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EditorModule} from 'primeng/components/editor/editor';
 import {LiteratureService} from '../../services/literature.service';
 import {HttpModule} from '@angular/http';
@@ -12,6 +12,11 @@ import {AnnotationService} from '../../services/annotation.service';
 import {AuthService} from '../../services/auth.service';
 import {CookieService} from 'ng2-cookies';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  GeneVariantLiteratureFormDialogComponent
+} from '../gene-variant-literature-form-dialog/gene-variant-literature-form-dialog.component';
+import {GeneVariantLiteratureService} from '../../services/gene-variant-literature.service';
+import {TestGeneVariants} from '../../test-data/test-gene-variants.spec';
 
 describe('GeneVariantLiteratureDataTableComponent', () => {
   let component: GeneVariantLiteratureDataTableComponent;
@@ -21,6 +26,7 @@ describe('GeneVariantLiteratureDataTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         GeneVariantLiteratureDataTableComponent,
+        GeneVariantLiteratureFormDialogComponent,
         TruncateWordsPipe
       ],
       imports: [
@@ -28,16 +34,19 @@ describe('GeneVariantLiteratureDataTableComponent', () => {
         MdCardModule,
         DialogModule,
         FormsModule,
+        ReactiveFormsModule,
         EditorModule,
         ListboxModule,
         HttpModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        DropdownModule
       ],
       providers: [
         LiteratureService,
         AnnotationService,
         AuthService,
-        CookieService
+        CookieService,
+        GeneVariantLiteratureService
       ]
     })
     .compileComponents();
@@ -46,6 +55,7 @@ describe('GeneVariantLiteratureDataTableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GeneVariantLiteratureDataTableComponent);
     component = fixture.componentInstance;
+    component.geneVariant = JSON.parse(JSON.stringify(TestGeneVariants[0]));
     fixture.detectChanges();
   });
 
