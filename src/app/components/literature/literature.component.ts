@@ -21,7 +21,7 @@ export class LiteratureComponent implements OnInit {
   displayNewAnnotationDialog = false;
   newAnnotation: AnnotationModel;
   selectedLiterature: LiteratureModel;
-  displayLiteratureForm = true;
+  displayLiteratureForm = false;
 
   constructor(private literatureService: LiteratureService,
               private annotationService: AnnotationService,

@@ -11,8 +11,9 @@
       {{row?.literature?.title}}
     </ng-template>
   </p-column>
-  <p-column field="literature.url" header="URL">
-  </p-column>
+  <p-column field="literature.url" header="URL"></p-column>
+  <p-column field="literature.pubMedId" header="Pub Med Id"></p-column>
+  <p-column field="literature.details" header="Detail"></p-column>
   <p-column field="addedAt" header="Added">
     <ng-template let-col let-geneVariantLiterature="rowData" pTemplate="body">
       {{geneVariantLiterature.addedAt | date : 'medium'}}

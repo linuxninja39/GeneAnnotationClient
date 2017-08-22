@@ -27,6 +27,14 @@
         </div>
       </div>
     </div>
+    <div>
+      <label for="pubMedId">Pub Med Id</label>
+      <input id="pubMedId" formControlName="pubMedId"/>
+    </div>
+    <div>
+      <label for="url">Details</label>
+      <p-editor id="details" formControlName="details"></p-editor>
+    </div>
     <div formArrayName="author">
       <div *ngFor="let authorControl of authorFormArray.controls; let i=index" [formGroupName]="i">
         <label for="authorName">Author Name</label>

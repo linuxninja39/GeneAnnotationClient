@@ -9,6 +9,8 @@
     <p-column class="zygosityEl" field="zygosityType.name" header="Zygosity"></p-column>
     <p-column field="variantType.name" header="Type"></p-column>
     <p-column field="callType.name" header="Call"></p-column>
+    <p-column field="start" header="Start"></p-column>
+    <p-column field="end" header="End"></p-column>
     <p-column header="Annotations">
       <ng-template pTemplate="body" let-row="rowData">
         <div *ngFor="let ann of row.annotation" class="md-card" innerHTML="{{ann?.note | words : 8 : '...' }}"></div>

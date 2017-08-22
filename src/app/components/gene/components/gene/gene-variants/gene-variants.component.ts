@@ -43,7 +43,9 @@ export class GeneVariantsComponent implements OnInit {
         geneId: ['', Validators.required],
         zygosityTypeId: ['', Validators.required],
         variantTypeId: ['', Validators.required],
-        callTypeId: ['', Validators.required]
+        callTypeId: ['', Validators.required],
+        start: [this.gene.currentGeneLocation.start, Validators.required],
+        end: [this.gene.currentGeneLocation.end, Validators.required],
       }
     );
   }

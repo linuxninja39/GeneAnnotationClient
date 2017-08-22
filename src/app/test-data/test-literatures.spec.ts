@@ -4,6 +4,8 @@ export const TestLiteratures: LiteratureModel[] = [
   {
     title: 'lit 1',
     url: 'http://lit1.com',
+    pubMedId: '1',
+    details: 'cool',
     author: [
       {
         id: 1,

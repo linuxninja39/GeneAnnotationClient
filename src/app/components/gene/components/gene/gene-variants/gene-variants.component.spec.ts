@@ -14,7 +14,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {TestGeneVariants} from '../../../../../test-data/test-gene-variants.spec';
 import {GeneVariantService} from '../../../../../services/gene-variant.service';
 import {GeneVariantModel} from '../../../../../models/api/gene-variant.model';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 import {By} from '@angular/platform-browser';
 
 class MockGeneVariantService {
@@ -62,6 +62,11 @@ describe('GeneVariantsComponent', () => {
     () => {
       expect(component).toBeTruthy();
     }
+  );
+
+  it(
+    '',
+    () => {}
   );
 
   it(
@@ -126,7 +131,7 @@ describe('GeneVariantsComponent', () => {
         component.saveVariant();
 
         expect(callCount).toBe(1, 'saveGeneVariant not called exactly once');
-        expect(correctDataStructure).toBe(true,'form values not set correctly');
+        expect(correctDataStructure).toBe(true, 'form values not set correctly');
 
       }
     )
@@ -140,8 +145,8 @@ describe('GeneVariantsComponent', () => {
       expect(children.length)
         .toBe(TestGeneVariants.length, 'table size and number of variants mismatch');
 
-      let rowCount = 0;
-      for(const row of children) {
+      const rowCount = 0;
+      for (const row of children) {
         expect(row.nativeElement.innerHTML).toContain(TestGeneVariants[rowCount].zygosityType.name);
       }
     }

@@ -18,6 +18,6 @@ export interface GeneVariantModel extends BaseModel {
   callTypeId?: number | string;
   annotation?: AnnotationModel[];
   geneVariantLiterature?: GeneVariantLiteratureModel[];
-  start?: number;
-  end?: number;
+  start: number;
+  end: number;
 }

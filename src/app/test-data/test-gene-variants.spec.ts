@@ -9,6 +9,8 @@ export const TestGeneVariants: GeneVariantModel[] = [
     zygosityType: {id: 1, name: 'zy'},
     variantType: {id: 1, name: 'varT'},
     callType: {id: 1, name: 'call'},
+    start: 44434,
+    end: 54334,
     annotation: [
       {
         id: 1,
@@ -23,6 +25,8 @@ export const TestGeneVariants: GeneVariantModel[] = [
         literature: {
           title: 'my lit title',
           url: 'http://liturl',
+          pubMedId: '1',
+          details: 'um, cool details. How many times',
           author: []
         },
         pathogenicSupportCategory: {name: PathogenicSupportCategory.Supportive},
@@ -37,5 +41,7 @@ export const TestGeneVariants: GeneVariantModel[] = [
     zygosityType: {id: 1, name: 'zy'},
     variantType: {id: 1, name: 'varT'},
     callType: {id: 2, name: 'other call'},
+    start: 64434,
+    end: 74334,
   }
 ];

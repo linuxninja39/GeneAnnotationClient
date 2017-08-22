@@ -8,6 +8,8 @@ import {AnnotationModel} from './annotation.model';
 export interface LiteratureModel extends BaseModel {
   title: string;
   url: string;
+  pubMedId?: string;
+  details?: string;
   author: AuthorModel[];
   annotation?: AnnotationModel[];
 }

@@ -63,6 +63,8 @@ export class LiteratureFormDialogComponent implements OnInit {
         title: ['', Validators.required],
 //        url: ['', [Validators.required, Validators.pattern(urlRegex)]],
         url: ['', [Validators.required]],
+        pubMedId: '',
+        details: '',
         author: this.formBuilder.array(
           [
             this.formBuilder.group({
