@@ -6,6 +6,7 @@ import {SelectItem} from 'primeng/primeng';
 import {GeneVariantModel} from '../../../../../models/api/gene-variant.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeneVariantService} from '../../../../../services/gene-variant.service';
+import {AuthService} from '../../../../../services/auth.service';
 
 const log = Log.create('GeneVariantsComponent');
 
@@ -29,7 +30,8 @@ export class GeneVariantsComponent implements OnInit {
     private router: Router,
     private changeDetector: ChangeDetectorRef,
     private geneVariantService: GeneVariantService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -43,7 +45,17 @@ export class GeneVariantsComponent implements OnInit {
         geneId: ['', Validators.required],
         zygosityTypeId: ['', Validators.required],
         variantTypeId: ['', Validators.required],
-        callTypeId: ['', Validators.required],
+        callType: this.formBuilder.array([
+          {
+            activeDate: [new Date(), Validators.required],
+            createdBy: [this.authService.User, Validators.required],
+            callType: this.formBuilder.group(
+              {
+                name: ['', Validators.required]
+              }
+            )
+          }
+        ]),
         start: [this.gene.currentGeneLocation.start, Validators.required],
         end: [this.gene.currentGeneLocation.end, Validators.required],
       }

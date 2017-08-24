@@ -1,14 +1,11 @@
 import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
-import { GeneVariantsComponent } from './gene-variants.component';
+import {GeneVariantsComponent} from './gene-variants.component';
 import {DataTableModule, DialogModule, DropdownModule} from 'primeng/primeng';
-import {MockPipeResolver} from '@angular/compiler/testing';
-import {PipeResolver} from '@angular/compiler';
 import {TestGenes} from '../../../../../test-data/test-genes.spec';
 import {TruncateModule} from 'ng2-truncate';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormArray, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ChangeDetectorRef} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {TestGeneVariants} from '../../../../../test-data/test-gene-variants.spec';
@@ -16,6 +13,10 @@ import {GeneVariantService} from '../../../../../services/gene-variant.service';
 import {GeneVariantModel} from '../../../../../models/api/gene-variant.model';
 import {Observable} from 'rxjs/Observable';
 import {By} from '@angular/platform-browser';
+import {AuthService} from '../../../../../services/auth.service';
+import {AppUserModel} from '../../../../../models/api/app-user.model';
+import {CookieService} from 'ng2-cookies';
+import {HttpModule} from '@angular/http';
 
 class MockGeneVariantService {
   saveGeneVariant: (geneVariant: GeneVariantModel) => Observable<GeneVariantModel>;
@@ -33,6 +34,7 @@ describe('GeneVariantsComponent', () => {
         GeneVariantsComponent
       ],
       imports: [
+        HttpModule,
         DataTableModule,
         TruncateModule,
         DialogModule,
@@ -43,18 +45,32 @@ describe('GeneVariantsComponent', () => {
         NoopAnimationsModule
       ],
       providers: [
-        { provide: GeneVariantService, useClass: MockGeneVariantService }
+        {provide: GeneVariantService, useClass: MockGeneVariantService},
+        AuthService,
+        CookieService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(GeneVariantsComponent);
-    component = fixture.componentInstance;
-    component.gene = JSON.parse(JSON.stringify(TestGenes[0]));
-    fixture.detectChanges();
-  });
+  beforeEach(
+    inject([
+        AuthService
+      ],
+      (authService: AuthService) => {
+
+        Object.defineProperty(authService, 'User', {
+          get: function () {
+            return <AppUserModel>{id: 1, name: 'joe@joe.com'};
+          }
+        });
+        fixture = TestBed.createComponent(GeneVariantsComponent);
+        component = fixture.componentInstance;
+        component.gene = JSON.parse(JSON.stringify(TestGenes[0]));
+        fixture.detectChanges();
+      }
+    )
+  );
 
 
   it(
@@ -66,7 +82,8 @@ describe('GeneVariantsComponent', () => {
 
   it(
     '',
-    () => {}
+    () => {
+    }
   );
 
   it(
@@ -85,7 +102,7 @@ describe('GeneVariantsComponent', () => {
     )
   );
 
-  it (
+  it(
     'should set dialog visible and create new variant',
     () => {
       component.showNewVariantDialog();
@@ -95,7 +112,7 @@ describe('GeneVariantsComponent', () => {
     }
   );
 
-  it (
+  it(
     'should call gene-variant.service to save new variant',
     inject(
       [
@@ -104,12 +121,16 @@ describe('GeneVariantsComponent', () => {
       (geneVariantService) => {
         let callCount = 0;
         let correctDataStructure = false;
-        component.newVariantForm.setValue(
+        component.newVariantForm.patchValue(
           {
             geneId: 1,
             zygosityTypeId: 1,
-            callTypeId: 1,
             variantTypeId: 1
+          }
+        );
+        (<FormArray>component.newVariantForm.get('callType')).controls[0].patchValue(
+          {
+            callType: {name: 'VOUS'}
           }
         );
         geneVariantService.saveGeneVariant = (geneVariant: GeneVariantModel) => {
@@ -118,8 +139,8 @@ describe('GeneVariantsComponent', () => {
             && geneVariant.geneId === 1
             && geneVariant.zygosityTypeId
             && geneVariant.zygosityTypeId === 1
-            && geneVariant.callTypeId
-            && geneVariant.callTypeId === 1
+            && geneVariant.callType[0].callType
+            && geneVariant.callType[0].callType.name === 'VOUS'
             && geneVariant.variantTypeId
             && geneVariant.variantTypeId === 1
           ) {
@@ -152,34 +173,32 @@ describe('GeneVariantsComponent', () => {
     }
   );
 
-  it (
+  it(
     'should update table after saveVariant',
     inject(
       [
         GeneVariantService
       ],
       (geneVariantService) => {
-        component.newVariantForm.setValue(
+        component.newVariantForm.patchValue(
           {
             geneId: 1,
             zygosityTypeId: 1,
-            callTypeId: 1,
             variantTypeId: 1
           }
         );
+        (<FormArray>component.newVariantForm.get('callType')).controls[0].patchValue(
+          {
+            callType: {name: 'VOUS'}
+          }
+        );
+
         const zygosityTypeName = 'Vital Signs';
         geneVariantService.saveGeneVariant = (geneVariant: GeneVariantModel) => {
           return Observable.of(
-            {
-              id: 3,
-              geneId: 1,
-              zygosityType: {id: 5, name: zygosityTypeName},
-              variantType: {id: 5, name: 'varT'},
-              callType: {id: 5, name: 'other call'},
-            }
+            TestGeneVariants[0]
           );
         };
-
 
         component.saveVariant();
 
@@ -187,7 +206,7 @@ describe('GeneVariantsComponent', () => {
         const children = dataTableElement.children;
         expect(component.gene.geneVariant.length)
           .toBe(TestGeneVariants.length + 1, 'geneVariant should have one more now');
-        expect(children[children.length - 1].nativeElement.innerHTML).toContain(zygosityTypeName);
+        expect(children[children.length - 1].nativeElement.innerText).toContain(TestGeneVariants[0].zygosityType.name);
       }
     )
   );

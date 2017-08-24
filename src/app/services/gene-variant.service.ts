@@ -9,6 +9,7 @@ import {sprintf} from 'sprintf-js';
 import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
 import {TestGeneVariants} from '../test-data/test-gene-variants.spec';
 import {FrontEndOnlyServiceUtil} from '../front-end-only-service-util';
+import {CurrentPreviousItemsService} from './current-previous-items.service';
 
 const log = Log.create('GeneVariantService');
 
@@ -19,7 +20,8 @@ export class GeneVariantService {
   public static readonly GENE_VARIANT_LITERATURE_EP = GeneVariantService.GENE_VARIANT_EP + '/Literature';
 
   constructor(
-    private http: Http
+    private http: Http,
+    private currentPreviousItemsService: CurrentPreviousItemsService
   ) {
   }
 
@@ -29,7 +31,11 @@ export class GeneVariantService {
       this.http
         .get(sprintf(GeneVariantService.GENE_VARIANT_EP, id))
         .map(
-          (res: Response) => <GeneVariantModel>res.json()
+          (res: Response) => {
+           const geneVariant = <GeneVariantModel>res.json();
+           this.currentPreviousItemsService.updateGeneVariantModel(geneVariant);
+           return geneVariant;
+          }
         )
     );
   }
@@ -54,7 +60,13 @@ export class GeneVariantService {
     }
     return FrontEndOnlyServiceUtil.frontEndReturn(
       TestGeneVariants[0],
-      ob.map((res: Response) => <GeneVariantModel>res.json())
+      ob.map(
+        (res: Response) => {
+         const ret = <GeneVariantModel>res.json();
+         this.currentPreviousItemsService.updateGeneVariantModel(ret);
+         return ret;
+        }
+      )
     );
   }
 

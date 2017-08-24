@@ -2,7 +2,7 @@ import {TestBed, inject} from '@angular/core/testing';
 import {LiteratureService} from './literature.service';
 import {BaseRequestOptions, Response, HttpModule, ResponseOptions, XHRBackend} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {TestLiteratures} from '../test-data/test-literatures.spec';
+import {TestLiteratures} from '../test-data/test-literatures';
 import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
 
 describe('LiteratureService', () => {

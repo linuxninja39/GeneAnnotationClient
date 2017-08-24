@@ -6,7 +6,31 @@ import {environment} from '../../environments/environment';
 import {sprintf} from 'sprintf-js';
 import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
 import {FrontEndOnlyServiceUtil} from '../front-end-only-service-util';
-import {TestLiteratures} from '../test-data/test-literatures.spec';
+
+const TestLiteratures: LiteratureModel[] = [
+  {
+    title: 'lit 1',
+    url: 'http://lit1.com',
+    pubMedId: '1',
+    details: 'cool',
+    author: [
+      {
+        id: 1,
+        name: 'Bob the cool author'
+      }
+    ]
+  },
+    {
+    title: 'lit 2',
+    url: 'http://lit2.com',
+    author: [
+      {
+        id: 2,
+        name: 'Cracks of fear'
+      }
+    ]
+  }
+];
 
 @Injectable()
 export class LiteratureService {

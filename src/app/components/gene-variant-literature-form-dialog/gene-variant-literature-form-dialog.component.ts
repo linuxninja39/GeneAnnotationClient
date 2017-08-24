@@ -34,8 +34,8 @@ export class GeneVariantLiteratureFormDialogComponent implements OnInit {
   @Input()
   geneVariant: GeneVariantModel;
 
-  literatureOptions: SelectItem[] = [];
-  categoryOptions: SelectItem[] = [];
+  literatureOptions: SelectItem[];
+  categoryOptions: SelectItem[];
   geneVariantLiteratureFormGroup: FormGroup;
 
   get annotationFormArray(): FormArray {
@@ -45,7 +45,10 @@ export class GeneVariantLiteratureFormDialogComponent implements OnInit {
   constructor(private literatureService: LiteratureService,
               private geneVariantLiteratureService: GeneVariantLiteratureService,
               private formBuilder: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService
+  ) {
+    this.literatureOptions = [];
+    this.categoryOptions = [];
   }
 
   ngOnInit() {

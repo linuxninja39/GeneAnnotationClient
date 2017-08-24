@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
-import { LiteratureComponent } from './literature.component';
+import {LiteratureComponent} from './literature.component';
 import {DataTableModule, DialogModule, EditorModule} from 'primeng/primeng';
 import {MdCardModule} from '@angular/material';
 import {LiteratureService} from '../../services/literature.service';
@@ -8,8 +8,21 @@ import {AnnotationService} from '../../services/annotation.service';
 import {HttpModule} from '@angular/http';
 import {AuthService} from '../../services/auth.service';
 import {CookieService} from 'ng2-cookies';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {LiteratureFormDialogComponent} from '../literature-form-dialog/literature-form-dialog.component';
+import {Component, Input} from '@angular/core';
+import {TestLiteratures} from '../../test-data/test-literatures';
+import {Observable} from 'rxjs/Observable';
+
+@Component({
+  selector: 'app-literature-form-dialog',
+  template: ''
+})
+class MockLiteratureFormDialogComponent {
+  @Input()
+  display;
+}
 
 describe('LiteratureComponent', () => {
   let component: LiteratureComponent;
@@ -18,9 +31,11 @@ describe('LiteratureComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        LiteratureComponent
+        LiteratureComponent,
+        MockLiteratureFormDialogComponent
       ],
       imports: [
+        ReactiveFormsModule,
         DataTableModule,
         MdCardModule,
         DialogModule,
@@ -36,14 +51,20 @@ describe('LiteratureComponent', () => {
         LiteratureService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LiteratureComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(
+    inject(
+      [LiteratureService],
+      (literatureService: LiteratureService) => {
+        fixture = TestBed.createComponent(LiteratureComponent);
+        spyOn(literatureService, 'getLiteratures').and.returnValue(Observable.of(TestLiteratures));
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      }
+    )
+  );
 
   it('should be created', () => {
     expect(component).toBeTruthy();

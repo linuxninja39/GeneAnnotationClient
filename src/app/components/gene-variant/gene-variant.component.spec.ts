@@ -44,7 +44,6 @@ describe('GeneVariantComponent', () => {
   let geneVariantService: GeneVariantService;
   let geneVariantServiceSpy: jasmine.Spy;
   let geneService: GeneService;
-  let geneServiceSpy: jasmine.Spy;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -100,17 +99,17 @@ describe('GeneVariantComponent', () => {
       component.gene = JSON.parse(JSON.stringify(TestGenes[0]));
       fixture.detectChanges();
 
-      const geneNameEl = fixture.debugElement.query(By.css(".geneNameEl"));
-      expect(geneNameEl.nativeElement.innerText).toContain(TestGenes[0].currentGeneName.name)
+      const geneNameEl = fixture.debugElement.query(By.css('.geneNameEl'));
+      expect(geneNameEl.nativeElement.innerText).toContain(TestGenes[0].currentGeneName.name);
 
-      const zygosityTypeNameEl = fixture.debugElement.query(By.css(".zygosityTypeNameEl"));
-      expect(zygosityTypeNameEl.nativeElement.innerText).toContain(TestGeneVariants[0].zygosityType.name)
+      const zygosityTypeNameEl = fixture.debugElement.query(By.css('.zygosityTypeNameEl'));
+      expect(zygosityTypeNameEl.nativeElement.innerText).toContain(TestGeneVariants[0].zygosityType.name);
 
-      const variantTypeNameEl = fixture.debugElement.query(By.css(".variantTypeNameEl"));
-      expect(variantTypeNameEl.nativeElement.innerText).toContain(TestGeneVariants[0].variantType.name)
+      const variantTypeNameEl = fixture.debugElement.query(By.css('.variantTypeNameEl'));
+      expect(variantTypeNameEl.nativeElement.innerText).toContain(TestGeneVariants[0].variantType.name);
 
-      const callTypeNameEl = fixture.debugElement.query(By.css(".callTypeNameEl"));
-      expect(callTypeNameEl.nativeElement.innerText).toContain(TestGeneVariants[0].callType.name)
+      const callTypeNameEl = fixture.debugElement.query(By.css('.callTypeNameEl'));
+      expect(callTypeNameEl.nativeElement.innerText).toContain(TestGeneVariants[0].currentCallType.callType.name);
     }
   );
 });

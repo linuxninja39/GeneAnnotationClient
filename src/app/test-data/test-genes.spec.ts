@@ -7,12 +7,12 @@ import {TestAnnotations} from './test-annotations.spec';
 export const TestGenes: GeneModel[] = [
   {
     id: 1,
-    symbol: [],
+    symbol: [{id: 1, name: 'bla', activeDate: new Date()}],
     chromosome: {id: 1, name: '1'},
-    geneLocation: [],
+    geneLocation: [{id: 1, chr: 'b', start: 1, end: 2, hgVersion: 19, locus: 'l'}],
     geneName: [TestGeneNames[0], TestGeneNames[1]],
-    origin: [],
-    synonym: [],
+    origin: [{id: 1, name: 'blkj'}],
+    synonym: [{id: 1, name: 'bla', activeDate: new Date()}],
     geneNameExpansion: 'name expansion',
     knownGeneFunction: 'known function',
     currentGeneLocation: {id: 1, chr: 'b', start: 1, end: 2, hgVersion: 19, locus: 'l'},

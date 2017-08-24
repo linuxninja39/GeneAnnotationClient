@@ -1,6 +1,6 @@
-
 import {GeneVariantModel} from '../models/api/gene-variant.model';
 import {PathogenicSupportCategory} from '../models/api/pathogenic-support-category.model';
+import {TestAppUsers} from './test-app-users.spec';
 
 export const TestGeneVariants: GeneVariantModel[] = [
   {
@@ -8,7 +8,23 @@ export const TestGeneVariants: GeneVariantModel[] = [
     geneId: 1,
     zygosityType: {id: 1, name: 'zy'},
     variantType: {id: 1, name: 'varT'},
-    callType: {id: 1, name: 'call'},
+    currentCallType: {
+      id: 2,
+      geneVariantId: 1,
+      callTypeId: 2,
+      callType: {name: 'VOUS'},
+      activeDate: new Date(),
+      createdBy: TestAppUsers[0]
+    },
+    callType: [
+      {
+        id: 1,
+        geneVariantId: 1,
+        callTypeId: 1,
+        activeDate: new Date(),
+        createdBy: TestAppUsers[0]
+      }
+    ],
     start: 44434,
     end: 54334,
     annotation: [
@@ -40,7 +56,15 @@ export const TestGeneVariants: GeneVariantModel[] = [
     geneId: 1,
     zygosityType: {id: 1, name: 'zy'},
     variantType: {id: 1, name: 'varT'},
-    callType: {id: 2, name: 'other call'},
+    callType: [
+      {
+        id: 1,
+        geneVariantId: 1,
+        callTypeId: 1,
+        activeDate: new Date(),
+        createdBy: TestAppUsers[0]
+      }
+    ],
     start: 64434,
     end: 74334,
   }

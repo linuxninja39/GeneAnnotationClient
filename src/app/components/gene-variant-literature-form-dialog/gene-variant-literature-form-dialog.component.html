@@ -2,10 +2,10 @@
   <form [formGroup]="geneVariantLiteratureFormGroup">
 
     <div>
-      User: {{geneVariantLiteratureFormGroup.value.appUser.name}}
+      User: {{geneVariantLiteratureFormGroup.value?.appUser?.name}}
     </div>
     <div>
-      Creation Date: {{geneVariantLiteratureFormGroup.value.addedAt | date : 'medium'}}
+      Creation Date: {{geneVariantLiteratureFormGroup.value?.addedAt | date : 'medium'}}
     </div>
     <div>
       <label for="literatureOptions">Literature</label>

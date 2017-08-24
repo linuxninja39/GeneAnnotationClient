@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {GeneService} from '../../services/gene.service';
 import {GeneVariantModel} from '../../models/api/gene-variant.model';
 import {GeneVariantService} from '../../services/gene-variant.service';
 import {GeneModel} from '../../models/api/gene.model';
+import {CurrentPreviousItemsService} from '../../services/current-previous-items.service';
 
 @Component({
   selector: 'app-gene-variant',
@@ -15,11 +16,11 @@ export class GeneVariantComponent implements OnInit {
   geneVariant: GeneVariantModel;
   gene: GeneModel;
 
-  constructor(
-    private activeRoute: ActivatedRoute,
-    private geneVariantService: GeneVariantService,
-  private geneService: GeneService
-  ) { }
+  constructor(private activeRoute: ActivatedRoute,
+              private geneVariantService: GeneVariantService,
+              private geneService: GeneService
+  ) {
+  }
 
   ngOnInit() {
     this.activeRoute.params.subscribe(
