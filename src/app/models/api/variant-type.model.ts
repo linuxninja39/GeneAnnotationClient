@@ -16,7 +16,6 @@ export interface VariantTypeModel extends BaseModel {
   SNV_PREDICTED_LOF = <any>'SNV, predicted lof',
   SNV_PREDICTED_GOF = <any>'SNV, predicted gof',
   SPLICE_SITE = <any>'Splice site',
-  GWAS = <any>'GWAS (within gene or nearest to this gene)'
   */
   name: string;
 }
