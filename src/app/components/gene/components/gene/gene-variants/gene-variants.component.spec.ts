@@ -81,8 +81,20 @@ describe('GeneVariantsComponent', () => {
   );
 
   it(
-    '',
+    'showCallHistory should set showCallHistoryDialog to argument',
     () => {
+      component.showCallHistory(true);
+      expect(component.displayCallHistoryDialog).toBeTruthy('showCallHistoryDialog should be true');
+      component.showCallHistory(false);
+      expect(component.displayCallHistoryDialog).toBeFalsy('showCallHistoryDialog should be false');
+    }
+  );
+
+  it(
+    'showNewVariantDialog should set displayCallHistoryDialog to true',
+    () => {
+      component.showNewVariantDialog();
+      expect(component.displayNewVariantDialog).toBeTruthy('showNewVariantDialog should be true');
     }
   );
 
@@ -156,6 +168,27 @@ describe('GeneVariantsComponent', () => {
 
       }
     )
+  );
+
+  it(
+    'should have correct columns in table',
+    () => {
+      const dataTableElement = fixture.debugElement.query(By.css('thead'));
+      const columns = dataTableElement.children[0].children;
+      const correctColumns = [
+          "Zygosity",
+          "Variant Type",
+          "Call",
+          "Start",
+          "End",
+          "Annotations",
+      ];
+
+      expect(columns.length).toEqual(correctColumns.length, "column count should match");
+      for (let i = 0; i < correctColumns.length; i++) {
+        expect(columns[i].nativeElement.innerText).toEqual(correctColumns[i]);
+      }
+    }
   );
 
   it(

@@ -19,6 +19,7 @@ export class GeneVariantsComponent implements OnInit {
   @Input()
   gene: GeneModel;
   displayNewVariantDialog = false;
+  displayCallHistoryDialog = false;
   newVariant: GeneVariantModel;
   zygosities: SelectItem[] = [];
   types: SelectItem[] = [];
@@ -37,6 +38,10 @@ export class GeneVariantsComponent implements OnInit {
   ngOnInit() {
     this.setupDropdownOptions();
     this.setupNewVariantForm();
+  }
+
+  showCallHistory(show: boolean) {
+    this.displayCallHistoryDialog = show;
   }
 
   private setupNewVariantForm() {
@@ -152,7 +157,7 @@ export class GeneVariantsComponent implements OnInit {
     ];
   }
 
-  showNewVariantDialog() {
+  showNewVariantDialog(): void {
     this.newVariant = <GeneVariantModel>{};
     this.displayNewVariantDialog = true;
   }

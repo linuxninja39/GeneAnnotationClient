@@ -12,16 +12,6 @@ import {TestGenes} from '../../test-data/test-genes.spec';
 import {HttpModule} from '@angular/http';
 import {CurrentPreviousItemsService} from '../../services/current-previous-items.service';
 
-class MockGeneService {
-  getGene(id) {
-    return Observable.of(<GeneModel>{});
-  }
-
-  getGenes() {
-    return Observable.of(JSON.parse(JSON.stringify(TestGenes)));
-  }
-}
-
 describe('GenesComponent', () => {
   let component: GenesComponent;
   let fixture: ComponentFixture<GenesComponent>;
@@ -73,7 +63,7 @@ describe('GenesComponent', () => {
       "Expansion of gene name",
       "Known Function",
     ];
-    expect(columns.length).toEqual(correctColumns.length, "column count sould match");
+    expect(columns.length).toEqual(correctColumns.length, "column count should match");
     for (let i = 0; i < correctColumns.length; i++) {
       expect(columns[i].nativeElement.innerText).toEqual(correctColumns[i]);
     }
