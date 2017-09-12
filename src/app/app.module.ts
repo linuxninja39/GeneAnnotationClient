@@ -52,6 +52,7 @@ import {
 } from './components/gene-variant-literature-form-dialog/gene-variant-literature-form-dialog.component';
 import {GeneVariantLiteratureService} from './services/gene-variant-literature.service';
 import { LiteratureFormDialogComponent } from './components/literature-form-dialog/literature-form-dialog.component';
+import { GeneVariantCallHistoryComponent } from './components/gene-variant-call-history/gene-variant-call-history.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { LiteratureFormDialogComponent } from './components/literature-form-dial
     FirstItemPipe,
     WhoAreYouComponent,
     GeneVariantLiteratureFormDialogComponent,
-    LiteratureFormDialogComponent
+    LiteratureFormDialogComponent,
+    GeneVariantCallHistoryComponent
 
   ],
   imports: [

@@ -4,7 +4,7 @@ import {GeneVariantsComponent} from './gene-variants.component';
 import {DataTableModule, DialogModule, DropdownModule} from 'primeng/primeng';
 import {TestGenes} from '../../../../../test-data/test-genes.spec';
 import {TruncateModule} from 'ng2-truncate';
-import {FormArray, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormArray, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -243,5 +243,4 @@ describe('GeneVariantsComponent', () => {
       }
     )
   );
-
 });
