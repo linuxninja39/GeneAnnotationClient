@@ -1,3 +1,14 @@
-<p>
-  gene-variant-call-history works!
-</p>
+<p-dialog header="Call History" [(visible)]="display">
+  <p-dataTable
+    class="callHistoryTableEl"
+    [value]="geneVariant?.callType"
+  >
+    <p-column field="callType.name" header="Call"></p-column>
+    <p-column field="callType.name" header="Added On">
+      <ng-template pTemplate="body" let-row="rowData">
+        <div>{{row.activeDate | date: 'medium'}}</div>
+      </ng-template>
+    </p-column>
+    <p-column field="createdBy.name" header="Added By"></p-column>
+  </p-dataTable>
+</p-dialog>
