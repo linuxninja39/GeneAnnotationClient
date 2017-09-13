@@ -41,6 +41,7 @@ export class GeneVariantsComponent implements OnInit {
   }
 
   showCallHistory(show: boolean, geneVariant: GeneVariantModel) {
+    console.log('showCallHistory called', show, geneVariant);
     this.selectedVariant = geneVariant;
     this.displayCallHistoryDialog = show;
   }

@@ -53,6 +53,7 @@ import {
 import {GeneVariantLiteratureService} from './services/gene-variant-literature.service';
 import { LiteratureFormDialogComponent } from './components/literature-form-dialog/literature-form-dialog.component';
 import { GeneVariantCallHistoryComponent } from './components/gene-variant-call-history/gene-variant-call-history.component';
+import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { GeneVariantCallHistoryComponent } from './components/gene-variant-call-
     WhoAreYouComponent,
     GeneVariantLiteratureFormDialogComponent,
     LiteratureFormDialogComponent,
-    GeneVariantCallHistoryComponent
+    GeneVariantCallHistoryComponent,
+    ClickStopPropagationDirective
 
   ],
   imports: [
