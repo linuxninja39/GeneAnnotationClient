@@ -40,7 +40,8 @@ export class GeneVariantsComponent implements OnInit {
     this.setupNewVariantForm();
   }
 
-  showCallHistory(show: boolean) {
+  showCallHistory(show: boolean, geneVariant: GeneVariantModel) {
+    this.selectedVariant = geneVariant;
     this.displayCallHistoryDialog = show;
   }
 

@@ -17,6 +17,7 @@ import {AuthService} from '../../../../../services/auth.service';
 import {AppUserModel} from '../../../../../models/api/app-user.model';
 import {CookieService} from 'ng2-cookies';
 import {HttpModule} from '@angular/http';
+import {CurrentPreviousItemsService} from '../../../../../services/current-previous-items.service';
 
 class MockGeneVariantService {
   saveGeneVariant: (geneVariant: GeneVariantModel) => Observable<GeneVariantModel>;
@@ -27,6 +28,16 @@ class MockGeneVariantService {
 describe('GeneVariantsComponent', () => {
   let component: GeneVariantsComponent;
   let fixture: ComponentFixture<GeneVariantsComponent>;
+  const testGeneIndex = 0;
+  const correctColumns = [
+    'Zygosity',
+    'Variant Type',
+    'Call',
+    'Start',
+    'End',
+    'Annotations',
+  ];
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -59,6 +70,8 @@ describe('GeneVariantsComponent', () => {
       ],
       (authService: AuthService) => {
 
+        const currentPreviousItemsService = new CurrentPreviousItemsService();
+
         Object.defineProperty(authService, 'User', {
           get: function () {
             return <AppUserModel>{id: 1, name: 'joe@joe.com'};
@@ -66,7 +79,7 @@ describe('GeneVariantsComponent', () => {
         });
         fixture = TestBed.createComponent(GeneVariantsComponent);
         component = fixture.componentInstance;
-        component.gene = JSON.parse(JSON.stringify(TestGenes[0]));
+        component.gene = JSON.parse(JSON.stringify(TestGenes[testGeneIndex]));
         fixture.detectChanges();
       }
     )
@@ -83,9 +96,9 @@ describe('GeneVariantsComponent', () => {
   it(
     'showCallHistory should set showCallHistoryDialog to argument',
     () => {
-      component.showCallHistory(true);
+      component.showCallHistory(true, TestGeneVariants[0]);
       expect(component.displayCallHistoryDialog).toBeTruthy('showCallHistoryDialog should be true');
-      component.showCallHistory(false);
+      component.showCallHistory(false, TestGeneVariants[0]);
       expect(component.displayCallHistoryDialog).toBeFalsy('showCallHistoryDialog should be false');
     }
   );
@@ -105,7 +118,7 @@ describe('GeneVariantsComponent', () => {
       (router) => {
         const routerSpy = spyOn(router, 'navigate');
         const changeDetectorSpy = spyOn((component as any).changeDetector, 'detectChanges');
-        component.selectedVariant = TestGeneVariants[0];
+        component.selectedVariant = JSON.parse(JSON.stringify(TestGeneVariants[0]));
         component.onRowSelect({});
         const arg = routerSpy.calls.first().args[0];
         expect(arg[0]).toBe('/gene-variant');
@@ -175,16 +188,8 @@ describe('GeneVariantsComponent', () => {
     () => {
       const dataTableElement = fixture.debugElement.query(By.css('thead'));
       const columns = dataTableElement.children[0].children;
-      const correctColumns = [
-          "Zygosity",
-          "Variant Type",
-          "Call",
-          "Start",
-          "End",
-          "Annotations",
-      ];
 
-      expect(columns.length).toEqual(correctColumns.length, "column count should match");
+      expect(columns.length).toEqual(correctColumns.length, 'column count should match');
       for (let i = 0; i < correctColumns.length; i++) {
         expect(columns[i].nativeElement.innerText).toEqual(correctColumns[i]);
       }
@@ -202,6 +207,33 @@ describe('GeneVariantsComponent', () => {
       const rowCount = 0;
       for (const row of children) {
         expect(row.nativeElement.innerHTML).toContain(TestGeneVariants[rowCount].zygosityType.name);
+      }
+    }
+  );
+
+  it(
+    'cell content should be correct',
+    () => {
+      const bla = [
+        'Zygosity',
+        'Variant Type',
+        'Call',
+        'Start',
+        'End',
+        'Annotations',
+      ];
+
+      const dataTableElement = fixture.debugElement.query(By.css('tbody'));
+      const children = dataTableElement.children;
+      for (let j = 0; j < children.length; j++) {
+        const row = children[j];
+        const cells = row.children;
+        const controlGeneVariant = TestGenes[testGeneIndex].geneVariant[j];
+        expect(cells[0].nativeElement.innerText).toContain(controlGeneVariant.zygosityType.name, 'Zygosity cell');
+        expect(cells[1].nativeElement.innerText).toContain(controlGeneVariant.variantType.name, 'Variant type cell');
+        expect(cells[2].nativeElement.innerText).toContain(controlGeneVariant.currentCallType.callType.name, 'Call cell');
+        expect(cells[3].nativeElement.innerText).toContain(controlGeneVariant.start, 'Start cell');
+        expect(cells[4].nativeElement.innerText).toContain(controlGeneVariant.end, 'End cell');
       }
     }
   );
@@ -242,5 +274,24 @@ describe('GeneVariantsComponent', () => {
         expect(children[children.length - 1].nativeElement.innerText).toContain(TestGeneVariants[0].zygosityType.name);
       }
     )
+  );
+
+  it(
+    'Should call showCallHistory when "Call" cell clicked',
+    () => {
+      const dataTableElement = fixture.debugElement.query(By.css('tbody'));
+      const rows = dataTableElement.children;
+      const callCell = rows[0].children[2];
+
+      const callDiv = callCell.query(By.css('.callCellEl'));
+
+      const spy = spyOn(component, 'showCallHistory').and.callThrough();
+
+      callDiv.triggerEventHandler('click', null);
+
+      expect(spy.calls.count())
+        .toBe(1, 'showCallHistory should have been called once');
+      expect(spy.calls.first().args[0]).toBe(true, 'true should have been passed');
+    }
   );
 });

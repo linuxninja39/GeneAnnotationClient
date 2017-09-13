@@ -56,6 +56,14 @@ export const TestGeneVariants: GeneVariantModel[] = [
     geneId: 1,
     zygosityType: {id: 1, name: 'zy'},
     variantType: {id: 1, name: 'varT'},
+    currentCallType: {
+      id: 2,
+      geneVariantId: 2,
+      callTypeId: 3,
+      callType: {name: 'Sweet Call Yo'},
+      activeDate: new Date(),
+      createdBy: TestAppUsers[0]
+    },
     callType: [
       {
         id: 1,

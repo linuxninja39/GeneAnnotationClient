@@ -8,7 +8,11 @@
   >
     <p-column class="zygosityEl" field="zygosityType.name" header="Zygosity"></p-column>
     <p-column field="variantType.name" header="Variant Type"></p-column>
-    <p-column field="callType.name" header="Call"></p-column>
+    <p-column field="currentCallType.callType.name" header="Call">
+      <ng-template pTemplate="body" let-geneVariant="rowData" >
+        <div class="callCellEl" (click)="showCallHistory(true, geneVariant)">{{geneVariant.currentCallType.callType.name}}</div>
+      </ng-template>
+    </p-column>
     <p-column field="start" header="Start"></p-column>
     <p-column field="end" header="End"></p-column>
     <p-column header="Annotations">
