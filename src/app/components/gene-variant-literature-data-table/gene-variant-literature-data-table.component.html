@@ -29,14 +29,14 @@
         <div class="ui-g-12">
           <!--md-card *ngFor="let ann of row?.annotation" [innerHTML]="ann.note | words:5"></md-card -->
           <md-card *ngFor="let ann of row?.annotation" [innerHTML]="ann.note"></md-card>
-          <button pButton label="Add" (click)="showAddAnnotationDialog(row)"></button>
+          <button pButton label="Add Annotation" (click)="showAddAnnotationDialog(row)"></button>
         </div>
       </div>
     </ng-template>
   </p-column>
   <p-footer>
     <div class="ui-helper-clearfix" style="width:100%">
-      <button type="button" pButton icon="fa-plus" style="float:left" (click)="showAddLiteratureDialog()" label="Add"></button>
+      <button class="addLiteratureButtonEl" type="button" pButton icon="fa-plus" style="float:left" (click)="showAddLiteratureDialog()" label="Add Literature"></button>
     </div>
   </p-footer>
 </p-dataTable>

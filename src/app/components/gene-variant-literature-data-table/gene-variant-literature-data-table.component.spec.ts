@@ -144,4 +144,31 @@ describe('GeneVariantLiteratureDataTableComponent', () => {
       }
     }
   );
+
+  it(
+    'Should call showAddLiteratureDialog when add literature button clicked',
+    () => {
+      const button = fixture.debugElement.query(By.css('[label="Add Literature"]'));
+      const spy = spyOn(component, 'showAddLiteratureDialog').and.callThrough();
+
+      button.triggerEventHandler('click', null);
+
+      expect(spy.calls.count())
+        .toEqual(1, 'showAddLiteratureDialog should have been called with button click');
+    }
+  );
+
+  it(
+    'Should call showAddAnnotationDialog when add annotation button clicked',
+    () => {
+      const button = fixture.debugElement.query(By.css('[label="Add Annotation"]'));
+      const spy = spyOn(component, 'showAddAnnotationDialog').and.returnValue(null);
+
+      button.triggerEventHandler('click', null);
+
+      expect(spy.calls.count())
+        .toEqual(1, 'showAddAnnotationDialog should have been called with button click');
+    }
+  );
+
 });

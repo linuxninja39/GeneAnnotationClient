@@ -54,13 +54,14 @@
         </div>
         <div class="ui-g-6">
           <p-dropdown formControlName="variantTypeId" [options]="types" [autoWidth]="false" width="200" placeholder="Select Type"></p-dropdown>
+          <app-variant-type-dropdown [variantTypes]="types"></app-variant-type-dropdown>
         </div>
-        <div class="ui-g-6">
+        <!--div class="ui-g-6">
           <label>Call</label>
         </div>
         <div class="ui-g-6">
-          <p-dropdown formControlName="callTypeId" [options]="calls" [autoWidth]="false" width="200" placeholder="Select call"></p-dropdown>
-        </div>
+          <p-dropdown formControlName="callType" [options]="calls" [autoWidth]="false" width="200" placeholder="Select call"></p-dropdown>
+        </div-->
         <div class="ui-g-6">
         </div>
         <div class="ui-g-6">

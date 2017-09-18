@@ -18,6 +18,7 @@ import {AppUserModel} from '../../../../../models/api/app-user.model';
 import {CookieService} from 'ng2-cookies';
 import {HttpModule} from '@angular/http';
 import {CurrentPreviousItemsService} from '../../../../../services/current-previous-items.service';
+import {GeneVariantCallHistoryComponent} from '../../../../gene-variant-call-history/gene-variant-call-history.component';
 
 class MockGeneVariantService {
   saveGeneVariant: (geneVariant: GeneVariantModel) => Observable<GeneVariantModel>;
@@ -42,7 +43,8 @@ describe('GeneVariantsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        GeneVariantsComponent
+        GeneVariantsComponent,
+        GeneVariantCallHistoryComponent
       ],
       imports: [
         HttpModule,

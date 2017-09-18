@@ -54,6 +54,8 @@ import {GeneVariantLiteratureService} from './services/gene-variant-literature.s
 import { LiteratureFormDialogComponent } from './components/literature-form-dialog/literature-form-dialog.component';
 import { GeneVariantCallHistoryComponent } from './components/gene-variant-call-history/gene-variant-call-history.component';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
+import { DynamicComponentDirective } from './directives/dynamic-component.directive';
+import { VariantTypeDropdownComponent } from './components/variant-type-dropdown/variant-type-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     GeneVariantLiteratureFormDialogComponent,
     LiteratureFormDialogComponent,
     GeneVariantCallHistoryComponent,
-    ClickStopPropagationDirective
+    ClickStopPropagationDirective,
+    DynamicComponentDirective,
+    VariantTypeDropdownComponent
 
   ],
   imports: [
