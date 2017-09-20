@@ -6,6 +6,9 @@ import {AuthService} from '../../services/auth.service';
 import {GeneVariantModel} from '../../models/api/gene-variant.model';
 import {GeneVariantService} from '../../services/gene-variant.service';
 import {Log} from 'ng2-logger';
+import {RecursiveSelectItem} from '../variant-type-dropdown/recursive-select-item';
+import {VariantTypeModel} from '../../models/api/variant-type.model';
+import {VariantTypeService} from '../../services/variant-type.service';
 
 const log = Log.create('GeneVariantFormComponent');
 
@@ -20,7 +23,7 @@ export class GeneVariantFormComponent implements OnInit {
   @Input()
   gene: GeneModel;
   zygosities: SelectItem[] = [];
-  types: SelectItem[] = [];
+  types: VariantTypeModel[] = [];
   calls: SelectItem[] = [];
 
   newVariantForm: FormGroup;
@@ -33,6 +36,7 @@ export class GeneVariantFormComponent implements OnInit {
     this.displayChange.emit(d);
     this._display = d;
   }
+
   get display(): boolean {
     return this._display;
   }
@@ -43,7 +47,8 @@ export class GeneVariantFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private geneVariantService: GeneVariantService) {
+              private geneVariantService: GeneVariantService,
+              private variantTypeService: VariantTypeService) {
   }
 
   ngOnInit() {
@@ -51,7 +56,7 @@ export class GeneVariantFormComponent implements OnInit {
     this.setupNewVariantForm();
   }
 
-    private setupDropdownOptions() {
+  private setupDropdownOptions() {
     this.zygosities = [
       {
         label: 'Hetorzygous',
@@ -89,56 +94,12 @@ export class GeneVariantFormComponent implements OnInit {
       },
     ];
 
-    this.types = [
-      {
-        label: 'Deletion (whole gene)',
-        value: 1
-      },
-      {
-        label: 'Partial Deletion (intragenic)',
-        value: 2
-      },
-      {
-        label: 'Partial Deletion (deleted 5\')',
-        value: 3
-      },
-      {
-        label: 'Partial Deletion (deleted 3\')',
-        value: 4
-      },
-      {
-        label: 'Duplication (whole gene)',
-        value: 5
-      },
-      {
-        label: 'Partial Duplication (intragenic)',
-        value: 6
-      },
-      {
-        label: 'Partial Duplication (duplicated 5\')',
-        value: 7
-      },
-      {
-        label: 'Partial Duplication (duplicated 3\')',
-        value: 8
-      },
-      {
-        label: 'SNV, predicted lof',
-        value: 9
-      },
-      {
-        label: 'SNV, predicted gof',
-        value: 10
-      },
-      {
-        label: 'Splice site',
-        value: 11
-      },
-      {
-        label: 'GWAS (within gene or nearest to this gene)',
-        value: 12
-      },
-    ];
+    this.variantTypeService.getVariantTypeTree()
+      .subscribe(
+        (variantTypes) => {
+          this.types = variantTypes;
+        }
+      );
   }
 
   private setupNewVariantForm() {

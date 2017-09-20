@@ -18,5 +18,6 @@ export interface VariantTypeModel extends BaseModel {
   SPLICE_SITE = <any>'Splice site',
   */
   name: string;
+  children?: VariantTypeModel[];
 }
 

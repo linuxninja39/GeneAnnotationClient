@@ -57,6 +57,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
 import { DynamicComponentDirective } from './directives/dynamic-component.directive';
 import { VariantTypeDropdownComponent } from './components/variant-type-dropdown/variant-type-dropdown.component';
 import { GeneVariantFormComponent } from './components/gene-variant-form/gene-variant-form.component';
+import {VariantTypeService} from './services/variant-type.service';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,9 @@ import { GeneVariantFormComponent } from './components/gene-variant-form/gene-va
     ListboxModule,
     NgxOidcClientModule
   ],
+  entryComponents: [
+    VariantTypeDropdownComponent
+  ],
   providers: [
     GeneService,
     LiteratureService,
@@ -120,6 +124,7 @@ import { GeneVariantFormComponent } from './components/gene-variant-form/gene-va
     AppUserService,
     NgxOidcClientService,
     GeneVariantLiteratureService,
+    VariantTypeService,
     {
       provide: OIDC_CLIENT_CONFIG,
       useValue: {
