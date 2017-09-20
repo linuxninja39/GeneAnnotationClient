@@ -33,6 +33,11 @@ export class GeneService {
     );
   }
 
+  getGenesByRange(start: number, end: number): Observable<GeneModel[]> {
+    return Observable.of([TestGenes[0]]);
+    //throw new Error('implement me');
+  }
+
   getGenes(page?: string | number): Observable<GeneModel[]> {
     if (environment.frontendOnly) {
       return Observable.of(JSON.parse(JSON.stringify(TestGenes)));

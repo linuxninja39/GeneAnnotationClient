@@ -32,9 +32,9 @@ export class GeneVariantComponent implements OnInit {
             (geneVariant: GeneVariantModel) => {
               this.geneVariant = geneVariant;
               this.geneService
-                .getGene(geneVariant.geneId)
+                .getGenesByRange(1, 2)
                 .subscribe(
-                  gene => this.gene = gene
+                  gene => this.gene = gene[0]
                 );
             }
           )

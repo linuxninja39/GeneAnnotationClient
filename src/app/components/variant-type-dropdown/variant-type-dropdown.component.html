@@ -1,2 +1,8 @@
-<p-dropdown [options]="variantTypes" [autoWidth]="false" width="200" placeholder="Select Variant Type"></p-dropdown>
+<p-dropdown
+  [options]="variantTypes"
+  [autoWidth]="false"
+  width="200"
+  placeholder="Select Variant Type"
+  (onChange)="valueChange($event)"
+></p-dropdown>
 <ng-template appDynamicComponent></ng-template>

@@ -14,4 +14,9 @@ export class VariantTypeDropdownComponent implements OnInit {
   ngOnInit() {
   }
 
+  valueChange(event) {
+    console.log('event', event);
+    console.log('value', event.value);
+
+  }
 }

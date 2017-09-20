@@ -56,6 +56,7 @@ import { GeneVariantCallHistoryComponent } from './components/gene-variant-call-
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { DynamicComponentDirective } from './directives/dynamic-component.directive';
 import { VariantTypeDropdownComponent } from './components/variant-type-dropdown/variant-type-dropdown.component';
+import { GeneVariantFormComponent } from './components/gene-variant-form/gene-variant-form.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { VariantTypeDropdownComponent } from './components/variant-type-dropdown
     GeneVariantCallHistoryComponent,
     ClickStopPropagationDirective,
     DynamicComponentDirective,
-    VariantTypeDropdownComponent
+    VariantTypeDropdownComponent,
+    GeneVariantFormComponent
 
   ],
   imports: [

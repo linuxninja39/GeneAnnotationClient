@@ -1,0 +1,53 @@
+<p-dialog
+  header="New Variant"
+  [(visible)]="display"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [width]="500"
+  [height]="300"
+>
+  <div>
+
+    <form [formGroup]="newVariantForm">
+      <div class="ui-g">
+        <div class="ui-g-6">
+          <label>Zygosity</label>
+        </div>
+        <div class="ui-g-6">
+          <p-dropdown
+            formControlName="zygosityTypeId"
+            [options]="zygosities"
+            [autoWidth]="false"
+            width="200"
+            placeholder="Select Zygosity"
+          ></p-dropdown>
+        </div>
+        <div class="ui-g-6">
+          <label>Type</label>
+        </div>
+        <div class="ui-g-6">
+          <p-dropdown
+            formControlName="variantTypeId"
+            [options]="types"
+            [autoWidth]="false"
+            width="200"
+            placeholder="Select Type"
+          ></p-dropdown>
+          <app-variant-type-dropdown [variantTypes]="types"></app-variant-type-dropdown>
+        </div>
+        <div class="ui-g-6">
+          <label>Call</label>
+        </div>
+        <!--div class="ui-g-6">
+          <p-dropdown formControlName="callType" [options]="calls" [autoWidth]="false" width="200" placeholder="Select call"></p-dropdown>
+        </div-->
+        <div class="ui-g-6">
+        </div>
+        <div class="ui-g-6">
+          <button pButton label="Save" (click)="saveVariant()"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</p-dialog>

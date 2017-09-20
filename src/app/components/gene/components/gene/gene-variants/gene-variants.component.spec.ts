@@ -130,59 +130,11 @@ describe('GeneVariantsComponent', () => {
   );
 
   it(
-    'should set dialog visible and create new variant',
+    'should set dialog visible',
     () => {
       component.showNewVariantDialog();
-      expect(JSON.stringify(component.newVariant))
-        .toBe(JSON.stringify({}), 'should be empty object');
       expect(component.displayNewVariantDialog).toBeTruthy();
     }
-  );
-
-  it(
-    'should call gene-variant.service to save new variant',
-    inject(
-      [
-        GeneVariantService
-      ],
-      (geneVariantService) => {
-        let callCount = 0;
-        let correctDataStructure = false;
-        component.newVariantForm.patchValue(
-          {
-            geneId: 1,
-            zygosityTypeId: 1,
-            variantTypeId: 1
-          }
-        );
-        (<FormArray>component.newVariantForm.get('callType')).controls[0].patchValue(
-          {
-            callType: {name: 'VOUS'}
-          }
-        );
-        geneVariantService.saveGeneVariant = (geneVariant: GeneVariantModel) => {
-          callCount++;
-          if (geneVariant.geneId
-            && geneVariant.geneId === 1
-            && geneVariant.zygosityTypeId
-            && geneVariant.zygosityTypeId === 1
-            && geneVariant.callType[0].callType
-            && geneVariant.callType[0].callType.name === 'VOUS'
-            && geneVariant.variantTypeId
-            && geneVariant.variantTypeId === 1
-          ) {
-            correctDataStructure = true;
-          }
-          return Observable.of(TestGeneVariants[0]);
-        };
-
-        component.saveVariant();
-
-        expect(callCount).toBe(1, 'saveGeneVariant not called exactly once');
-        expect(correctDataStructure).toBe(true, 'form values not set correctly');
-
-      }
-    )
   );
 
   it(
@@ -241,7 +193,7 @@ describe('GeneVariantsComponent', () => {
   );
 
   it(
-    'should update table after saveVariant',
+    'should update table after event from GeneVariantFromComponent',
     inject(
       [
         GeneVariantService
@@ -249,7 +201,6 @@ describe('GeneVariantsComponent', () => {
       (geneVariantService) => {
         component.newVariantForm.patchValue(
           {
-            geneId: 1,
             zygosityTypeId: 1,
             variantTypeId: 1
           }
@@ -259,21 +210,7 @@ describe('GeneVariantsComponent', () => {
             callType: {name: 'VOUS'}
           }
         );
-
-        const zygosityTypeName = 'Vital Signs';
-        geneVariantService.saveGeneVariant = (geneVariant: GeneVariantModel) => {
-          return Observable.of(
-            TestGeneVariants[0]
-          );
-        };
-
-        component.saveVariant();
-
-        const dataTableElement = fixture.debugElement.query(By.css('tbody'));
-        const children = dataTableElement.children;
-        expect(component.gene.geneVariant.length)
-          .toBe(TestGeneVariants.length + 1, 'geneVariant should have one more now');
-        expect(children[children.length - 1].nativeElement.innerText).toContain(TestGeneVariants[0].zygosityType.name);
+        throw new Error('TODO: implement me');
       }
     )
   );
