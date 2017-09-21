@@ -123,6 +123,12 @@ export class GeneVariantFormComponent implements OnInit {
         end: [this.gene.currentGeneLocation.end, Validators.required],
       }
     );
+
+    this.newVariantForm.valueChanges.subscribe(
+      (data) => {
+        console.log('form changed', data);
+      }
+    );
   }
 
   saveVariant(): void {

@@ -27,14 +27,14 @@
           <label>Type</label>
         </div>
         <div class="ui-g-6">
-          <p-dropdown
+          <!--p-dropdown
             formControlName="variantTypeId"
             [options]="types"
             [autoWidth]="false"
             width="200"
             placeholder="Select Type"
-          ></p-dropdown>
-          <app-variant-type-dropdown [variantTypes]="types"></app-variant-type-dropdown>
+          ></p-dropdown-->
+          <app-variant-type-dropdown formControlName="variantTypeId" [variantTypes]="types"></app-variant-type-dropdown>
         </div>
         <div class="ui-g-6">
           <label>Call</label>
@@ -46,6 +46,9 @@
         </div>
         <div class="ui-g-6">
           <button pButton label="Save" (click)="saveVariant()"></button>
+        </div>
+        <div>
+          {{newVariantForm.value.variantTypeId|json}}
         </div>
       </div>
     </form>
