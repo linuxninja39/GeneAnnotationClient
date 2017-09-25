@@ -44,5 +44,7 @@ export class GeneVariantsComponent implements OnInit {
     this.router.navigate(['/gene-variant', this.selectedVariant.id]);
   }
 
-  updateTable() {}
+  updateTable(geneVariant: GeneVariantModel) {
+    this.gene.geneVariant = [...this.gene.geneVariant, geneVariant];
+  }
 }

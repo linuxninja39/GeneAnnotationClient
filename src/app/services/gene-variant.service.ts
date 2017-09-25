@@ -59,7 +59,7 @@ export class GeneVariantService {
       );
     }
     return FrontEndOnlyServiceUtil.frontEndReturn(
-      TestGeneVariants[0],
+      this.currentPreviousItemsService.updateGeneVariantModel(geneVariant),
       ob.map(
         (res: Response) => {
          const ret = <GeneVariantModel>res.json();

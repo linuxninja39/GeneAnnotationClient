@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SelectItem} from 'primeng/primeng';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeneModel} from '../../models/api/gene.model';
 import {AuthService} from '../../services/auth.service';
 import {GeneVariantModel} from '../../models/api/gene-variant.model';
@@ -60,37 +60,37 @@ export class GeneVariantFormComponent implements OnInit {
     this.zygosities = [
       {
         label: 'Hetorzygous',
-        value: 1
+        value: {name: 'Hetorzygous'}
       },
       {
         label: 'Homozygous',
-        value: 2
+        value: {name: 'Homozygous'}
       },
       {
         label: 'Compound Heterozygous',
-        value: 3
+        value: {name: 'Compound Heterozygous'}
       },
     ];
     this.calls = [
       {
         label: 'VOUS',
-        value: 1
+        value: 'VOUS'
       },
       {
         label: 'Likely pathogenic',
-        value: 2
+        value: 'Likely pathogenic'
       },
       {
         label: 'Pathogenic',
-        value: 3
+        value: 'Pathogenic'
       },
       {
         label: 'Benign',
-        value: 4
+        value: 'Benign'
       },
       {
         label: 'autosomal recessive carrier',
-        value: 5
+        value: 'autosomal recessive carrier'
       },
     ];
 
@@ -102,25 +102,33 @@ export class GeneVariantFormComponent implements OnInit {
       );
   }
 
+  get callTypesFormArray(): FormArray {
+    return this.newVariantForm.get('callType') as FormArray;
+  }
+
   private setupNewVariantForm() {
     this.newVariantForm = this.formBuilder.group(
       {
         geneId: ['', Validators.required],
-        zygosityTypeId: ['', Validators.required],
-        variantTypeId: ['', Validators.required],
-        callType: this.formBuilder.array([
-          {
-            activeDate: [new Date(), Validators.required],
-            createdBy: [this.authService.User, Validators.required],
-            callType: this.formBuilder.group(
+        zygosityType: ['', Validators.required],
+        variantType: ['', Validators.required],
+        callType: this.formBuilder.array(
+          [
+            this.formBuilder.group(
               {
-                name: ['', Validators.required]
+                activeDate: [new Date(), Validators.required],
+                createdBy: [this.authService.User, Validators.required],
+                callType: this.formBuilder.group(
+                  {
+                    name: ['', Validators.required]
+                  }
+                )
               }
             )
-          }
-        ]),
-        start: [this.gene.currentGeneLocation.start, Validators.required],
-        end: [this.gene.currentGeneLocation.end, Validators.required],
+          ]
+        ),
+        start: ['', Validators.required],
+        end: ['', Validators.required],
       }
     );
 
@@ -139,7 +147,6 @@ export class GeneVariantFormComponent implements OnInit {
       .saveGeneVariant(newVariant)
       .subscribe(
         (geneVariant) => {
-          this.gene.geneVariant = [...this.gene.geneVariant, geneVariant];
           this.newVariantForm.reset();
           this.newEventSavedEventEmitter.emit(geneVariant);
           this.display = false;

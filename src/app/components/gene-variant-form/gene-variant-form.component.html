@@ -11,12 +11,24 @@
 
     <form [formGroup]="newVariantForm">
       <div class="ui-g">
+        <div class="ui-g-3">
+          <label>Start:</label>
+        </div>
+        <div class="ui-g-3">
+          <input formControlName="start" type="number"/>
+        </div>
+        <div class="ui-g-3">
+          <label>End:</label>
+        </div>
+        <div class="ui-g-3">
+          <input formControlName="end" type="number"/>
+        </div>
         <div class="ui-g-6">
           <label>Zygosity</label>
         </div>
         <div class="ui-g-6">
           <p-dropdown
-            formControlName="zygosityTypeId"
+            formControlName="zygosityType"
             [options]="zygosities"
             [autoWidth]="false"
             width="200"
@@ -27,28 +39,28 @@
           <label>Type</label>
         </div>
         <div class="ui-g-6">
-          <!--p-dropdown
-            formControlName="variantTypeId"
-            [options]="types"
-            [autoWidth]="false"
-            width="200"
-            placeholder="Select Type"
-          ></p-dropdown-->
-          <app-variant-type-dropdown formControlName="variantTypeId" [variantTypes]="types"></app-variant-type-dropdown>
+          <app-variant-type-dropdown formControlName="variantType" [variantTypes]="types"></app-variant-type-dropdown>
         </div>
         <div class="ui-g-6">
           <label>Call</label>
         </div>
-        <!--div class="ui-g-6">
-          <p-dropdown formControlName="callType" [options]="calls" [autoWidth]="false" width="200" placeholder="Select call"></p-dropdown>
-        </div-->
+        <div class="ui-g-6" formArrayName="callType">
+          <div *ngFor="let callTypeControl of callTypesFormArray.controls; let i=index" [formGroupName]="i">
+            <div formGroupName="callType">
+              <p-dropdown
+                formControlName="name"
+                [options]="calls"
+                [autoWidth]="false"
+                width="200"
+                placeholder="Select Call"
+              ></p-dropdown>
+            </div>
+          </div>
+        </div>
         <div class="ui-g-6">
         </div>
         <div class="ui-g-6">
           <button pButton label="Save" (click)="saveVariant()"></button>
-        </div>
-        <div>
-          {{newVariantForm.value.variantTypeId|json}}
         </div>
       </div>
     </form>

@@ -14,6 +14,7 @@ import {GeneVariantService} from '../../services/gene-variant.service';
 import {TestGeneVariants} from '../../test-data/test-gene-variants.spec';
 import {CurrentPreviousItemsService} from '../../services/current-previous-items.service';
 import {Observable} from 'rxjs/Observable';
+import {VariantTypeService} from '../../services/variant-type.service';
 
 describe('GeneVariantFormComponent', () => {
   let component: GeneVariantFormComponent;
@@ -36,7 +37,8 @@ describe('GeneVariantFormComponent', () => {
         AuthService,
         CookieService,
         GeneVariantService,
-        CurrentPreviousItemsService
+        CurrentPreviousItemsService,
+        VariantTypeService
       ]
     })
       .compileComponents();
@@ -65,8 +67,8 @@ describe('GeneVariantFormComponent', () => {
       expect(component.newVariantForm).toBeTruthy();
       const controlNames = [
         'geneId',
-        'zygosityTypeId',
-        'variantTypeId',
+        'zygosityType',
+        'variantType',
         'callType',
         'start',
         'end',
@@ -98,9 +100,9 @@ describe('GeneVariantFormComponent', () => {
       component.newVariantForm.patchValue(
         {
           'geneId': TestGeneVariants[0].id,
-          'zygosityTypeId': TestGeneVariants[0].zygosityTypeId,
-          'variantTypeId': TestGeneVariants[0].variantTypeId,
-          'callType': TestGeneVariants[0].callType,
+          'zygosityType': TestGeneVariants[0].zygosityType,
+          'variantType': TestGeneVariants[0].variantType,
+          'callType': [TestGeneVariants[0].callType],
           'start': TestGeneVariants[0].start,
           'end': TestGeneVariants[0].end,
         }

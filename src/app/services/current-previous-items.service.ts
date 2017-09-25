@@ -38,7 +38,7 @@ export class CurrentPreviousItemsService {
     }
   }
 
-  updateGeneVariantModel(geneVariant: GeneVariantModel): void {
+  updateGeneVariantModel(geneVariant: GeneVariantModel): GeneVariantModel {
     for (const fieldName of CurrentPreviousItemsService.CURRENT_GENE_VARIANT_PROPERTIES) {
       const fieldKey = CurrentPreviousItemsService.PROPERTY_PREFACE + fieldName;
       const fieldArray = geneVariant[this.listFieldName(fieldName)];
@@ -47,6 +47,8 @@ export class CurrentPreviousItemsService {
 
       geneVariant[fieldKey] = fieldArray.shift();
     }
+
+    return geneVariant;
   }
 
   sort(a: ActiveDateBaseModel, b: ActiveDateBaseModel) {

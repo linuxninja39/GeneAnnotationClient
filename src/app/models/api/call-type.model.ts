@@ -3,7 +3,7 @@
  */
 import {BaseModel} from './base.model';
 
-export interface GeneVariantCallTypeModel extends BaseModel {
+export interface CallTypeModel extends BaseModel {
   /*
   VOUS, // = <any>'VOUS',
   LIKELY_PATHOGENIC, //  <any>'Likely pathogenic',

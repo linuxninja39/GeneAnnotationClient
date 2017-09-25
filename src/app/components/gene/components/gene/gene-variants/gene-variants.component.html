@@ -33,7 +33,7 @@
 <app-gene-variant-form
   [(display)]="displayNewVariantDialog"
   [gene]="gene"
-  (newEventSavedEventEmitter)="updateTable()"
+  (newEventSavedEventEmitter)="updateTable($event)"
 ></app-gene-variant-form>
 
 <app-gene-variant-call-history [(display)]="displayCallHistoryDialog"></app-gene-variant-call-history>
