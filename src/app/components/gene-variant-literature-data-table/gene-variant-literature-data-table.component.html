@@ -13,7 +13,7 @@
   </p-column>
   <p-column field="literature.url" header="Url"></p-column>
   <p-column field="literature.pubMedId" header="PubMed ID"></p-column>
-  <p-column field="literature.details" header="Abstract"></p-column>
+  <p-column field="literature.abstract" header="Abstract"></p-column>
   <p-column field="addedAt" header="Added On">
     <ng-template let-col let-geneVariantLiterature="rowData" pTemplate="body">
       {{geneVariantLiterature.addedAt | date : 'medium'}}

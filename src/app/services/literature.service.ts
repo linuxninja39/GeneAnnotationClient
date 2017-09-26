@@ -6,31 +6,9 @@ import {environment} from '../../environments/environment';
 import {sprintf} from 'sprintf-js';
 import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
 import {FrontEndOnlyServiceUtil} from '../front-end-only-service-util';
+import {TestLiteratures} from '../test-data/test-literatures';
 
-const TestLiteratures: LiteratureModel[] = [
-  {
-    title: 'lit 1',
-    url: 'http://lit1.com',
-    pubMedId: '1',
-    details: 'cool',
-    author: [
-      {
-        id: 1,
-        name: 'Bob the cool author'
-      }
-    ]
-  },
-    {
-    title: 'lit 2',
-    url: 'http://lit2.com',
-    author: [
-      {
-        id: 2,
-        name: 'Cracks of fear'
-      }
-    ]
-  }
-];
+const TestLits: LiteratureModel[] = JSON.parse(JSON.stringify(TestLiteratures));
 
 @Injectable()
 export class LiteratureService {
@@ -42,7 +20,7 @@ export class LiteratureService {
 
   getLiteratures(page?: number): Observable<LiteratureModel[]> {
     return FrontEndOnlyServiceUtil.frontEndReturn<LiteratureModel[]>(
-      TestLiteratures,
+      TestLits,
       this.http
         .get(LiteratureService.BASE_EP)
         .map((res: Response) => <LiteratureModel[]>res.json())

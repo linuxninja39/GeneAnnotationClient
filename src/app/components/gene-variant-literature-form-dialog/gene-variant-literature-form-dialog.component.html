@@ -9,7 +9,13 @@
     </div>
     <div>
       <label for="literatureOptions">Literature</label>
-      <p-dropdown id="literatureOptions" [options]="literatureOptions" formControlName="literature" filter="filter"></p-dropdown>
+      <p-dropdown
+        id="literatureOptions"
+        [options]="literatureOptions"
+        formControlName="literature"
+        filter="true"
+        autoWidth="true"
+      ></p-dropdown>
     </div>
     <div>
       <label for="categoryOptions">Pathogenic Support</label>

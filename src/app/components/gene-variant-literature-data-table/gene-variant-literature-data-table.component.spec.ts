@@ -137,7 +137,7 @@ describe('GeneVariantLiteratureDataTableComponent', () => {
         expect(cells[0].nativeElement.innerText).toContain(geneVariantLiteratures[i].literature.title);
         expect(cells[1].nativeElement.innerText).toContain(geneVariantLiteratures[i].literature.url);
         expect(cells[2].nativeElement.innerText).toContain(geneVariantLiteratures[i].literature.pubMedId);
-        expect(cells[3].nativeElement.innerText).toContain(geneVariantLiteratures[i].literature.details);
+        expect(cells[3].nativeElement.innerText).toContain(geneVariantLiteratures[i].literature.abstract);
         expect(cells[4].nativeElement.innerText).toContain(addedOnString);
         expect(cells[5].nativeElement.innerText).toContain(geneVariantLiteratures[i].appUser.name);
         expect(cells[6].nativeElement.innerText).toContain(geneVariantLiteratures[i].pathogenicSupportCategory.name);

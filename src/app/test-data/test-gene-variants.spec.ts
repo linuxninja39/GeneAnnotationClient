@@ -41,8 +41,10 @@ export const TestGeneVariants: GeneVariantModel[] = [
           title: 'my lit title',
           url: 'http://liturl',
           pubMedId: '1',
-          details: 'um, cool details. How many times',
-          author: []
+          abstract: 'um, cool details. How many times',
+          author: [],
+          addedBy: {name: 'fred'},
+          addedOn: new Date()
         },
         pathogenicSupportCategory: {name: PathogenicSupportCategory.Supportive},
         appUser: {id: 1, name: 'j@j.com'},
