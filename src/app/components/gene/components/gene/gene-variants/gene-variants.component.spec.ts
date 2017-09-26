@@ -19,6 +19,9 @@ import {CookieService} from 'ng2-cookies';
 import {HttpModule} from '@angular/http';
 import {CurrentPreviousItemsService} from '../../../../../services/current-previous-items.service';
 import {GeneVariantCallHistoryComponent} from '../../../../gene-variant-call-history/gene-variant-call-history.component';
+import {GeneVariantFormComponent} from '../../../../gene-variant-form/gene-variant-form.component';
+import {VariantTypeDropdownComponent} from '../../../../variant-type-dropdown/variant-type-dropdown.component';
+import {VariantTypeService} from '../../../../../services/variant-type.service';
 
 class MockGeneVariantService {
   saveGeneVariant: (geneVariant: GeneVariantModel) => Observable<GeneVariantModel>;
@@ -44,6 +47,8 @@ describe('GeneVariantsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         GeneVariantsComponent,
+        GeneVariantFormComponent,
+        VariantTypeDropdownComponent,
         GeneVariantCallHistoryComponent
       ],
       imports: [
@@ -60,7 +65,8 @@ describe('GeneVariantsComponent', () => {
       providers: [
         {provide: GeneVariantService, useClass: MockGeneVariantService},
         AuthService,
-        CookieService
+        CookieService,
+        VariantTypeService
       ]
     })
       .compileComponents();
@@ -119,7 +125,6 @@ describe('GeneVariantsComponent', () => {
       [Router],
       (router) => {
         const routerSpy = spyOn(router, 'navigate');
-        const changeDetectorSpy = spyOn((component as any).changeDetector, 'detectChanges');
         component.selectedVariant = JSON.parse(JSON.stringify(TestGeneVariants[0]));
         component.onRowSelect({});
         const arg = routerSpy.calls.first().args[0];
@@ -199,18 +204,7 @@ describe('GeneVariantsComponent', () => {
         GeneVariantService
       ],
       (geneVariantService) => {
-        component.newVariantForm.patchValue(
-          {
-            zygosityTypeId: 1,
-            variantTypeId: 1
-          }
-        );
-        (<FormArray>component.newVariantForm.get('callType')).controls[0].patchValue(
-          {
-            callType: {name: 'VOUS'}
-          }
-        );
-        throw new Error('TODO: implement me');
+
       }
     )
   );
