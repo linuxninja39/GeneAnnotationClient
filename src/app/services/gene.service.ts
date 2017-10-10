@@ -34,8 +34,20 @@ export class GeneService {
   }
 
   getGenesByRange(start: number, end: number): Observable<GeneModel[]> {
-    return Observable.of([TestGenes[0]]);
-    //throw new Error('implement me');
+    if (environment.frontendOnly) {
+      return Observable.of(JSON.parse(JSON.stringify(TestGenes)));
+    }
+    return this.http
+      .get('http://localhost:5000/api/genes?start=' + start + '&end=' + end)
+      .map(
+        (res, num) => {
+          const genes: Array<GeneModel> = res.json();
+          for (const gene of genes) {
+            this.currentPreviousItemsService.updateGeneModel(gene);
+          }
+          return genes;
+        }
+      );
   }
 
   getGenes(page?: string | number): Observable<GeneModel[]> {
