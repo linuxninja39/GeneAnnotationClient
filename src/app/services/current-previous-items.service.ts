@@ -8,7 +8,7 @@ export class CurrentPreviousItemsService {
   static readonly CURRENT_GENE_PROPERTIES = [
     'GeneName',
     'Synonym',
-    'GeneLocation',
+    'GeneLocations',
     'Symbol'
   ];
 

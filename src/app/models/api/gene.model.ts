@@ -21,8 +21,8 @@ export interface GeneModel extends BaseModel {
   currentSynonym?: SynonymModel;
   lastModifiedDate?: Date;
   geneNameExpansion?: string;
-  knownGeneFunction?: string;
-  geneLocation: GeneLocationModel[];
+  knownFunction?: string;
+  geneLocations: GeneLocationModel[];
   currentGeneLocation?: GeneLocationModel;
   origin: OriginTypeModel[];
   geneVariant?: GeneVariantModel[];

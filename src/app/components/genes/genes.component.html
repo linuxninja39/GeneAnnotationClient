@@ -30,8 +30,8 @@
       <p-column field="geneNameExpansion" header="Expansion of gene name" [sortable]="true"></p-column>
       <p-column field="knownGeneFunction" header="Known Function" [sortable]="true">
         <ng-template let-col let-row="rowData" pTemplate="body">
-          <!--div (click)="handleKnowFunctionClick($event, row, knownFunctionPanel)">{{row.knownGeneFunction | words : 10 : "..."}}</div-->
-          <div (click)="handleKnowFunctionClick($event, row, knownFunctionPanel); $event.stopPropagation()">{{row.knownGeneFunction}}</div>
+          <!--div (click)="handleKnowFunctionClick($event, row, knownFunctionPanel)">{{row.knownFunction | words : 10 : "..."}}</div-->
+          <div (click)="handleKnowFunctionClick($event, row, knownFunctionPanel); $event.stopPropagation()">{{row.knownFunction}}</div>
         </ng-template>
       </p-column>
     </p-dataTable>
@@ -39,4 +39,4 @@
   <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
 </div>
 
-<p-overlayPanel #knownFunctionPanel>{{selectedGene?.knownGeneFunction}}</p-overlayPanel>
+<p-overlayPanel #knownFunctionPanel>{{selectedGene?.knownFunction}}</p-overlayPanel>

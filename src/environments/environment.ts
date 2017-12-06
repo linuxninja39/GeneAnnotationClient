@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   apiServerUrl: 'http://localhost:5000/api',
-  frontendOnly: true
+  frontendOnly: false
 };

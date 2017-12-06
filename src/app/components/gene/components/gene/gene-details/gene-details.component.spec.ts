@@ -44,7 +44,7 @@ describe('GeneDetailsComponent', () => {
       elementMap.set('.endEl', TestGenes[0].currentGeneLocation.end);
       elementMap.set('.locusEl', TestGenes[0].currentGeneLocation.locus);
       elementMap.set('.nameExpansionEl', TestGenes[0].geneNameExpansion);
-      elementMap.set('.knownFunctionEl', TestGenes[0].knownGeneFunction);
+      elementMap.set('.knownFunctionEl', TestGenes[0].knownFunction);
       fixture.detectChanges();
       elementMap.forEach(
         (elementContent, elementClassName) => {

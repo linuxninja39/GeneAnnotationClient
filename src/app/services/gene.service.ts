@@ -27,6 +27,7 @@ export class GeneService {
             const gene: GeneModel = res.json();
             log.info('got gene', gene);
             this.currentPreviousItemsService.updateGeneModel(gene);
+            gene.knownFunction = gene.knownFunction? gene.knownFunction: 'n/a';
             return gene;
           }
         )
@@ -61,6 +62,7 @@ export class GeneService {
           const genes: Array<GeneModel> = res.json();
           for (const gene of genes) {
             this.currentPreviousItemsService.updateGeneModel(gene);
+            gene.knownFunction = gene.knownFunction? gene.knownFunction: 'n/a';
           }
           return genes;
         }
