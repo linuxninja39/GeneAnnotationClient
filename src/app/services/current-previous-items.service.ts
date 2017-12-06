@@ -8,7 +8,6 @@ export class CurrentPreviousItemsService {
   static readonly CURRENT_GENE_PROPERTIES = [
     'GeneName',
     'Synonym',
-    'GeneLocations',
     'Symbol'
   ];
 
@@ -31,6 +30,8 @@ export class CurrentPreviousItemsService {
       gene[fieldKey] = fieldArray.shift();
     }
 
+    this.setCurrentGeneLocation(gene);
+
     if (gene.geneVariant) {
       for (const geneVariant of gene.geneVariant) {
         this.updateGeneVariantModel(geneVariant);
@@ -49,6 +50,12 @@ export class CurrentPreviousItemsService {
     }
 
     return geneVariant;
+  }
+
+  private setCurrentGeneLocation(gene: GeneModel): void {
+    gene.currentGeneLocation = gene.geneLocations.find(
+      (gl => {return gl.hgVersion === 19})
+    );
   }
 
   sort(a: ActiveDateBaseModel, b: ActiveDateBaseModel) {

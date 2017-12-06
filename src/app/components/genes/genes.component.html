@@ -13,12 +13,13 @@
   <div class="card ui-g-12 ui-md-6 ui-lg-8">
     <md-progress-spinner *ngIf="spinner" mode="indeterminate"></md-progress-spinner>
     <p-dataTable [value]="genes" selectionMode="single" [(selection)]="selectedGene" (onRowSelect)="onRowSelect($event)">
-      <p-column field="symbol" header="Symbols" [sortable]="true">
+      <p-column field="currentSymbol.name" header="Current Symbol" [sortable]="true"></p-column>
+      <p-column field="symbol" header="Past Symbols" [sortable]="false">
         <ng-template let-col let-row="rowData" pTemplate="body">
           <div *ngFor="let sym of row.symbol">{{sym.name}}</div>
         </ng-template>
       </p-column>
-      <p-column field="chromosome.name" header="Chromosome" [sortable]="true"></p-column>
+      <p-column field="currentGeneLocation.chromosome.name" header="Chromosome" [sortable]="true"></p-column>
       <p-column field="currentGeneLocation.start" header="Start" [sortable]="true"></p-column>
       <p-column field="currentGeneLocation.end" header="End" [sortable]="true"></p-column>
       <p-column field="currentGeneLocation.locus" header="Locus" [sortable]="true"></p-column>
