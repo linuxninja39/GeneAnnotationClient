@@ -6,7 +6,7 @@ import {
   AccordionModule, ButtonModule, DataTableModule, DialogModule, DropdownModule, InputTextModule, OverlayPanelModule,
   PanelModule,
   EditorModule,
-  SharedModule, ListboxModule
+  SharedModule, ListboxModule, PaginatorModule
 } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
@@ -101,6 +101,7 @@ import {VariantTypeService} from './services/variant-type.service';
     AccordionModule,
     MdCardModule,
     MdProgressSpinnerModule,
+    PaginatorModule,
     TruncateModule,
     OverlayPanelModule,
     PanelModule,

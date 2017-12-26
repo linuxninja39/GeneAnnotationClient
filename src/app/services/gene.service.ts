@@ -8,11 +8,14 @@ import {CurrentPreviousItemsService} from './current-previous-items.service';
 import {environment} from '../../environments/environment';
 import {TestGenes} from '../test-data/test-genes.spec';
 import {FrontEndOnlyServiceUtil} from '../front-end-only-service-util';
+import {GeneQueryModel} from '../models/query-models/gene-query-model';
 
 const log = Log.create('GeneService');
 
 @Injectable()
 export class GeneService {
+
+  public queryCount: number;
 
   constructor(private http: Http, private currentPreviousItemsService: CurrentPreviousItemsService) {
   }
@@ -51,15 +54,40 @@ export class GeneService {
       );
   }
 
-  getGenes(page?: string | number): Observable<GeneModel[]> {
+  getGenes(geneQueryModel?: GeneQueryModel): Observable<GeneModel[]> {
     if (environment.frontendOnly) {
       return Observable.of(JSON.parse(JSON.stringify(TestGenes)));
     }
+    var params = [];
+    var url = 'http://localhost:5000/api/genes';
+    var countUrl = 'http://localhost:5000/api/genes/count';
+    log.info('geneQueryModel', geneQueryModel);
+    if (geneQueryModel) {
+      if (geneQueryModel.pageCount != null && geneQueryModel.pageStart != null) {
+        params.push('pageStart=' + geneQueryModel.pageStart);
+        params.push('pageCount=' + geneQueryModel.pageCount);
+      }
+      if (geneQueryModel.globalFilter != null && geneQueryModel.globalFilter != '') {
+        params.push('globalFilter=' + geneQueryModel.globalFilter);
+        countUrl += '?globalFilter=' + geneQueryModel.globalFilter;
+      }
+    }
+    url += '?' + params.join('&');
+    log.info('url', url);
+    log.info('countUrl', countUrl);
     return this.http
-      .get('http://localhost:5000/api/genes')
+      .get(countUrl)
+      .mergeMap(
+        (res) => {
+          this.queryCount = res.json();
+          log.info('count', this.queryCount);
+          return this.http.get(url)
+        }
+      )
       .map(
         (res, num) => {
           const genes: Array<GeneModel> = res.json();
+          log.info('got genes', genes);
           for (const gene of genes) {
             this.currentPreviousItemsService.updateGeneModel(gene);
             gene.knownFunction = gene.knownFunction? gene.knownFunction: 'n/a';

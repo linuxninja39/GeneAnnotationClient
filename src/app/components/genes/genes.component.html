@@ -7,13 +7,29 @@
 
 <div class="ui-g">
   <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
-  <div class="card ui-g-12 ui-md-6 ui-lg-4"><label for="search">Search:</label> <input id="search" (keyup)="searchGenes($event)"></div>
+  <div class="card ui-g-12 ui-md-6 ui-lg-4"><label for="search">Search:</label> <input #globalFilter id="search"></div>
   <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
   <div class="ui-g-12 ui-md-6 ui-lg-2"></div>
   <div class="card ui-g-12 ui-md-6 ui-lg-8">
     <md-progress-spinner *ngIf="spinner" mode="indeterminate"></md-progress-spinner>
-    <p-dataTable [value]="genes" selectionMode="single" [(selection)]="selectedGene" (onRowSelect)="onRowSelect($event)">
-      <p-column field="currentSymbol.name" header="Current Symbol" [sortable]="true"></p-column>
+    <p-dataTable
+      [value]="genes"
+      selectionMode="single"
+      [(selection)]="selectedGene"
+      (onRowSelect)="onRowSelect($event)"
+      [paginator]="true"
+      [pageLinks]="10"
+      [totalRecords]="totalGenes"
+      [rows]="10"
+      [lazy]="true"
+      (onLazyLoad)="loadData($event)"
+      [globalFilter]="globalFilter"
+    >
+      <p-column
+        field="currentSymbol.name"
+        header="Current Symbol"
+        [sortable]="true"
+      ></p-column>
       <p-column field="symbol" header="Past Symbols" [sortable]="false">
         <ng-template let-col let-row="rowData" pTemplate="body">
           <div *ngFor="let sym of row.symbol">{{sym.name}}</div>

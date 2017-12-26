@@ -24,26 +24,12 @@ export class GenesComponent implements OnInit {
   knownFunctionPanel: ElementRef;
   spinner = true;
 
+  totalGenes: number;
+
   constructor(private geneService: GeneService, private router: Router) { }
 
   ngOnInit() {
-    this.geneService
-      .getGenes()
-      .subscribe(
-        (genes: GeneModel[]) => {
-          this.genes = genes;
-          this.genesOrig = genes;
-          this.spinner = false;
-        },
-        (error) => {
-          log.error('got error trying to get genes', error);
-          this.spinner = false;
-          if (!environment.production) {
-            this.genes = TestGenes;
-          }
-        }
-      )
-    ;
+
   }
 
   searchGenes(event) {
@@ -65,5 +51,34 @@ export class GenesComponent implements OnInit {
   handleKnowFunctionClick(e, gene: GeneModel, overlayPanel: OverlayPanel) {
     this.selectedGene = gene;
     overlayPanel.toggle(e);
+  }
+
+  loadData(event) {
+    this.spinner = true;
+    log.info('data load', event);
+        this.geneService
+      .getGenes(
+        {
+          pageStart: event.first,
+          pageCount: event.rows,
+          globalFilter: event.globalFilter
+        }
+      )
+      .subscribe(
+        (genes: GeneModel[]) => {
+          this.totalGenes = this.geneService.queryCount;
+          this.genes = genes;
+          this.genesOrig = genes;
+          this.spinner = false;
+        },
+        (error) => {
+          log.error('got error trying to get genes', error);
+          this.spinner = false;
+          if (!environment.production) {
+            this.genes = TestGenes;
+          }
+        }
+      )
+    ;
   }
 }
