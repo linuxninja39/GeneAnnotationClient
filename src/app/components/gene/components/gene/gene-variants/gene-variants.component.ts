@@ -1,12 +1,9 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {GeneModel} from '../../../../../models/api/gene.model';
-import { Log } from 'ng2-logger';
+import {Log} from 'ng2-logger';
 import {Router} from '@angular/router';
-import {SelectItem} from 'primeng/primeng';
 import {GeneVariantModel} from '../../../../../models/api/gene-variant.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeneVariantService} from '../../../../../services/gene-variant.service';
-import {AuthService} from '../../../../../services/auth.service';
 
 const log = Log.create('GeneVariantsComponent');
 
@@ -17,15 +14,35 @@ const log = Log.create('GeneVariantsComponent');
 })
 export class GeneVariantsComponent implements OnInit {
   @Input()
-  gene: GeneModel;
+  set gene(gene: GeneModel) {
+    if (gene) {
+      if (gene.currentGeneLocation) {
+        if (gene.currentGeneLocation.start && gene.currentGeneLocation.start) {
+          this.spinner = true;
+          this.geneVariantService
+            .getGeneVariantsByRange(1981908, 211634)
+            .subscribe(
+              (geneVariants) => {
+                log.info('get variants', geneVariants);
+                this.spinner = false;
+                this.geneVariants = geneVariants;
+              }
+            )
+          ;
+        }
+      }
+    }
+  }
+
   displayNewVariantDialog = false;
   displayCallHistoryDialog = false;
+  geneVariants: GeneVariantModel[];
   selectedVariant: GeneVariantModel;
+  spinner = true;
 
-  newVariantForm: FormGroup;
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private geneVariantService: GeneVariantService,
+              private router: Router) {
+  }
 
   ngOnInit() {
   }
@@ -45,6 +62,6 @@ export class GeneVariantsComponent implements OnInit {
   }
 
   updateTable(geneVariant: GeneVariantModel) {
-    this.gene.geneVariant = [...this.gene.geneVariant, geneVariant];
+    this.geneVariants = [...this.geneVariants, geneVariant];
   }
 }

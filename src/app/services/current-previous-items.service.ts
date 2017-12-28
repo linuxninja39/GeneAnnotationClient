@@ -44,7 +44,11 @@ export class CurrentPreviousItemsService {
       const fieldKey = CurrentPreviousItemsService.PROPERTY_PREFACE + fieldName;
       const fieldArray = geneVariant[this.listFieldName(fieldName)];
 
-      fieldArray.sort((a, b) => this.sort(a, b));
+      if (fieldArray) {
+        fieldArray.sort((a, b) => this.sort(a, b));
+      } else {
+        return geneVariant;
+      }
 
       geneVariant[fieldKey] = fieldArray.shift();
     }

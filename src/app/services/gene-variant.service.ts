@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/observable/merge';
 import {GeneVariantModel} from '../models/api/gene-variant.model';
 import {Http, Headers, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
-import { Log } from 'ng2-logger';
+import {Log} from 'ng2-logger';
 import {sprintf} from 'sprintf-js';
 import {GeneVariantLiteratureModel} from '../models/api/gene-variant-literature.model';
 import {TestGeneVariants} from '../test-data/test-gene-variants.spec';
@@ -16,13 +16,29 @@ const log = Log.create('GeneVariantService');
 @Injectable()
 export class GeneVariantService {
   public static readonly BASE_EP = environment.apiServerUrl + '/GeneVariants';
+  public static readonly GENE_VARIANT_BY_RANGE_EP = GeneVariantService.BASE_EP + '?start=%d&end=%d';
   public static readonly GENE_VARIANT_EP = GeneVariantService.BASE_EP + '/%s';
   public static readonly GENE_VARIANT_LITERATURE_EP = GeneVariantService.GENE_VARIANT_EP + '/Literature';
 
-  constructor(
-    private http: Http,
-    private currentPreviousItemsService: CurrentPreviousItemsService
-  ) {
+  constructor(private http: Http,
+              private currentPreviousItemsService: CurrentPreviousItemsService) {
+  }
+
+  getGeneVariantsByRange(start: number | string, end: number | string): Observable<GeneVariantModel[]> {
+    return FrontEndOnlyServiceUtil.frontEndReturn<GeneVariantModel[]>(
+      TestGeneVariants,
+      this.http
+        .get(sprintf(GeneVariantService.GENE_VARIANT_BY_RANGE_EP, start, end))
+        .map(
+          (res: Response) => {
+            const geneVariants = <GeneVariantModel[]>res.json();
+            geneVariants.forEach(
+              (geneVariant) => this.currentPreviousItemsService.updateGeneVariantModel(geneVariant)
+            );
+            return geneVariants;
+          }
+        )
+    );
   }
 
   getGeneVariant(id: string | number): Observable<GeneVariantModel> {
@@ -32,9 +48,9 @@ export class GeneVariantService {
         .get(sprintf(GeneVariantService.GENE_VARIANT_EP, id))
         .map(
           (res: Response) => {
-           const geneVariant = <GeneVariantModel>res.json();
-           this.currentPreviousItemsService.updateGeneVariantModel(geneVariant);
-           return geneVariant;
+            const geneVariant = <GeneVariantModel>res.json();
+            this.currentPreviousItemsService.updateGeneVariantModel(geneVariant);
+            return geneVariant;
           }
         )
     );
@@ -48,23 +64,23 @@ export class GeneVariantService {
       ob = this.http.put(
         sprintf(GeneVariantService.GENE_VARIANT_EP, geneVariant.id),
         JSON.stringify(geneVariant),
-        { headers: headers }
+        {headers: headers}
       );
     } else {
       log.info('sending geneVariant', JSON.stringify(geneVariant));
       ob = this.http.post(
         GeneVariantService.BASE_EP,
         JSON.stringify(geneVariant),
-        { headers: headers }
+        {headers: headers}
       );
     }
     return FrontEndOnlyServiceUtil.frontEndReturn(
       this.currentPreviousItemsService.updateGeneVariantModel(geneVariant),
       ob.map(
         (res: Response) => {
-         const ret = <GeneVariantModel>res.json();
-         this.currentPreviousItemsService.updateGeneVariantModel(ret);
-         return ret;
+          const ret = <GeneVariantModel>res.json();
+          this.currentPreviousItemsService.updateGeneVariantModel(ret);
+          return ret;
         }
       )
     );

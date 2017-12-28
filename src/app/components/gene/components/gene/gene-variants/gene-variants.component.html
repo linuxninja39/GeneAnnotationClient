@@ -1,7 +1,8 @@
 <div>
+  <md-progress-spinner *ngIf="spinner" mode="indeterminate"></md-progress-spinner>
   <p-dataTable
     class="geneVariantsTableEl"
-    [value]="gene?.geneVariant"
+    [value]="geneVariants"
     selectionMode="single"
     [(selection)]="selectedVariant"
     (onRowSelect)="onRowSelect($event)"
@@ -11,7 +12,7 @@
     <p-column field="currentCallType.callType.name" header="Call">
       <ng-template pTemplate="body" let-geneVariant="rowData" >
         <div appClickStopPropagation class="callCellEl" (click)="showCallHistory(true, geneVariant)">
-          {{geneVariant.currentCallType.callType.name}}
+          {{geneVariant?.currentCallType?.callType?.name}}
         </div>
       </ng-template>
     </p-column>
